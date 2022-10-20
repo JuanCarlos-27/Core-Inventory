@@ -1,0 +1,111 @@
+{% extends './base.html' %}
+
+{% block title %} Productos{% endblock  %}
+{% block body  %}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4 text-center">Productos</h1>
+        <div class="card mb-4 ">
+            <div class="card-header d-flex justify-content-between">
+                <a href="" class="shadow btn btn-success" data-bs-toggle="modal" data-bs-target="#createProduct">Crear</a>
+            </div>
+            <div class="card-body">
+                <table id="dataTable_product" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Disponible</th>
+                            <th>Imagen</th>
+                            <th>Estado</th> 
+                            <th>Accion</th>         
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td>{{p.id_product}}</td>
+                            <td>{{p.name}}</td>
+                            <td>{{p.descripction}}</td>
+                            <td>{{p.price}}</td>
+                            <td>{{p.stock}}</td>
+                            <td>{{p.show_image}}</td>
+                            {% if p.status == 0 %}
+                                <td><span class="badge rounded-pill text-bg-success">Disponible</span></td>
+                            {% else %}
+                            <td><span class="badge rounded-pill text-bg-danger">Agotado</span></td>
+                            {% endif %}
+                            <td>
+                                <a onclick="openModal('productoAEditar/{{p.id_product}}')" id="btnEdit" class="shadow btn btn-primary"><i class="fas fa-pen"></i></a>
+                                {% comment %} <a href="productoAEditar/{{p.id_product}}" id="btnEdit" class="shadow btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct"><i class="fas fa-pen"></i></a> {% endcomment %}
+                                <a href="eliminarProducto/{{p.id_product}}" class="shadow btn btn-danger" id="btnDeleteProduct"><i class="fas fa-trash"></i></a>    
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% comment %} Modal de crear producto {% endcomment %}
+<div class="modal fade" id="createProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row g-3" method="POST" id="createProductForm" action="registrarProducto" enctype="multipart/form-data">{% csrf_token %}
+                <div class="col-md-12">
+                  <label for="txtName" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="txtName" name="txtName" placeholder="Ej: Zanahoria" required>
+                </div>
+                <div class="col-12">
+                    <label for="txtDescription" class="form-label">Descripción</label>
+                    <textarea class="form-control" id="txtDescription" name="txtDescription" placeholder="Ej: Paquete X 5 und" required></textarea>
+                </div>
+                <div class="col-md-12">
+                    <label for="fileImage" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="fileImage" name="fileImage" accept="image/png, image/jpeg" id="inputZip" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="txtPrice" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="txtPrice" name="txtPrice" placeholder="Ej: 7000" required>
+                  </div>
+                <div class="col-md-4">
+                    <label for="txtQuantity" class="form-label">Cantidad</label>
+                    <input type="text" class="form-control" id="txtQuantity" name="txtQuantity" placeholder="Ej: 10" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="inputState" class="form-label">Estado</label>
+                  <select id="inputState" name="inputState" class="form-select">
+                    <option value="0">Disponible</option>
+                    <option value="1">Agotado</option>
+                  </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                  </div>
+              </form>
+        </div> 
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+
+<script>
+    const openModal = (url)=>{
+        $("#editProduct").load(url, function(){
+            $(this).modal("show");
+        });
+    }
+</script>
+{% endblock  %}
