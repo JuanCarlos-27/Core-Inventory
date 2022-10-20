@@ -134,6 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'jcromero@misena.edu.co'
+EMAIL_HOST_USER = 'jcromero909@misena.edu.co'
 EMAIL_HOST_PASSWORD = 'JuanCarlos125789'
 EMAIL_USE_TLS = True

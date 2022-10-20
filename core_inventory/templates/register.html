@@ -4,6 +4,7 @@
 {% block content %}
 <div class="container register-form">
     <form action="" method="post" class="formulario" id="formulario">
+        {% csrf_token %}
         <h3>Registrar Usuario</h3>
         <hr>
         <div class="row">
