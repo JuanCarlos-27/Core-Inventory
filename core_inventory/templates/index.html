@@ -73,9 +73,9 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-6"> 
                 {% if p.status != 0%}
-                  <a href="" class="btn btn-success disabled">Añadir</a>
+                <button type="submit" class="btn btn-warning disabled">Añadir🛒</button>
                 {% else %}
-                  <a href="" class="btn btn-success">Añadir</a>
+                  {% include 'Carrito/add.html' %}
                 {% endif %}
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">

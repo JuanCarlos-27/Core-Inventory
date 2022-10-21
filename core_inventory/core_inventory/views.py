@@ -73,17 +73,13 @@ def logout_view(request):
     messages.success(request, "¡Sesión cerrada correctamente!")
     return redirect("login")
 
-
-
 def productosCatalogo(request):
     user = request.user if request.user.is_authenticated else None
-
     if user != None:
         is_authenticated = True
     else:
         is_authenticated = False
         
-    print(is_authenticated)
     listaProductos = Product.objects.all()
     return render(request, "index.html", {
         "productos":listaProductos,
