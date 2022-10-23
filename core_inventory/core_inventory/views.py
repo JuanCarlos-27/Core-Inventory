@@ -9,8 +9,12 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
-def send_success_registration(emailUser, name):
-    context = {'name':name}
+def send_success_registration(emailUser, name, clave):
+    context = {
+        'name':name, 
+        'email':emailUser,
+        'clave': clave[:4]
+        }
     template = get_template("email.html")
     content = template.render(context)
     
@@ -44,7 +48,7 @@ def register(request):
             
         if user:
             if customer:
-                send_success_registration(email, name)
+                send_success_registration(email, name, password)
                 messages.success(request, "¡Te has registrado correctamente!")
                 return redirect("login")
         
@@ -62,9 +66,12 @@ def login_view(request):
             full_name = data_user.first_name + " " + data_user.last_name 
             login(request, user)
             messages.success(request, "¡Bienvenido {}!".format(full_name))
-            return redirect("index")
+            if data_user.is_staff:
+                return redirect("admin/")
+            else:
+                return redirect("index")
         else:
-            messages.error(request, "Usuario y/o constraseña no validos")
+            messages.error(request, "Usuario y/o contraseña no validos")
         
     return render(request, 'login.html')
 

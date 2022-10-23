@@ -10,6 +10,10 @@ urlpatterns = [
     path('productos/productoAEditar/<id>', views.productoAEditar),
     path('productos/eliminarProducto/<id>', views.eliminarProducto),
     
+    path('<slug:slug>', views.productDetailView.as_view())
+
+
+    
 ]
 
 if settings.DEBUG:

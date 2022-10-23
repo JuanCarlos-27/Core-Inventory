@@ -47,8 +47,8 @@
       <div class="product-content product-wrap clearfix m-2">
       <div class="row">
           <div class="col-md-5 col-sm-12 col-xs-12">
-            <div class="product-image"> 
-              {{p.show_image_catalog}} 
+            <div class="product-image">
+              <img src={{p.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="img-responsive"/>   
             </div>
           </div>
           <div class="col-md-7 col-sm-12 col-xs-12">
@@ -73,9 +73,9 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-6"> 
                 {% if p.status != 0%}
-                <button type="submit" class="btn btn-warning disabled">Añadir🛒</button>
+                  <a href="" class="btn btn-primary disabled">Ver detalle</a>
                 {% else %}
-                  {% include 'Carrito/add.html' %}
+                  <a href="" class="shadow fw-bold btn btn-primary">Ver detalle</a>
                 {% endif %}
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">

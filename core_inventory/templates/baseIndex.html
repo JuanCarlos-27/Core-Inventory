@@ -13,7 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/9c6f82517c.js" crossorigin="anonymous"></script> 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/myStyle.css' %}">
     <link rel="stylesheet" href="{% static 'css/cardStyles.css' %}">
     <link rel="stylesheet" href="{% static 'css/estilosFormulario.css' %}">
 </head>
@@ -79,7 +80,7 @@
             </ul>
         </div> 
         <ul class="d-flex nav col-md-auto col-12 justify-content-center " >
-          <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Inicio</a></li>
+          <li><a href="{% url 'index' %}" class="nav-link px-2 text-light me-sm-4 link-hover">Inicio</a></li>
           <li><a href="#" class="nav-link px-2 me-sm-4 text-light link-hover">Historia</a></li>
           <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Mision & visión</a></li>
         </ul>

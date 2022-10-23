@@ -1,0 +1,25 @@
+{% extends '../baseIndex.html' %}
+
+{% block content %}
+    <div class="container bg-white">
+        <div class="row">
+            <div class="col-3">
+                {% if product.image_product %}
+                    <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="img-responsive"/>   
+                {% endif %}
+            </div>
+            <div class="col">
+                <h1>{{product.name}}</h1>
+                <div class="fw-bold">
+                    Precio:<span class="text-danger"> ${{ product.price}}</span>
+                </div>
+                <div class="">
+                    <p>{{ product.descripction}}</p>
+                </div>
+                <div class="">
+                    {% include 'Carrito/add.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -3,7 +3,45 @@
 {% block title %} Carrito{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1 class="bg-white text-center">Carrito de compras</h1>
+    <div class="container bg-white h-75">
+        <h1 class="text-center">Mi carrito de compras</h1>
+        {% if cart.products.exists %}
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <table class="table table-striped mb-0 table-bordered border-dark text-center">
+                        <thead style="background-color: #F37828;">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Imagen</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in cart.products.all %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{product.name}}</td>
+                                
+                                <td>
+                                    {% if product.image_product.url %}
+                                        <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        {% else %}
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <h3>Esta vacio :(</h3>
+            </div>
+        </div>
+
+        {% endif %}
     </div>
 {% endblock content %}
+
+

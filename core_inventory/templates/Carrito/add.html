@@ -1,5 +1,5 @@
 <form action="{% url 'Carts:add' %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="product_id" value="{{ p.id_product }}">
-    <button type="submit" class="btn btn-warning">Añadir 🛒</button>
+    <input type="hidden" name="product_id" value="{{ product.id_product }}">
+    <button type="submit" class="shadow fw-bold btn btn-warning">Añadir al carrito 🛒</button>
 </form>

@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from . models import Product
+from django.views.generic.detail import DetailView
 
 # Create your views here.
-
 def vistaProducto(request):
     listaProductos = Product.objects.all()
     return render(request, "Productos/vistaProductos.html", {"productos":listaProductos})
@@ -17,7 +17,7 @@ def registrarProducto(request):
     
     producto = Product.objects.create(name=nombreP, descripction=descripcionP, price=precioP, image_product=imagenP, stock=cantidadP, status=estadoP)
     
-    return redirect('/productos')
+    return redirect('/')
 
 def productoAEditar(request, id):
     producto = Product.objects.get(id_product = id)
@@ -38,10 +38,18 @@ def editarProducto(request):
     producto.price = precioP
     producto.image_product = imagenP
     producto.save()
-    return redirect('/productos')
+    return redirect('/')
 
 def eliminarProducto(request, id):
     producto = Product.objects.get(id_product = id)
     producto.delete()
     return redirect('/productos')
 
+class productDetailView(DetailView):
+    model = Product
+    template_name = 'Carrito/productDetail.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+        return context

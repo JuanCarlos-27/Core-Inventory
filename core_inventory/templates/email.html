@@ -19,6 +19,12 @@
           .text-center{
             text-align: center;
           }
+          .opacity{
+            opacity: .8
+          }
+          .bold{
+            font-weight: bolder
+          }
         </style>
     </head>
     <body>
@@ -29,8 +35,12 @@
             <hr>
             <h1 class="text-center pb-2">Hola 👋 {{name}} ,</h1>
             <h2 class="text-center">¡Te informamos que tu registro ha sido exitoso 🥳!</h2>
-
-
+          
+            <p class="text-center opacity">Recuerda tus credenciales de acceso:</p>
+            <p class="text-center"><span class="bold">Correo:</span> {{email}}</p>
+            <p class="text-center"><span class="bold">Clave:</span> {{clave}}***</p>
+            
+            <hr>
             <p class="text-center lead">Equipo Core Inventory</p>
         <div>
     </body>
