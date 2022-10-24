@@ -9,6 +9,9 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
+from MyApps.Carts.utils import create_cart
+
+
 def send_success_registration(emailUser, name, clave):
     context = {
         'name':name, 
@@ -84,7 +87,10 @@ def logout_view(request):
     return redirect("login")
 
 def productosCatalogo(request):
+    cart = create_cart(request)
+    # print(cart.products.count())
     listaProductos = Product.objects.all()
     return render(request, "index.html", {
         "productos":listaProductos,
+        "cart": cart
         })

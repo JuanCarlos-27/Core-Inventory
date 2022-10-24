@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from . models import Product
 from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+from MyApps.Carts.utils import create_cart
 
 # Create your views here.
 def vistaProducto(request):
@@ -31,7 +33,6 @@ def editarProducto(request):
     imagenP = request.FILES.get('fileImageEdit')
     precioP = request.POST['txtPriceEdit']
     
-    print(precioP)
     producto = Product.objects.get(id_product = codigoP)
     producto.name = nombreP
     producto.descripction = descripcionP
@@ -55,8 +56,27 @@ def eliminarProducto(request, id):
 #         return context
 
 def productDetailView(request, slug):
+    cart = create_cart(request)
     producto = Product.objects.get(slug = slug)
     context = {
         "product": producto,
+        "cart": cart
     }
     return render(request, 'Carrito/productDetail.html', context)
+
+
+class ProductSearchListView(ListView):
+    template_name = 'Productos/search.html'
+    
+    def get_queryset(self):
+        return Product.objects.filter(name__icontains = self.query())
+    
+    def query(self):
+        return self.request.GET.get("q")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.query()
+        context['count'] = context['product_list'].count()
+        return context
+    

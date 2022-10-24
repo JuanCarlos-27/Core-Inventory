@@ -1,0 +1,9 @@
+{% load static %}
+<form action="{% url 'search' %}" class="input-group w-75 mb-1">
+    <input type="text" name="q" class="form-control" value="{{ query }}" placeholder="Busca tu producto">
+    <div class="input-group-append">
+        <button type="submit" class="btn" style="background-color:#CFB286">
+            <img src="{% static 'img/search.svg' %}">
+        </button>
+    </div>
+</form>

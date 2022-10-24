@@ -8,12 +8,11 @@ from . models import CartProducts
 
 def cart(request):
     cart = create_cart(request)
-    #print(cart.products.count())
+    # print(cart.products.count())
     return render(request, "Carrito/cart.html", {
         "cart": cart
         })
-
-
+    
 def add(request):
     cart = create_cart(request)
     product = get_object_or_404(Product, pk = request.POST.get('product_id'))
@@ -40,10 +39,11 @@ def remove(request):
     cart = create_cart(request)
     product = get_object_or_404(Product, pk = request.POST.get('product_id'))
     
+    #Si se elimina del carrito, el stock se restablece
+    p = cart.cartproducts_set.get(product_id = request.POST.get('product_id'))
+    product.stock = product.stock + p.quantity
+    product.save()
 
-    for a in cart.products_related():
-        product.stock = product.stock + a.quantity
-        product.save()
     
     cart.products.remove(product)
     messages.success(request, "¡Producto eliminado!")

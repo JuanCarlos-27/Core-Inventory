@@ -10,10 +10,9 @@ urlpatterns = [
     path('productos/productoAEditar/<id>', views.productoAEditar),
     path('productos/eliminarProducto/<id>', views.eliminarProducto),
     
+    path('search', views.ProductSearchListView.as_view(), name="search"),
     path('<slug:slug>', views.productDetailView, name="product_detail")
 
-
-    
 ]
 
 if settings.DEBUG:
