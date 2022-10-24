@@ -3,40 +3,68 @@
 {% block title %} Carrito{% endblock %}
 
 {% block content %}
-    <div class="container bg-white h-75">
-        <h1 class="text-center">Mi carrito de compras</h1>
+    <div class="container h-75 bg-white rounded-3">
+        <h1 class="text-center rounded-3 mb-3">Mi carrito de compras</h1>
         {% if cart.products.exists %}
-            <div class="row justify-content-center">
-                <div class="col-10">
+            <div class="row justify-content-between">
+                <div class="col-8">
                     <table class="table table-striped mb-0 table-bordered border-dark text-center">
                         <thead style="background-color: #F37828;">
                         <tr>
                             <th scope="col"></th>
                             <th scope="col">Nombre</th>
+                            <th scope="col">Precio Unitario</th>
+                            <th scope="col">Cantidad</th>
                             <th scope="col">Imagen</th>
+                            <th scope="col">Acción</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {% for product in cart.products.all %}
+                        {% for cp in cart.products_related %}
+                        {% with product=cp.product  %}
                             <tr>
                                 <td>{{ forloop.counter }}</td>
                                 <td>{{product.name}}</td>
-                                
+                                <td>
+                                    {% load humanize %}
+                                    ${{product.price|intcomma}}
+                                </td>
+                                <td>{{ cp.quantity }}</td>
                                 <td>
                                     {% if product.image_product.url %}
                                         <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
                                     {% endif %}
                                 </td>
+                                <td>
+                                    {% include 'Carrito/delete.html' %}
+                                </td>
                             </tr>
+                        {% endwith %}
                         {% endfor %}
                         </tbody>
                     </table>
                 </div>
+                <div class="col-3">
+                    <div class="shadow h-100 card border-dark  text-center">
+                        <div class="card-header fw-bold" style="background-color: #F37828;">Detalles de compra</div>
+                        <div class="card-body">
+                            <div class="fw-bold h5">
+                                {% load humanize %}
+                                Subtotal ({{ cart.products.count }}): <span class="text-danger">${{ cart.subtotal|intcomma }}</span>
+                            </div>
+                            <div class="fw-bold h5">
+                                <a href="#" class="btn btn-success">Proceder al pago</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            
         {% else %}
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <h3>Esta vacio :(</h3>
+        <div class="row h-75 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <h4 class="opacity-75">Tu carrito de compras 🛒 esta vacio</h4>
+                <a href="{% url 'index' %}" class="h5 text-decoration-none opacity-75 text-primary">Ir a comprar🍅</a>
             </div>
         </div>
 

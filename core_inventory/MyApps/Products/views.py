@@ -45,11 +45,18 @@ def eliminarProducto(request, id):
     producto.delete()
     return redirect('/productos')
 
-class productDetailView(DetailView):
-    model = Product
-    template_name = 'Carrito/productDetail.html'
+# class productDetailView(DetailView):
+#     model = Product
+#     template_name = 'Carrito/productDetail.html'
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print(context)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         print(context)
+#         return context
+
+def productDetailView(request, slug):
+    producto = Product.objects.get(slug = slug)
+    context = {
+        "product": producto,
+    }
+    return render(request, 'Carrito/productDetail.html', context)

@@ -55,6 +55,9 @@ def register(request):
     return render(request, 'register.html')
 
 def login_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+    
     if request.method == 'POST':
         username = request.POST.get("email")
         password = request.POST.get("password")
@@ -81,15 +84,7 @@ def logout_view(request):
     return redirect("login")
 
 def productosCatalogo(request):
-    user = request.user if request.user.is_authenticated else None
-    if user != None:
-        is_authenticated = True
-    else:
-        is_authenticated = False
-        
     listaProductos = Product.objects.all()
     return render(request, "index.html", {
         "productos":listaProductos,
-        "is_authenticated":is_authenticated
         })
-

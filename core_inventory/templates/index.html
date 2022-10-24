@@ -55,14 +55,15 @@
           <div class="product-deatil">
               <h4 class="name">
                 <a href="#">{{p.name}}</a>
-                {% if p.status == 0 %}
+                {% if p.status == 0 and p.stock != 0 %}
                       <span class="badge rounded-pill text-bg-success">Disponible</span>
                 {% else %}
                       <span class="badge rounded-pill text-bg-danger">Agotado</span>
                 {% endif %}
               </h4>
-              <p class="price-container">
-                <span>${{p.price}}</span>
+              <p class="price-container ">
+                {% load humanize %}
+                <span class="text-dark">${{p.price|intcomma }}</span>
               </p>
               <span class="tag1"></span> 
           </div>
@@ -73,9 +74,9 @@
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-6"> 
                 {% if p.status != 0%}
-                  <a href="" class="btn btn-primary disabled">Ver detalle</a>
+                  <a href="" class="text-white btn disabled" style="background-color:#F37828;">Ver detalle</a>
                 {% else %}
-                  <a href="" class="shadow fw-bold btn btn-primary">Ver detalle</a>
+                  <a href="{% url 'product_detail' p.slug %}" class="text-white shadow fw-bold btn" style="background-color:#F37828;">Ver detalle</a>
                 {% endif %}
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">

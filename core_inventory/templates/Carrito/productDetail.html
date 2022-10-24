@@ -1,24 +1,25 @@
 {% extends '../baseIndex.html' %}
-
+{% block title %} Detalle{% endblock title %}
 {% block content %}
-    <div class="container bg-white">
-        <div class="row">
-            <div class="col-3">
-                {% if product.image_product %}
-                    <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="img-responsive"/>   
-                {% endif %}
-            </div>
-            <div class="col">
-                <h1>{{product.name}}</h1>
+
+    <div class="container d-flex justify-content-center">
+        <div class="card border-dark rounded" style="width: 18rem;">
+            {% if product.image_product %}
+                <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="card-img-top border-bottom"/>  
+            {% endif %}
+            <div class="card-body text-center">
+                <h5 class="card-title">{{product.name}}</h5>
                 <div class="fw-bold">
-                    Precio:<span class="text-danger"> ${{ product.price}}</span>
+                    {% load humanize %}
+                    Precio:<span class="text-danger"> ${{ product.price|intcomma}}</span>
                 </div>
-                <div class="">
-                    <p>{{ product.descripction}}</p>
-                </div>
-                <div class="">
-                    {% include 'Carrito/add.html' %}
-                </div>
+                <p class="card-text">{{ product.descripction }}</p>
+                {% if product.status == 0 %}
+                    <span class="badge rounded-pill text-bg-success">Disponible ({{product.stock}} unidades)</span>
+                {% else %}
+                    <span class="badge rounded-pill text-bg-danger">Agotado</span>
+                {% endif %}
+                {% include 'Carrito/add.html' %}
             </div>
         </div>
     </div>

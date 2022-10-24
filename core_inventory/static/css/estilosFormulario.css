@@ -21,10 +21,6 @@
     border-radius: 10px 10px 10px 20% ;
     box-shadow: -5px 9px 18px 0px #3a3a3a;
 }
-/*.form-control{
-    border-radius:1rem;
-}
-*/
 .register-form form{
     padding: 90px;
 }
@@ -54,27 +50,6 @@
     font-size: 20px;
 
 }
-/*label{
-    font-size: 1.1em;
-    font-weight: bolder;
-}
-
-input{
-    outline: none;
-    border: none;
-}
-s
-input:hover{
-    outline: 2px solid #F37828;
-    border: none;
-
-
-}
-.form-control:focus{
-    outline: 3px solid #F37828;
-    border: none;
-    font-weight: 600;
-*/
 
 .formulario__label {
 	display: block;
