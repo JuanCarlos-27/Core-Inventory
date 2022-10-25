@@ -3,9 +3,9 @@ import decimal
 from django.db import models
 from django.contrib.auth.models import User
 from MyApps.Products.models import Product
-
 from django.db.models.signals import pre_save, m2m_changed, post_save
-
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 class Cart(models.Model):
     cart_id = models.CharField(max_length=100, null = False, blank=False, unique = True)

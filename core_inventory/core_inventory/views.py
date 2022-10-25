@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from MyApps.Products.models import Product
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import redirect
 from django.contrib import messages
-from MyApps.Customers.models import Customer
+
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 
 from MyApps.Carts.utils import create_cart
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 def send_success_registration(emailUser, name, clave):
     context = {
@@ -32,7 +34,6 @@ def send_success_registration(emailUser, name, clave):
 
 def register(request):
     if request.method == 'POST':
-        username = request.POST.get("correo")
         email = request.POST.get("correo")
         name = request.POST.get("nombre")
         last_name = request.POST.get("apellido")
@@ -44,16 +45,21 @@ def register(request):
         
         user = False
         try:
-            user = User.objects.create_user(username, email =email, password = password, first_name =name, last_name= last_name)
-            customer = Customer.objects.create(user = user, phone_number = telefono, address=direccion, dni=dni)
+            user = User.objects.create_user(username=dni,
+                                            email=email,
+                                            password=password,
+                                            first_name=name,
+                                            last_name=last_name,
+                                            phone_number=telefono,
+                                            address = direccion,
+                                            dni = dni)
         except Exception as e:
             messages.error(request, "Ya estas registrado")
             
         if user:
-            if customer:
-                send_success_registration(email, name, password)
-                messages.success(request, "¡Te has registrado correctamente!")
-                return redirect("login")
+            send_success_registration(email, name, password)
+            messages.success(request, "¡Te has registrado correctamente!")
+            return redirect("login")
         
     return render(request, 'register.html')
 
@@ -62,13 +68,13 @@ def login_view(request):
         return redirect('index')
     
     if request.method == 'POST':
-        username = request.POST.get("email")
+        email = request.POST.get("email")
         password = request.POST.get("password")
         # Si existe me retorna un objeto, de lo contrario retorna None.
-        user = authenticate(username= username, password=password)
+        user = authenticate(email= email, password=password)
                
         if user:
-            data_user = User.objects.get(username =user)
+            data_user = User.objects.get(email=user)
             full_name = data_user.first_name + " " + data_user.last_name 
             login(request, user)
             messages.success(request, "¡Bienvenido {}!".format(full_name))

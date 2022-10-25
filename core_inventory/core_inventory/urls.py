@@ -8,8 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.productosCatalogo, name='index'), # Ruta raiz
     path('main/', include('MyApps.Products.urls')),
-    path('', include('MyApps.Customers.urls')),
     path('carrito/', include('MyApps.Carts.urls')),
+    path('pedidos/', include('MyApps.Orders.urls')),
     path('product_detail/', include('MyApps.Products.urls')),
     path('login', views.login_view, name='login'), # Login
     path('logout', views.logout_view, name='logout'), # Register

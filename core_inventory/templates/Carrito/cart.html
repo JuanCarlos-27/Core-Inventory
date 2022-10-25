@@ -46,14 +46,14 @@
                 </div>
                 <div class="col-3">
                     <div class="shadow h-100 card border-dark  text-center">
-                        <div class="card-header fw-bold" style="background-color: #F37828;">Detalles de compra</div>
+                        <div class="card-header fw-bold" style="background-color: #F37828;">Detalle de compra</div>
                         <div class="card-body">
                             <div class="fw-bold h5">
                                 {% load humanize %}
                                 Subtotal ({{ cart.products.count }}): <span class="text-danger">${{ cart.subtotal|intcomma }}</span>
                             </div>
                             <div class="fw-bold h5">
-                                <a href="#" class="btn btn-success">Proceder al pago</a>
+                                <a href="{% url 'Orders:order' %}" class="btn btn-success">Proceder al pago</a>
                             </div>
                         </div>
                     </div>

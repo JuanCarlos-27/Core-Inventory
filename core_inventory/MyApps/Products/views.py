@@ -74,9 +74,14 @@ class ProductSearchListView(ListView):
     def query(self):
         return self.request.GET.get("q")
     
+    def notification(self):
+        cart = create_cart(self.request)
+        return cart
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['query'] = self.query()
         context['count'] = context['product_list'].count()
+        context['cart'] = self.notification()
+        
         return context
-    

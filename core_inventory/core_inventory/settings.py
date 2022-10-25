@@ -29,6 +29,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'Users.User'
 
 # Application definition
 
@@ -41,8 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'import_export',
+    'MyApps.Users',
+    'MyApps.Orders',
     'MyApps.Products',
-    'MyApps.Customers',
     'MyApps.Carts'
     
 ]

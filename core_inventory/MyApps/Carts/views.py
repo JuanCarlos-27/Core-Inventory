@@ -44,7 +44,6 @@ def remove(request):
     product.stock = product.stock + p.quantity
     product.save()
 
-    
     cart.products.remove(product)
     messages.success(request, "¡Producto eliminado!")
     return redirect('Carts:cart')

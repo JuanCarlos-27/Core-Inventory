@@ -1,0 +1,33 @@
+{% extends 'baseIndex.html' %}
+{% load static %}
+{% block content %}
+<div class="container h-75 bg-white rounded-3 d-flex justify-content-around pt-4">  
+    <div class="col-6">
+        <div class="shadow card border-dark">
+            <div class="card-header fw-bold h4" style="background-color: #F37828;">Resumen de productos
+            </div> 
+            <div class="card-body">
+                {% for product in cart.products.all %}
+                <div class="row">
+                    <div class="col-2">
+                        {% if product.image_product.url %}
+                            <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
+                        {% endif %}
+                    </div>
+                    <div class="col-2">
+                        <p class="fw-bold">{{ product.name }}</p>
+                        {% load humanize %}
+                        <p class="fw-bold text-danger">${{product.price|intcomma}}</p>
+
+                        
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div> 
+    <div class="col-5">
+        {% include 'Pedidos/orderResume.html' %}
+    </div>
+</div>
+{% endblock content %}
