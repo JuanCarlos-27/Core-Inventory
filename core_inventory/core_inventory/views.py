@@ -1,15 +1,14 @@
 from django.shortcuts import render
 from MyApps.Products.models import Product
-# from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
-
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
-
-from MyApps.Carts.utils import create_cart
+from MyApps.Carts.utils import create_cart, get_cantidad
+from django.http import HttpResponseRedirect
+from django.template.loader import render_to_string
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -33,6 +32,7 @@ def send_success_registration(emailUser, name, clave):
     email.send()
 
 def register(request):
+    cart = create_cart(request)
     if request.method == 'POST':
         email = request.POST.get("correo")
         name = request.POST.get("nombre")
@@ -61,9 +61,10 @@ def register(request):
             messages.success(request, "¡Te has registrado correctamente!")
             return redirect("login")
         
-    return render(request, 'register.html')
+    return render(request, 'register.html', {"cart":cart})
 
 def login_view(request):
+    cart = create_cart(request)
     if request.user.is_authenticated:
         return redirect('index')
     
@@ -81,14 +82,27 @@ def login_view(request):
             if data_user.is_staff:
                 return redirect("admin/")
             else:
+                if request.GET.get('next'):
+                    return HttpResponseRedirect(request.GET['next'])
                 return redirect("index")
+            
+            
         else:
             messages.error(request, "Usuario y/o contraseña no validos")
         
-    return render(request, 'login.html')
+    return render(request, 'login.html', {"cart":cart})
 
 def logout_view(request):
-    logout(request)
+    cart = create_cart(request)
+    if cart.cartproducts_set.all():
+        for p in cart.cartproducts_set.all():
+            product = get_object_or_404(Product, pk = p.product_id)
+            product.stock = product.stock + p.quantity
+            product.save()
+        logout(request)
+    else:
+        logout(request)
+    
     messages.success(request, "¡Sesión cerrada correctamente!")
     return redirect("login")
 
@@ -100,3 +114,29 @@ def productosCatalogo(request):
         "productos":listaProductos,
         "cart": cart
         })
+
+def contact(request):
+    cart = create_cart(request)
+    if request.method == 'POST':
+        name = request.POST['nameContact']
+        email = request.POST['emailContact']
+        subject = request.POST['subject']
+        message = request.POST['messageContact']
+        context = {
+            'name': name,
+            'email': email,
+            'message': message
+        }
+        template = get_template("contact_email.html")
+        content = template.render(context)
+        email = EmailMultiAlternatives(
+            subject,
+            "",
+            settings.EMAIL_HOST_USER,
+            ['jcromero909@misena.edu.co']
+        )
+        email.attach_alternative(content, 'text/html')
+        email.send()
+        messages.success(request, "¡Tu mensaje ha sido enviado correctamente!")
+
+    return render(request, "contact.html",{"cart":cart})

@@ -11,8 +11,8 @@ class Cart(models.Model):
     cart_id = models.CharField(max_length=100, null = False, blank=False, unique = True)
     user = models.ForeignKey(User, null=True, blank=True, on_delete = models.CASCADE)
     products = models.ManyToManyField(Product, through='CartProducts')
-    subtotal = models.IntegerField(default=0)
-    total = models.IntegerField(default=0)
+    subtotal = models.PositiveIntegerField(default=0)
+    total = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     
     FEE = 0 # Impuesto
@@ -23,6 +23,9 @@ class Cart(models.Model):
     def update_totals(self):
         self.update_subtotal()
         self.update_total()
+        
+        if self.order:
+            self.order.update_total()
         
     def update_subtotal(self):
         self.subtotal = sum([
@@ -36,6 +39,10 @@ class Cart(models.Model):
         
     def products_related(self):
         return self.cartproducts_set.select_related('product')
+    
+    @property
+    def order(self):
+        return self.order_set.first()
 
 class CartProductsManager(models.Manager):
     def create_or_update_quantity(self, cart, product, quantity=1):

@@ -42,9 +42,9 @@
         {% endif %}
     {% endfor %}
   {% endif %}
-  <div class="container w-25 login-form">
-      <h3 class="col-md-12 text-center py-3">Iniciar Sesión</h3>
-      <div class="col-md-12 form-group formulario__grupo" id="grupo__correo">
+  <div class="container login-form">
+      <h3 class="col-sm-12 text-center py-3">Iniciar Sesión</h3>
+      <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
           <label for="correo" class="formulario__label">Correo Electrónico<span class="asterisco">*</span></label>
           <div class="formulario__grupo-input">
               <input type="text" name="email" id="correo" class="form-control validacion-correcta formulario__input"  placeholder="ej: juang20133@gmail.com" required/>
@@ -52,7 +52,7 @@
           </div>
           <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guion bajo.</p>
       </div>
-      <div class="col-md-12 form-group formulario__grupo" id="grupo__password">
+      <div class="col-sm-12 form-group formulario__grupo" id="grupo__password">
           <label for="password" class="formulario__label">Contraseña<span class="asterisco">*</span></label>
           <div class="formulario__grupo-input">
               <input type="password" name="password" id="password" class="form-control validacion-correcta formulario__input"  placeholder="Ingresar Contraseña" required/>
@@ -61,9 +61,12 @@
           <p class="formulario__input-error">La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.
           Puede tener otros símbolos.</p>
       </div>
-      <div class="col-md-12 form-group text-center">
-        <input type="submit" name="btnxSubmit" class="btnAccess" value="Ingresar" onclick="validarRol()"/>
+      <div class="col-sm-12 form-group text-center">
+        <input type="submit" name="btnxSubmit" class="btnAccess" value="Ingresar"/>
       </div>
+      <div class="col-sm-12 form-group text-center pt-2">
+        <a href="{% url  'Users:password_reset' %}" class="forgotPassword">¿Has olvidado tu contraseña?</a>
+    </div>
   </div>
 </form>
 

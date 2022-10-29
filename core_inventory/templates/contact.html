@@ -1,0 +1,86 @@
+{% extends 'baseIndex.html' %}
+
+
+{% block title %} Contacto{% endblock title %}
+
+{% block content %}
+<form method="POST">
+  {% csrf_token %}
+  {% if messages %}
+    {% for m in messages %}
+        {% if m.tags == 'success' %}
+            <script type="text/javascript">
+                const mensajeExito = ()=>{
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    
+                    Toast.fire({
+                        icon: 'success',
+                        title: "{{ m }}"
+                    })
+                }
+                mensajeExito();
+            </script>
+        {% else %}
+        <script type="text/javascript">
+            const mensajeError = ()=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ m }}'
+                })
+            }
+            mensajeError();
+        </script>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+  <div class="container w-50 contact-form">
+        <h3 class="col-sm-12 text-center py-3">Formulario de Contacto</h3>
+        <div class="col-md-12">
+            <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
+                <label for="emailContact" class="formulario__label">Correo Electrónico<span class="asterisco">*</span></label>
+                <div class="formulario__grupo-input">
+                    <input type="email" name="emailContact" id="emailContact" class="form-control validacion-correcta formulario__input"  placeholder="ej: juang20133@gmail.com" required/>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
+                <label for="nameContact" class="formulario__label">Nombre y apellido<span class="asterisco">*</span></label>
+                <div class="formulario__grupo-input">
+                    <input type="text" name="nameContact" id="nameContact" class="form-control validacion-correcta formulario__input"  placeholder="ej: Julian Ramirez" required/>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
+                <label for="subject" class="formulario__label">Asunto<span class="asterisco">*</span></label>
+                <div class="formulario__grupo-input">
+                    <input type="text" name="subject" id="subject" class="form-control validacion-correcta formulario__input"  placeholder="ej: Solicitud de mejora" required/>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
+                <label for="messageContact" class="formulario__label">Comentario<span class="asterisco">*</span></label>
+                <div class="formulario__grupo-input">
+                    <div class="col-sm-12">
+                        <textarea class="form-control formulario__input_textarea" name="messageContact" rows="5" placeholder="Ingrese su mensaje"></textarea>
+                      </div>
+                </div>
+            </div>
+            <div class="col-sm-12 form-group text-center">
+                <input type="submit" name="btnSubmitComment" class="btnAccess" value="Enviar"/>
+            </div>
+		</div>
+  </div>
+</form>
+
+{% endblock content  %}

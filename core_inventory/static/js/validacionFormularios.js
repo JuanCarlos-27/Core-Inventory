@@ -93,8 +93,18 @@ const validarPassword2 = () => {
 	}
 }
 
-inputs.forEach((input) => {
+inputs.forEach(input => {
 	input.addEventListener('keyup', validarFormulario);
 	input.addEventListener('blur', validarFormulario);
 });
 
+
+const btnSubmit = document.querySelector(".btnRegister")
+
+btnSubmit.addEventListener('click', (e)=>{
+	Object.entries(campos).forEach(([key, value]) => {
+		if(value === false){
+			e.preventDefault()
+		}
+	});
+})

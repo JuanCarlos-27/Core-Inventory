@@ -15,3 +15,8 @@ def create_cart(request):
     request.session['cart_id'] = cart.cart_id
     
     return cart
+
+
+def get_cantidad(request):
+    cart = create_cart(request)
+    return cart.products.count()

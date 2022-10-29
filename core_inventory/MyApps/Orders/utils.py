@@ -1,7 +1,7 @@
 from . models import Order
 
 def get_or_created_order(cart, request):
-    order = Order.objects.filter(cart=cart).first()
+    order = cart.order
     
     if order is None and request.user.is_authenticated:
         order = Order.objects.create(cart=cart, user=request.user)

@@ -78,13 +78,13 @@
         </ul>
           <ul class="d-flex nav col-md-auto col-12 justify-content-center" >
             <li><a href="{% url 'index' %}" class="nav-link px-2 text-light me-sm-4 link-hover">Inicio</a></li>
-            <li><a href="#" class="nav-link px-2 me-sm-4 text-light link-hover">Historia</a></li>
-            <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Mision & visión</a></li>
+            <li><a href="#" class="nav-link px-2 me-sm-4 text-light link-hover">Contáctenos</a></li>
+            <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Sobre nosotros</a></li>
           </ul>
           <ul class="d-flex nav col-md-auto col-12 justify-content-center">
             <img src="{% static 'img/box-seam.svg' %}" class="d-none d-sm-flex">
             <li><a href="" class="nav-link px-2 text-light link-hover">Mis Pedidos</a> </li>
-            <img src="{% static 'img/cart4.svg' %}" class="d-none d-sm-flex">
+            <img src="{% static 'img/cart.svg' %}" class="d-none d-sm-flex">
             <li>
               <a href="{% url 'Carts:cart' %}" class="nav-link px-2 text-light link-hover position-relative">Mi Carrito
                 <span id="add-product" class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger"></span>
@@ -97,8 +97,8 @@
           </a>
           <ul class="d-flex nav col-md-auto col-12 justify-content-center " >
             <li><a href="{% url 'index' %}" class="nav-link px-2 text-light me-sm-4 link-hover">Inicio</a></li>
-            <li><a href="#" class="nav-link px-2 me-sm-4 text-light link-hover">Historia</a></li>
-            <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Mision & visión</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link px-2 me-sm-4 text-light link-hover">Contáctenos</a></li>
+            <li><a href="#" class="nav-link px-2 text-light me-sm-4 link-hover">Sobre nosotros</a></li>
           </ul>
           <ul class="d-flex nav col-md-auto col-12 justify-content-center ">
             <img src="{% static 'img/person-fill.svg' %}" class="d-none d-sm-flex">

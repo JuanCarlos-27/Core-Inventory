@@ -3,14 +3,36 @@
     font-weight: bolder;
     font-size: 16px;
 }
+
+.reset-password{
+	background: #fff;
+    border-radius: 10px;
+    box-shadow: -5px 9px 18px 0px #3a3a3a;
+	padding-bottom:25px;
+}
+.contact-form{
+    background: #fff;
+    border-radius: 10px 10px 10px 20%;
+    box-shadow: -5px 9px 18px 0px #3a3a3a;
+	padding-bottom:10px;
+}
 .login-form{
     background: #fff;
     margin: 30px auto;
-    width: 70%;
     border-radius: 10px 10px 10px 20% ;
     box-shadow: -5px 9px 18px 0px #3a3a3a;
+	padding-bottom:10px;
+	width: 340px;
 }
-
+.forgotPassword{
+	text-align: center;
+	color: rgb(0, 0, 0,.9);
+	text-decoration: none;
+	font-style: italic;
+}
+.forgotPassword:hover{
+	color: #F37828;
+}
 
 /*ESTILOS FORMULARIO DE REGISTRO */
 
@@ -71,6 +93,18 @@
 	transition: .3s ease all;
 }
 
+.formulario__input_textarea {
+	border: 2px solid #bababa;
+	border-radius: 1rem;
+	padding: 10px;
+	transition: .3s ease all;
+}
+
+.formulario__input_textarea:focus {
+	border: 3px solid #F37828;
+	outline: none;
+	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
 .formulario__input:focus {
 	border: 3px solid #F37828;
 	outline: none;
@@ -184,11 +218,15 @@
 	border: 3px solid #28a745;
 }
 
-
-/* ----- -----  Mediaqueries ----- ----- 
 @media screen and (max-width: 800px) {
 	.formulario {
 		grid-template-columns: 1fr;
+	}
+	.register-form form{
+		padding: 30px;
+	}
+	.login-form{
+		width: 100%;
 	}
 
 	.formulario__grupo-terminos, 
@@ -201,4 +239,3 @@
 		width: 100%;
 	}
 }
-*/

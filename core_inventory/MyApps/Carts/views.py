@@ -8,7 +8,6 @@ from . models import CartProducts
 
 def cart(request):
     cart = create_cart(request)
-    # print(cart.products.count())
     return render(request, "Carrito/cart.html", {
         "cart": cart
         })
@@ -33,7 +32,7 @@ def add(request):
 
     messages.success(request, "¡{0} productos agregados!".format(quantity))
     
-    return render(request, 'Carrito/productDetail.html',{"product": product})
+    return render(request, 'Carrito/productDetail.html',{"product": product, "cart":cart})
 
 def remove(request):
     cart = create_cart(request)

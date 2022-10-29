@@ -2,26 +2,28 @@
 {% load static %}
 {% block content %}
 <div class="container h-75 bg-white rounded-3 d-flex justify-content-around pt-4">  
-    <div class="col-6">
+    <div class="col-4">
         <div class="shadow card border-dark">
             <div class="card-header fw-bold h4" style="background-color: #F37828;">Resumen de productos
             </div> 
             <div class="card-body">
-                {% for product in cart.products.all %}
-                <div class="row">
-                    <div class="col-2">
+                {% for cp in cart.products_related %}
+                {% with product=cp.product  %}
+                <div class="row d-flex align-items-center">
+                    <div class="col border-end">
                         {% if product.image_product.url %}
                             <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
                         {% endif %}
                     </div>
-                    <div class="col-2">
+                    <div class="col">
                         <p class="fw-bold">{{ product.name }}</p>
+                    </div>               
+                    <div class="col-5">
                         {% load humanize %}
-                        <p class="fw-bold text-danger">${{product.price|intcomma}}</p>
-
-                        
+                        <p class="fw-bold text-danger">${{product.price|intcomma}} x ({{cp.quantity}}) unidades</p>
                     </div>
                 </div>
+                {% endwith %}
                 {% endfor %}
             </div>
         </div>
