@@ -9,3 +9,11 @@ class User(AbstractUser):
     address = models.CharField(max_length=60)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
+
+    @property
+    def shippingAddress(self):
+        return self.shippingaddress_set.filter(default=True).first()
+    
+    def has_shipping_address(self):
+        return self.shippingAddress is not None
+        

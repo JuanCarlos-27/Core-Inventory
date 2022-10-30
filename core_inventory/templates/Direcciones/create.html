@@ -1,0 +1,35 @@
+<div class="modal fade" id="createAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Dirección</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="row g-3" method="POST" id="createAddressForm" action="{% url 'address:createAddress' %}">{% csrf_token %}
+                <div class="col-md-12">
+                    <label for="address" class="formulario__label">Dirección<span class="asterisco">*</span></label>
+                    <input type="text" name="address" id="address" class="form-control validacion-correcta formulario__input"  placeholder="Ej: Calle 32 sur # 14 bis este" required/>
+                </div>
+                <div class="col-md-12">
+                    <label for="neighborhood" class="formulario__label">Barrio<span class="asterisco">*</span></label>
+                    <input type="text" name="neighborhood" id="neighborhood" class="form-control validacion-correcta formulario__input"  placeholder="Ej: Los jardines" required/>
+                </div>
+                <div class="col-md-12">
+                    <label for="zone" class="formulario__label">Localidad<span class="asterisco">*</span></label>
+                    <input type="text" name="zone" id="zone" class="form-control validacion-correcta formulario__input"  placeholder="Ej: Suba" required/>
+                </div>
+                <div class="col-12">
+                    <label for="reference" class="formulario__label">Referencia<span class="asterisco">*</span></label>
+                    <textarea class="form-control formulario__input_textarea" name="reference" id="reference" rows="2" placeholder="Ej: Puerta amarilla; frente al parque"></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                  </div>
+              </form>
+        </div> 
+      </div>
+    </div>
+</div>

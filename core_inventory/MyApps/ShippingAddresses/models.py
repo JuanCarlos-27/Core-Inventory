@@ -14,3 +14,8 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
     
+    def update_default(self, default=False):
+        self.default = default
+        self.save()
+        
+    

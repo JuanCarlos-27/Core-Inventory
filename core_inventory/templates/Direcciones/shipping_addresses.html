@@ -5,6 +5,7 @@
 <div class="container bg-white rounded-3 p-3">
     <h1 class="text-center rounded-3 mb-3">Mis direcciones 🏠</h1>
     {% if object_list %}
+    <a href="#" class="btn text-white fw-bold mb-2" style="background-color: #F37828;" data-bs-toggle="modal" data-bs-target="#createAddress">Agregar</a>
         <div class="row">
             {% for shipping_address in object_list %}
             {% if shipping_address.default %}
@@ -18,13 +19,13 @@
                         <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
                         <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
                         <div class="card-footer text-right">
-                            <a href="#" class="btn btn-danger">Editar</a>
+                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold"><i class="bi bi-pencil-square"></i></a>
                         </div>
                     </div>
                     </div>
                 </div>
             {% else %}
-                <div class="col-sm-4">
+                <div class="col-sm-4 mb-4">
                     <div class="card text-center" style="border-color: #F37828;">
                     <div class="card-body">
                         <h5 class="card-title">{{shipping_address.address}}</h5>
@@ -33,8 +34,9 @@
                         <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
                         <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
                         <div class="card-footer text-right">
-                            <a href="#" class="btn btn-danger">Editar</a>
-                            <a href="#" class="btn btn-primary">Cambiar a principal</a>
+                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold"><i class="bi bi-pencil-square"></i></a>
+                            <a onclick="modalDelete('eliminar/{{shipping_address.pk}}')" class="btn btn-danger fw-bold"><i class="bi bi-trash"></i></a>
+                            <a href="{% url 'address:default' shipping_address.pk %}" class="btn btn-warning fw-bold">Principal</a>
                         </div>
                     </div>
                     </div>
@@ -46,9 +48,36 @@
         <div class="row h-75 justify-content-center align-items-center">
             <div class="col-12 text-center">
                 <h4 class="opacity-75">No tienes direcciones registradas.</h4>
-                <a href="" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
+                <a href="" class="h5 text-decoration-none opacity-75 text-primary" data-bs-toggle="modal" data-bs-target="#createAddress">Agregar una nueva ➕</a>
             </div>
         </div>
     {% endif %}
 </div>
+<div class="modal fade" id="editAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+</div>
+<script>
+    const openModal = (url)=>{
+        console.log(url)
+        $("#editAddress").load(url, function(){
+            $(this).modal("show");
+        });
+    }
+    const modalDelete = (url) =>{
+        Swal.fire({
+            title: '¿Estas seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Si, seguro!',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.href = url;
+            }
+          })
+    }
+</script>
+
+{% include 'Direcciones/create.html' %}
 {% endblock content %}
