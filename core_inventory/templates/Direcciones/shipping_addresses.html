@@ -1,0 +1,54 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Dirección{% endblock%}
+{% load static %}
+{% block content %}
+<div class="container bg-white rounded-3 p-3">
+    <h1 class="text-center rounded-3 mb-3">Mis direcciones 🏠</h1>
+    {% if object_list %}
+        <div class="row">
+            {% for shipping_address in object_list %}
+            {% if shipping_address.default %}
+                <div class="col-sm-4 mb-4">
+                    <div class="card text-center shadow" style="border-color: #F37828;">
+                    <div class="card-body">
+                        <img src="{% static 'img/tachuela.svg' %}" alt="" width="32" height="32">
+                        <h5 class="card-title">{{shipping_address.address}}</h5>
+                        <hr>
+                        <p class=""><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
+                        <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
+                        <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
+                        <div class="card-footer text-right">
+                            <a href="#" class="btn btn-danger">Editar</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-sm-4">
+                    <div class="card text-center" style="border-color: #F37828;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{shipping_address.address}}</h5>
+                        <hr>
+                        <p class=""><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
+                        <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
+                        <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
+                        <div class="card-footer text-right">
+                            <a href="#" class="btn btn-danger">Editar</a>
+                            <a href="#" class="btn btn-primary">Cambiar a principal</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="row h-75 justify-content-center align-items-center">
+            <div class="col-12 text-center">
+                <h4 class="opacity-75">No tienes direcciones registradas.</h4>
+                <a href="" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock content %}

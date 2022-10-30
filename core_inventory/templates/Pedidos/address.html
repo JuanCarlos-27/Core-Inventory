@@ -1,16 +1,10 @@
 {% extends 'baseIndex.html' %}
-{% block title %} Pedido{% endblock%}
+{% block title %} Dirección{% endblock%}
 {% load static %}
 {% block content %}
 <div class="container h-75 bg-white rounded-3 d-flex justify-content-around align-content-start flex-wrap">  
     <div class="steps col-xl-10 col-sm-12 mb-3">
         {% include 'Pedidos/stepByStep.html' %}
-    </div>
-    <div class="col-xl-4 col-sm-12">
-        {% include 'Pedidos/orderProducts.html' %}
-    </div> 
-    <div class="col-xl-5 col-sm-12">
-        {% include 'Pedidos/orderResume.html' %}
     </div>
 </div>
 {% endblock content %}

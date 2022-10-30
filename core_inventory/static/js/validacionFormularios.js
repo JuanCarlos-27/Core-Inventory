@@ -101,6 +101,8 @@ inputs.forEach(input => {
 
 const btnSubmit = document.querySelector(".btnRegister")
 
+
+if(btnSubmit){
 btnSubmit.addEventListener('click', (e)=>{
 	Object.entries(campos).forEach(([key, value]) => {
 		if(value === false){
@@ -108,3 +110,4 @@ btnSubmit.addEventListener('click', (e)=>{
 		}
 	});
 })
+}

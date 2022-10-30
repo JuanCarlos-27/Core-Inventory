@@ -7,7 +7,7 @@
         <h1 class="text-center rounded-3 mb-3">Mi carrito de compras</h1>
         {% if cart.products.exists %}
             <div class="row justify-content-between">
-                <div class="col-8">
+                <div class="col-sm-12 col-xl-8">
                     <table class="table table-striped mb-0 table-bordered border-dark text-center">
                         <thead style="background-color: #F37828;">
                         <tr>
@@ -44,7 +44,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-3">
+                <div class="col-sm-12 col-xl-3">
                     <div class="shadow h-100 card border-dark  text-center">
                         <div class="card-header fw-bold" style="background-color: #F37828;">Detalle de compra</div>
                         <div class="card-body">
@@ -59,10 +59,10 @@
                     </div>
                 </div>
             </div>
-            
+
         {% else %}
         <div class="row h-75 justify-content-center align-items-center">
-            <div class="col-12 text-center">
+            <div class="col-sm-12 text-center">
                 <h4 class="opacity-75">Tu carrito de compras 🛒 esta vacio</h4>
                 <a href="{% url 'index' %}" class="h5 text-decoration-none opacity-75 text-primary">Ir a comprar🍅</a>
             </div>

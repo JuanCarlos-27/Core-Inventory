@@ -1,3 +1,71 @@
 body{
     background: #CFB286 /*BDA174*/;
 }
+.steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-weight: bold;
+    height: 100px;
+}
+
+.step-button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-decoration: none;
+    border: none;
+    background-color: #b1b1b1;
+    transition: .4s;
+    font-weight: bold;
+}
+
+.step-button[aria-expanded="true"] {
+    width: 60px;
+    height: 60px;
+    background-color: #F37828;
+    color: #fff;
+}
+
+.done {
+    background-color: #F37828;
+    color: #fff;
+}
+
+.step-item {
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    text-align: center;
+}
+.step-title {
+    flex-basis: 100%;
+}
+#progress {
+    appearance:none;
+    position: absolute;
+    width: 90%;
+    z-index: 5;
+    height: 10px;
+    margin-left: 40px;
+    margin-bottom: 18px;
+}
+
+/* to customize progress bar */
+#progress::-webkit-progress-value {
+    background-color: #c59f67;
+    transition: .5s ease;
+}
+
+#progress::-webkit-progress-bar {
+    background-color: #bababa;
+
+}
+

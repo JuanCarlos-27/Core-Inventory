@@ -12,13 +12,14 @@ urlpatterns = [
     path('carrito/', include('MyApps.Carts.urls')),
     path('pedidos/', include('MyApps.Orders.urls')),
     path('product_detail/', include('MyApps.Products.urls')),
-    path('reset_password/', include('MyApps.Users.urls')),
-    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('password_reset_done', auth_views.PasswordResetDoneView.as_view(template_name="Password/password_reset_done.html"), name='password_reset_done'),
     path('login', views.login_view, name='login'), # Login
     path('logout', views.logout_view, name='logout'), # Register
     path('register', views.register, name='register'),
     path('contacto', views.contact, name='contact'),
+    path('direcciones/', include('MyApps.ShippingAddresses.urls')),
+    path('password_reset', auth_views.PasswordResetView.as_view(template_name="Password/forgot_password.html"), name="password_reset"),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password_reset_done', auth_views.PasswordResetDoneView.as_view(template_name="Password/password_reset_done.html"), name='password_reset_done'),
     
 ]
 if settings.DEBUG:

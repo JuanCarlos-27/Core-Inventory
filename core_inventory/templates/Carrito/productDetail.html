@@ -1,26 +1,25 @@
 {% extends '../baseIndex.html' %}
 {% block title %} Detalle{% endblock title %}
 {% block content %}
-
-    <div class="container d-flex justify-content-center">
-        <div class="card border-dark rounded" style="width: 18rem;">
-            {% if product.image_product %}
-                <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="card-img-top border-bottom"/>  
-            {% endif %}
-            <div class="card-body text-center">
-                <h5 class="card-title">{{product.name}}</h5>
-                <div class="fw-bold">
-                    {% load humanize %}
-                    Precio:<span class="text-danger"> ${{ product.price|intcomma}}</span>
-                </div>
-                <p class="card-text">{{ product.descripction }}</p>
-                {% if product.status == 0 %}
-                    <span class="badge rounded-pill text-bg-success">Disponible ({{product.stock}} unidades)</span>
-                {% else %}
-                    <span class="badge rounded-pill text-bg-danger">Agotado</span>
-                {% endif %}
-                {% include 'Carrito/add.html' %}
+<div class="container d-flex justify-content-center">
+    <div class="card border-dark rounded" style="width: 18rem;">
+        {% if product.image_product %}
+            <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="card-img-top border-bottom"/>  
+        {% endif %}
+        <div class="card-body text-center">
+            <h5 class="card-title">{{product.name}}</h5>
+            <div class="fw-bold">
+                {% load humanize %}
+                Precio:<span class="text-danger"> ${{ product.price|intcomma}}</span>
             </div>
+            <p class="card-text">{{ product.descripction }}</p>
+            {% if product.status == 0 %}
+                <span class="badge rounded-pill text-bg-success">Disponible ({{product.stock}} unidades)</span>
+            {% else %}
+                <span class="badge rounded-pill text-bg-danger">Agotado</span>
+            {% endif %}
+            {% include 'Carrito/add.html' %}
         </div>
     </div>
+</div>
 {% endblock content %}

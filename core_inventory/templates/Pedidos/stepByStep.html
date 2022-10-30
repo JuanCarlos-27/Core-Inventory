@@ -1,0 +1,18 @@
+<progress id="progress" value=0 max=100 ></progress>
+{% for item in breadcrumb %}
+    {% if item.collapsed %}
+        <div class="step-item">
+            <a href="{{item.url}}" type="button" class="step-button text-center" aria-expanded="true"><span>{{forloop.counter}}</span></a>
+            <div class="step-title">
+                {{item.title}}
+            </div>
+        </div>
+    {% else %}
+    <div class="step-item">
+        <a href="" type="button" class="step-button text-center collapsed" disabled="" aria-expanded="false"><span>{{forloop.counter}}</span></a>
+        <div class="step-title">
+            {{item.title}}
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}
