@@ -18,9 +18,11 @@
                 {% load humanize %}
                 Total a pagar: <span class="text-danger">${{ order.total|intcomma }}</span>
             </div>
-            <div class="fw-bold h5">
-                <a href="" class="btn btn-success">Continuar</a>
-            </div>
+            {% if btnContinue %}
+                <div class="fw-bold h5">
+                    <a href="{% url 'Orders:address' %}" class="btn btn-success">Continuar</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

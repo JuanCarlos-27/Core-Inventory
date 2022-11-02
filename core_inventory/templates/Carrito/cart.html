@@ -3,9 +3,9 @@
 {% block title %} Carrito{% endblock %}
 
 {% block content %}
-    <div class="container h-75 bg-white rounded-3">
-        <h1 class="text-center rounded-3 mb-3">Mi carrito de compras</h1>
-        {% if cart.products.exists %}
+{% if cart.products.exists %}
+        <div class="container pb-4 bg-white rounded-3">
+            <h1 class="text-center rounded-3 mb-3">Mi carrito de compras</h1>
             <div class="row justify-content-between">
                 <div class="col-sm-12 col-xl-8">
                     <table class="table table-striped mb-0 table-bordered border-dark text-center">
@@ -59,17 +59,18 @@
                     </div>
                 </div>
             </div>
-
+        </div>
         {% else %}
-        <div class="row h-75 justify-content-center align-items-center">
-            <div class="col-sm-12 text-center">
-                <h4 class="opacity-75">Tu carrito de compras 🛒 esta vacio</h4>
-                <a href="{% url 'index' %}" class="h5 text-decoration-none opacity-75 text-primary">Ir a comprar🍅</a>
+        <div class="container h-75 bg-white rounded-3">
+            <h1 class="text-center rounded-3 mb-3">Mi carrito de compras</h1>
+            <div class="row h-75 justify-content-center align-items-center">
+                <div class="col-sm-12 text-center">
+                    <h4 class="opacity-75">Tu carrito de compras 🛒 esta vacio</h4>
+                    <a href="{% url 'index' %}" class="h5 text-decoration-none opacity-75 text-primary">Ir a comprar🍅</a>
+                </div>
             </div>
         </div>
-
         {% endif %}
-    </div>
 {% endblock content %}
 
 

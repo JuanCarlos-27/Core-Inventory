@@ -1,0 +1,22 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Selecciona otra dirección{% endblock%}
+{% block content %}
+<div class="container bg-white rounded-3 d-flex justify-content-around align-content-start flex-wrap">  
+    <div class="steps col-xl-10 col-sm-12 mb-3">
+        {% include 'Pedidos/stepByStep.html' %}
+    </div>
+    <div class="col-xl-8 col-sm-12">
+        <h4 class="text-center">Selecciona una dirección de envio</h4>
+        {% for shipping_address in shipping_addresses  %}
+            <div class="card shadow m-3" style="border-color: #F37828;">
+            <div class="card-body">
+                <h5 class="card-title">{{shipping_address.address}} - {{shipping_address.neighborhood}}</h5>
+                <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
+                <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
+                <a href="{% url 'Orders:check_address' shipping_address.pk %}" class="btnAccess m-0 p-2 text-decoration-none">Seleccionar</a>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

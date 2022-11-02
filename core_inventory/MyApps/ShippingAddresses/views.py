@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DeleteView
 from . models import ShippingAddress
 from MyApps.Carts.utils import create_cart
+from MyApps.Orders.utils import get_or_created_order
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, get_object_or_404
@@ -42,11 +44,12 @@ def create(request):
                 shippingAddress = ShippingAddress.objects.create(user=user,address=address, neighborhood=neighborhood, zone=zone,reference=reference)
             else:
                 shippingAddress = ShippingAddress.objects.create(user=user,address=address, neighborhood=neighborhood, zone=zone,reference=reference,default=True)
-
+                
             messages.success(request, "¡Dirección creada correctamente!")
+                            
         else:
             messages.error(request, "¡Ya has registrado suficientes direcciones!")
-
+            
     return redirect('/direcciones')
 
 @login_required(login_url='login')
@@ -80,6 +83,7 @@ def delete(request, id):
         return redirect('index')
     else:
         shippingAddress.delete()
+    
     
     return redirect('/direcciones')
 

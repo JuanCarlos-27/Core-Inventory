@@ -1,0 +1,60 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Dirección{% endblock%}
+{% load static %}
+{% block content %}
+<div class="container bg-white rounded-3 d-flex justify-content-around align-content-start flex-wrap">  
+    <div class="steps col-xl-10 col-sm-12 mb-3">
+        {% include 'Pedidos/stepByStep.html' %}
+    </div>
+    <div class="col-xl-10 col-sm-12 p-3">
+        
+        <div class="card border-dark shadow">
+            <div class="card-header h4" style="background-color: #F37828;">
+                <div class="fw-bold text-center">Confirma tu pedido</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-4 border-end">
+                        <h6 class="fw-bold">Dirección de envio</h6>
+                        <div class="card-text">
+                            {{ shipping_address.address }}
+                        </div>
+                        <div class="card-text">
+                            {{ shipping_address.neighborhood }}
+                        </div>
+                        <div class="card-text">
+                            {{ shipping_address.zone }}
+                        </div>
+                    </div>
+                    <div class="col-xl-4  border-end">
+                        <h6 class="fw-bold">Método de pago</h6>
+                        <div class="card-text">
+                            Tarjeta con número *****2234
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <h6 class="fw-bold">Código de descuento</h6>
+                        <form>
+                            <input type="text" name="code" value="" class="formulario__input" placeholder="Ej: AAD576">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-sm-12 p-3">
+        <div class="card">
+            {% include 'Pedidos/orderProducts.html' %}
+        </div>
+    </div>
+    <div class="col-xl-6 col-sm-12 p-3 d-flex justify-content-end flex-wrap align-content-between">
+        <div class="card col-12">
+            {% include 'Pedidos/orderResume.html'%}
+        </div>
+        <div class="fw-bold h5 pt-4">
+            <a href="{% url 'Orders:cancel' %}" class="btn btn-danger fw-bold m-0 p-2">Cancelar pedido</a>
+            <a href="{% url 'Orders:complete' %}" class="btn fw-bold m-0 p-2 text-white" style="background-color:#F37828">Confirmar pedido</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

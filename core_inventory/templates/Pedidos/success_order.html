@@ -1,0 +1,11 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Pedido realizado{% endblock%}
+{% load static %}
+{% block content %}
+    <div class="container w-50 reset-password">
+        <h3 class="col-sm-12 text-center py-3">¡Tu pedido se ha completado con éxito ✅!</h3>
+        <p class="text-center">En instantes te llegará a tu correo electrónico la confirmación y los detalles del mismo.</p>
+        <p class="text-center">Te invitamos a seguir explorando nuestros productos de la más alta calidad en el mercado.</p>
+        <p class="text-center h5"><a href="{% url 'index' %}" class="text-decoration-none">¡Ir a comprar🤩!</a></p>
+    </div>
+{% endblock content %}
