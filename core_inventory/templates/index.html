@@ -42,7 +42,7 @@
 {% endif %}
 <main role="main">
   <div class="container d-flex flex-wrap">
-    {% for p in productos  %}
+    {% for p in product_list  %}
     <div class="col-xs-12 col-md-6 bootstrap snippets bootdeys">
       <div class="product-content product-wrap clearfix m-2">
       <div class="row">
@@ -81,11 +81,11 @@
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
                 <div class="rating">
+                  <label for="stars-rating-1"><i class="fa fa-star text-warning"></i></label>
+                  <label for="stars-rating-2"><i class="fa fa-star text-warning"></i></label>
+                  <label for="stars-rating-3"><i class="fa fa-star text-warning"></i></label>
+                  <label for="stars-rating-4"><i class="fa fa-star text-warning"></i></label>
                   <label for="stars-rating-5"><i class="fa fa-star"></i></label>
-                  <label for="stars-rating-4"><i class="fa fa-star"></i></label>
-                  <label for="stars-rating-3"><i class="fa fa-star text-primary"></i></label>
-                  <label for="stars-rating-2"><i class="fa fa-star text-primary"></i></label>
-                  <label for="stars-rating-1"><i class="fa fa-star text-primary"></i></label>
                 </div>
               </div>
             </div>
@@ -96,5 +96,7 @@
     </div>
     {% endfor %}
   </div>
+
+  {% include 'paginator.html' %}
 </main>
 {% endblock content%}

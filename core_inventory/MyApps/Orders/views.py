@@ -3,6 +3,7 @@ from MyApps.Carts.utils import create_cart, destroy_cart
 from MyApps.Products.models import Product
 from . models import Order
 from . utils import get_or_created_order, breadcrumb, destroy_order
+from . mails import Mail
 from django.contrib.auth.decorators import login_required
 from MyApps.ShippingAddresses.models import ShippingAddress
 from django.contrib import messages
@@ -24,6 +25,8 @@ def address(request):
     
     shipping_address = order.get_or_set_shipping_address()
     can_choose_address = request.user.shippingaddress_set.count() > 1
+    
+    print(can_choose_address)
     return render(request, 'Pedidos/address.html',{
         "cart":cart,
         "order": order,
@@ -37,8 +40,7 @@ def select_address(request):
     shipping_addresses = request.user.shippingaddress_set.all()
     return render(request, 'Pedidos/select_address.html',{
         'breadcrumb':breadcrumb(address=True),
-        'shipping_addresses':shipping_addresses
-        
+        'shipping_addresses':shipping_addresses 
     })
 
 @login_required(login_url='login')
@@ -106,6 +108,9 @@ def complete(request):
         return redirect('index')
     
     order.complete()
+    
+    Mail.send_complete_order(order, request.user,cart)
+    
     destroy_cart(request)
     destroy_order(request)
     

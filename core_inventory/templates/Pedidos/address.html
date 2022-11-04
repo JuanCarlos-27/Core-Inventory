@@ -26,7 +26,7 @@
                     </div>
                 </div>
             </div>
-            {% if shipping_address.can_choose_address %}
+            {% if can_choose_address %}
                 <div class="h4 text-muted">
                     <a href="{% url 'Orders:select_address' %}" class="h4 text-decoration-none opacity-75 text-primary">Elige otra dirección</a>
                 </div>

@@ -7,7 +7,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.productosCatalogo, name='index'), # Ruta raiz
+    path('', views.ProductListView.as_view(), name='index'), # Ruta raiz
     path('main/', include('MyApps.Products.urls')),
     path('carrito/', include('MyApps.Carts.urls')),
     path('pedidos/', include('MyApps.Orders.urls')),

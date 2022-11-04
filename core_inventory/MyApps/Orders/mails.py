@@ -1,12 +1,17 @@
 from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
+from datetime import date
 class Mail:
-    def send_complete_order(order, user):
+    def send_complete_order(order, user, cart):
+        today = date.today()
         subject = 'Tu pedido esta en camino 🚚'
-        template = get_template('Pedidos/email_order_completed.html')
+        template = get_template('Pedidos/email_order.html')
         content = template.render({
-            'user':user
+            'date':today,
+            'user':user,
+            'order':order,
+            'cart':cart
         })
         
         message = EmailMultiAlternatives(

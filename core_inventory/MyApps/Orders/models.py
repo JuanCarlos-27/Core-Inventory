@@ -1,20 +1,12 @@
-from enum import Enum
 import uuid
 from django.db import models
 from django.db.models.signals import pre_save
 from django.contrib.auth import get_user_model
 from MyApps.Carts.models import Cart
 from MyApps.ShippingAddresses.models import ShippingAddress
+from . common import OrderStatus, choices
 
 User = get_user_model()
-
-class OrderStatus(Enum):
-    CREATED = 'EN PROCESO'
-    PAYED = 'PAGADO'
-    COMPLETED = 'FINALIZADO'
-    CANCELED = 'CANCELADO'
-    
-choices = [(tag, tag.value) for tag in OrderStatus]
 
 class Order(models.Model):
     order_id = models.CharField(max_length=100, null = False, blank = False, unique=True)

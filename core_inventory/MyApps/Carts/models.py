@@ -3,6 +3,7 @@ import decimal
 from django.db import models
 from django.contrib.auth.models import User
 from MyApps.Products.models import Product
+from MyApps.Orders.common import OrderStatus
 from django.db.models.signals import pre_save, m2m_changed, post_save
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -42,7 +43,7 @@ class Cart(models.Model):
     
     @property
     def order(self):
-        return self.order_set.first()
+        return self.order_set.filter(status=OrderStatus.CREATED).first()
 
 class CartProductsManager(models.Manager):
     def create_or_update_quantity(self, cart, product, quantity=1):

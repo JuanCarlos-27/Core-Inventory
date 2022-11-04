@@ -9,6 +9,7 @@ from django.conf import settings
 from MyApps.Carts.utils import create_cart, get_cantidad
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
+from django.views.generic.list import ListView
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
@@ -106,15 +107,29 @@ def logout_view(request):
     messages.success(request, "¡Sesión cerrada correctamente!")
     return redirect("login")
 
-def productosCatalogo(request):
-    cart = create_cart(request)
-    # print(cart.products.count())
-    listaProductos = Product.objects.all()
-    return render(request, "index.html", {
-        "productos":listaProductos,
-        "cart": cart
-        })
+# def productosCatalogo(request):
+#     cart = create_cart(request)
+#     # print(cart.products.count())
+#     listaProductos = Product.objects.all()
+#     return render(request, "index.html", {
+#         "productos":listaProductos,
+#         "cart": cart
+#         })
 
+class ProductListView(ListView):
+    def cart(self):
+        cart = create_cart(self.request)
+        return cart
+    
+    template_name='index.html'
+    queryset = Product.objects.all()
+    paginate_by = 8
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart'] = self.cart()
+        return context
+    
 def contact(request):
     cart = create_cart(request)
     if request.method == 'POST':

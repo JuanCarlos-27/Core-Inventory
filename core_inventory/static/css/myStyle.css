@@ -69,3 +69,91 @@ body{
 
 }
 
+/* paginator styles */
+
+.pagination-outer{ text-align: center; }
+.pagination{
+    font-family: 'Ubuntu', sans-serif !important; 
+    display: inline-flex !important;
+    position: relative !important;
+    border: 2px solid #333 !important;
+}
+.pagination li a.page-link{
+    color: #333 !important;
+    background-color: #fff !important;
+    font-size: 20px !important;
+    font-weight: 500;
+    line-height: 37px;
+    height: 38px;
+    width: 42px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-right: 2px solid #333;
+    position: relative;
+    z-index: 1;
+    transition: all 0.3s ease 0s;
+}
+.pagination li:first-child a.page-link{ border-radius: 2px 0 0 2px; }
+.pagination li:last-child a.page-link{
+    border: none;
+    border-radius: 0 2px 2px 0;
+}
+.pagination li a.page-link:hover,
+.pagination li a.page-link:focus,
+.pagination li.active a.page-link:hover,
+.pagination li.active a.page-link{
+    color: #fff;
+    background: #F37828;
+    border-color: #333;
+}
+.pagination li a.page-link:before,
+.pagination li a.page-link:after{
+    content: '';
+    background-color: #fca664;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    border-bottom: 2px solid #333;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.4s ease 0s;
+}
+.pagination li a.page-link:after{
+    background-color: #fa8231;
+    height: 0;
+    border: none;
+}
+.pagination li a.page-link:hover:before{
+    border-radius: 0 0 7px 7px;
+    opacity: 1;
+    top: -2px;
+}
+.pagination li.active a.page-link:before,
+.pagination li a.page-link:focus:before{
+    opacity: 0;
+}
+.pagination li a.page-link:focus:after,
+.pagination li.active a.page-link:after{
+    opacity: 1;
+    height: 100%;
+}
+@media only screen and (max-width: 480px){
+    .pagination{
+        font-size: 0;
+        border: none;
+        display: inline-block;
+    }
+    .pagination li{
+        display: inline-block;
+        vertical-align: top;
+        margin: 0 5px 10px;
+    }
+    .pagination li a.page-link,
+    .pagination li:last-child a.page-link{
+        line-height: 34px;
+        border: 2px solid #333;
+    }
+}
