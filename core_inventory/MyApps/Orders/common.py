@@ -1,6 +1,7 @@
 from enum import Enum
 class OrderStatus(Enum):
     CREATED = 'EN PROCESO'
+    ACCEPTED = 'EN CAMINO'
     PAYED = 'PAGADO'
     COMPLETED = 'FINALIZADO'
     CANCELED = 'CANCELADO'

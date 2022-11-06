@@ -1,0 +1,75 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Mis pedidos{% endblock%}
+{% load static %}
+{% block content %}
+{% if object_list.exists %}
+<div class="container p-4 bg-white rounded-3">  
+    <h1 class="text-center mb-4">Mis pedidos📦</h1>
+    {% for order in object_list %}
+    <div class="card mb-3 border-dark">
+        <div class="card-header border-bottom">
+            <div class="row">
+                <div class="col-4">
+                    <h6 class="fw-bold">Pedido Realizado</h6>
+                    <a data-bs-toggle="collapse" {% if object_list.count > 1 %} href="#{{order.order_id}}" {% else %} href="#unique" {% endif %} role="button" aria-expanded="false" aria-controls="collapseExample">
+                        {{order.created_at}}
+                    </a>
+                </div>
+                <div class="col-4">
+                    <h6 class="fw-bold">Total</h6>
+                    {% load humanize %}
+                    <p class="">${{order.total|intcomma}}</p> 
+                </div>
+                <div class="col-4">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-6">
+                            <h6 class="fw-bold">Enviado a:</h6>
+                            <p class="">{{order.shipping_address}}</p>
+                        </div>
+                        <div class="col-6 ">
+                            <h1 class="text-center">✅</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" {% if object_list.count > 1 %} id="{{order.order_id}}" {% else %} id="unique" {% endif %}>
+            <div class="card-body">
+                {% for cp in order.cart.products_related  %}
+                {% with product=cp.product%}
+                <div class="row">
+                    <div class="col-4">
+                        {% if product.image_product.url %}
+                            <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
+                        {% endif %}
+                    </div>
+                    <div class="col-4">
+                        <h6 class="">{{product.name}}</h6>
+                        {% load humanize %}
+                        <p class="text-danger">${{product.price|intcomma}}</p> 
+                    </div>
+                    <div class="col-4">
+                        <h6 class="">Cantidad</h6>
+                        <h6 class="">{{cp.quantity}}</h6>
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="container h-75 bg-white rounded-3">
+    <h1 class="text-center rounded-3 mb-3">Mis pedidos</h1>
+    <div class="row h-75 justify-content-center align-items-center">
+        <div class="col-sm-12 text-center">
+            <h4 class="opacity-75">No tienes pedidos hasta el momento :(</h4>
+            <a href="{% url 'index' %}" class="h5 text-decoration-none opacity-75 text-primary">Ir a comprar🍅</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+  
+{% endblock content %}

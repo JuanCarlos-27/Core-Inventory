@@ -1,12 +1,34 @@
+import threading
 from django.shortcuts import render, redirect, get_object_or_404
 from MyApps.Carts.utils import create_cart, destroy_cart
 from MyApps.Products.models import Product
+from MyApps.ShippingAddresses.models import ShippingAddress
 from . models import Order
 from . utils import get_or_created_order, breadcrumb, destroy_order
 from . mails import Mail
 from django.contrib.auth.decorators import login_required
-from MyApps.ShippingAddresses.models import ShippingAddress
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
+from django.views.generic.list import ListView
+from django.db.models.query import EmptyQuerySet
+
+
+class OrderListView(LoginRequiredMixin, ListView):
+    login_url = 'login'
+    template_name = 'Pedidos/orders_history.html'
+    
+    def cart(self):
+        cart = create_cart(self.request)
+        return cart
+
+    def get_queryset(self):
+        return self.request.user.orders_completed()
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cart'] = self.cart()
+        return context
+    
 
 @login_required(login_url='login')
 def order(request):
@@ -108,8 +130,11 @@ def complete(request):
         return redirect('index')
     
     order.complete()
-    
-    Mail.send_complete_order(order, request.user,cart)
+    #Envio de correos de forma asincrona
+    thread = threading.Thread(target=Mail.send_complete_order, args=(
+        order, request.user,cart
+    ))
+    thread.start()
     
     destroy_cart(request)
     destroy_order(request)

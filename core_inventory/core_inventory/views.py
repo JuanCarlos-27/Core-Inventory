@@ -1,3 +1,4 @@
+import threading
 from django.shortcuts import render
 from MyApps.Products.models import Product
 from django.contrib.auth import login, authenticate, logout
@@ -58,7 +59,10 @@ def register(request):
             messages.error(request, "Ya estas registrado")
             
         if user:
-            send_success_registration(email, name, password)
+            thread = threading.Thread(target=send_success_registration, args=(
+                email, name, password
+            ))
+            thread.start()
             messages.success(request, "¡Te has registrado correctamente!")
             return redirect("login")
         
@@ -140,15 +144,16 @@ def contact(request):
         context = {
             'name': name,
             'email': email,
-            'message': message
+            'message': message,
+            'subject':subject
         }
         template = get_template("contact_email.html")
         content = template.render(context)
         email = EmailMultiAlternatives(
             subject,
-            "",
+            "Mensaje de contacto",
             settings.EMAIL_HOST_USER,
-            ['jcromero909@misena.edu.co']
+            ['noemply.inventory@gmail.com']
         )
         email.attach_alternative(content, 'text/html')
         email.send()

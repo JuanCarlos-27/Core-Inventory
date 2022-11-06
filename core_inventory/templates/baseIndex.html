@@ -84,7 +84,7 @@
           </ul>
           <ul class="d-flex nav col-md-auto col-12 justify-content-center">
             <img src="{% static 'img/box-seam.svg' %}" class="d-none d-sm-flex">
-            <li><a href="" class="nav-link px-2 text-light link-hover">Mis Pedidos</a> </li>
+            <li><a href="{% url 'Orders:orders_list' %}" class="nav-link px-2 text-light link-hover">Mis Pedidos</a> </li>
             <img src="{% static 'img/cart.svg' %}" class="d-none d-sm-flex">
             <li>
               <a href="{% url 'Carts:cart' %}" class="nav-link px-2 text-light link-hover position-relative">Mi Carrito

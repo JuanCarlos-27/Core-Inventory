@@ -9,21 +9,25 @@ from . common import OrderStatus, choices
 User = get_user_model()
 
 class Order(models.Model):
-    order_id = models.CharField(max_length=100, null = False, blank = False, unique=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=100, null = False, blank = False, unique=True, verbose_name="Id")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Cliente")
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     status = models.CharField(max_length = 50, 
                               choices=choices, 
-                              default=OrderStatus.CREATED)
-    shipping_total = models.PositiveIntegerField(default=2000)
-    total = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
-    shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE)
+                              default=OrderStatus.CREATED, verbose_name="Estado")
+    shipping_total = models.PositiveIntegerField(default=2000, verbose_name="Envio")
+    total = models.PositiveIntegerField(default=0, verbose_name="Total pago")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
+    shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Dirección de envio")
+    accepted = models.BooleanField(default=False, verbose_name="Tomar orden")
     # employeed_in_charge = models.ManyToManyField(User)
-    # accepted = models.BooleanField(default=False)
     def __str__(self):
         return self.order_id
     
+    class Meta:
+        verbose_name = "Pedidos"
+        verbose_name_plural = "pedidos"
+        
     def get_or_set_shipping_address(self):
         if self.shipping_address:
             return self.shipping_address

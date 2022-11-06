@@ -21,6 +21,10 @@ class Cart(models.Model):
     def __str__(self):
         return self.cart_id
     
+    class Meta:
+        verbose_name = "Carrito"
+        verbose_name_plural = "Carritos"
+        
     def update_totals(self):
         self.update_subtotal()
         self.update_total()

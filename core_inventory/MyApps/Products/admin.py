@@ -9,9 +9,11 @@ class ProductResources(resources.ModelResource):
     fields = ('id_product','name','descripction','price','show_image','stock','status')
     class Meta:
         model = Product
+        import_id_fields = ('id_product', )
 
 @admin.register(Product)
 class ProductAdmin(ImportExportModelAdmin):
+    resource_class = ProductResources
     fields = ('name','descripction','price','image_product','stock','status')
     list_display = ('id_product','name','descripction','price','show_image','stock','status',"slug")
     ordering = ("id_product",)

@@ -73,10 +73,10 @@
           <div class="product-info smart-form">
             <div class="row">
               <div class="col-md-6 col-sm-6 col-xs-6"> 
-                {% if p.status != 0%}
-                  <a href="" class="text-white btn disabled" style="background-color:#F37828;">Ver detalle</a>
-                {% else %}
+                {% if p.status == 0 and p.stock != 0%}
                   <a href="{% url 'product_detail' p.slug %}" class="text-white shadow fw-bold btn" style="background-color:#F37828;">Ver detalle</a>
+                {% else %}
+                  <a href="" class="text-white btn disabled" style="background-color:#F37828;">Ver detalle</a>
                 {% endif %}
               </div>
               <div class="col-md-6 col-sm-6 col-xs-6">
