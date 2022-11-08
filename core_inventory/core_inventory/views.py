@@ -1,4 +1,5 @@
 import threading
+from datetime import timedelta
 from django.shortcuts import render
 from MyApps.Products.models import Product
 from django.contrib.auth import login, authenticate, logout
@@ -8,6 +9,7 @@ from django.template.loader import get_template
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from MyApps.Carts.utils import create_cart, get_cantidad
+from MyApps.PromoCodes.models import PromoCode
 from django.http import HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.views.generic.list import ListView
@@ -62,8 +64,17 @@ def register(request):
             thread = threading.Thread(target=send_success_registration, args=(
                 email, name, password
             ))
-            thread.start()
+            thread.start() 
+            #Se crea un código de promoción para el usuario que se registra
+            valid_from = user.date_joined
+            valid_to = valid_from + timedelta(days=14)     
+            PromoCode.objects.create(user=user,
+                                     valid_from=valid_from,
+                                     valid_to=valid_to,
+                                     discount=1000)
             messages.success(request, "¡Te has registrado correctamente!")
+            
+            
             return redirect("login")
         
     return render(request, 'register.html', {"cart":cart})
@@ -124,6 +135,11 @@ class ProductListView(ListView):
     def cart(self):
         cart = create_cart(self.request)
         return cart
+    def promo_codes(self):
+        if self.request.user.is_authenticated:
+            promo_code = PromoCode.objects.has_promo_code(self.request.user)
+            return promo_code
+
     
     template_name='index.html'
     queryset = Product.objects.all()
@@ -132,6 +148,7 @@ class ProductListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart'] = self.cart()
+        context['promo_code'] = self.promo_codes()
         return context
     
 def contact(request):
@@ -160,3 +177,4 @@ def contact(request):
         messages.success(request, "¡Tu mensaje ha sido enviado correctamente!")
 
     return render(request, "contact.html",{"cart":cart})
+

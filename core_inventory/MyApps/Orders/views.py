@@ -20,15 +20,29 @@ class OrderListView(LoginRequiredMixin, ListView):
     def cart(self):
         cart = create_cart(self.request)
         return cart
-
+    
+    def orders_canceller(self):
+        return self.request.user.orders_cancelled()
+    
     def get_queryset(self):
         return self.request.user.orders_completed()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cart'] = self.cart()
+        context['orders_cancelled'] = self.orders_canceller()
         return context
-    
+
+@login_required(login_url='login')
+def orders_cancelled(request):
+    cart = create_cart(request)    
+    orders_completed = request.user.orders_completed()
+    orders_cancelled = request.user.orders_cancelled()
+    return render(request, 'Pedidos/orders_cancelled.html', {
+        'cart': cart,
+        'order': order,
+        'orders_cancelled':orders_cancelled,
+    })
 
 @login_required(login_url='login')
 def order(request):
@@ -67,7 +81,7 @@ def select_address(request):
 
 @login_required(login_url='login')
 def check_address(request, pk):
-    cart = create_cart(request)
+    cart = get_or_create_cart(request)
     order = get_or_created_order(cart, request)
     
     shipping_address = get_object_or_404(ShippingAddress, pk=pk)
@@ -116,7 +130,7 @@ def cancel(request):
     order.cancel()
     destroy_cart(request)
     destroy_order(request)
-    messages.success(request, "¡Tu proceso de pedido ha sido cancelado!")
+    messages.error(request, "¡Tu pedido ha sido cancelado!")
 
     return redirect('index')
 
@@ -125,20 +139,25 @@ def complete(request):
     cart = create_cart(request)
     order = get_or_created_order(cart, request)
     
+    if not order.shipping_address:
+        destroy_order(request)
+    
     if request.user.id != order.user_id:
         messages.error(request, "¡Estas tratando de ingresar a urls no permitidas, por seguridad hemos registrado tus datos y tu dirección IP!")
         return redirect('index')
-    
+
     order.complete()
     #Envio de correos de forma asincrona
     thread = threading.Thread(target=Mail.send_complete_order, args=(
         order, request.user,cart
     ))
     thread.start()
-    
     destroy_cart(request)
     destroy_order(request)
-    
-    return render(request, 'Pedidos/success_order.html',{
+    messages.success(request, "¡Pedido exitoso!")
         
-    })
+    return redirect('Orders:success')
+
+@login_required(login_url='login')
+def success(request):
+    return render(request, 'Pedidos/success_order.html')

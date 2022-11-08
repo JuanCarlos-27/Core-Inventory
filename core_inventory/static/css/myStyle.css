@@ -140,6 +140,26 @@ body{
     opacity: 1;
     height: 100%;
 }
+
+
+.promo_code:hover{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+/* @keyframes move{
+	0%{
+        transform: translatex(7px);
+	}
+    50%{
+        transform: translatey(7px);
+    }
+    100%{
+        transform: translatex(7px);
+    }
+} */
+
+
 @media only screen and (max-width: 480px){
     .pagination{
         font-size: 0;

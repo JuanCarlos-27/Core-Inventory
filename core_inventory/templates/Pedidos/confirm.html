@@ -34,9 +34,16 @@
                     </div>
                     <div class="col-xl-4">
                         <h6 class="fw-bold">Código de descuento</h6>
-                        <form>
-                            <input type="text" name="code" value="" class="formulario__input" placeholder="Ej: AAD576">
+                        <form id="promoCodeForm" action="{% url 'promo_code:validate' %}">
+                            <input type="text" id="code" name="code" value="{{order.promo_code.code}}" class="formulario__input" placeholder="Ej: AAD576" {% if order.promo_code %}readonly disabled{% endif %}>
                         </form>
+                        
+                        <div class="fw-bold fst-italic text-success" id="promoCodeSuccess">
+                            {% if order.promo_code %}
+                                ¡Código aplicado!
+                            {% endif %}
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -58,3 +65,35 @@
     </div>
 </div>
 {% endblock content %}
+
+
+{% block js %}
+    <script>
+        const form = document.getElementById("promoCodeForm")
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault();
+            const input = document.getElementById("code");
+            const code = input.value;
+            const url = form.action + "?code=" + code
+            const total = document.getElementById("orderTotal")
+            const txtSuccess = document.getElementById("promoCodeSuccess")
+            const orderDiscount = document.getElementById("orderDiscount")
+            fetch(url)
+                .then(res=>res.json())
+                .then(data=> {
+                    if(data.status){
+                        total.innerHTML = `Total a pagar: $${data.total}`
+                        orderDiscount.innerHTML = `Descuento: $${data.discount}`
+                        txtSuccess.classList.remove('text-danger');
+                        txtSuccess.classList.add('text-success');
+                        txtSuccess.innerHTML = '¡Código aplicado!';
+                        input.setAttribute('disabled', '');
+                    }else{
+                        txtSuccess.innerHTML = '¡Uups... código no valido!';
+                        txtSuccess.classList.remove('text-success');
+                        txtSuccess.classList.add('text-danger');
+                    }
+                })
+        })
+    </script>
+{% endblock %}

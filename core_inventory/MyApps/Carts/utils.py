@@ -21,4 +21,4 @@ def get_cantidad(request):
     return cart.products.count()
 
 def destroy_cart(request):
-    request.session['cart_id'] = None
+    request.session['cart_id']=None

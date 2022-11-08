@@ -6,6 +6,9 @@
         <h3 class="col-sm-12 text-center py-3">¡Tu pedido se ha completado con éxito ✅!</h3>
         <p class="text-center">En instantes te llegará a tu correo electrónico la confirmación y los detalles del mismo.</p>
         <p class="text-center">Te invitamos a seguir explorando nuestros productos de la más alta calidad en el mercado.</p>
-        <p class="text-center h5"><a href="{% url 'index' %}" class="text-decoration-none">¡Ir a comprar🤩!</a></p>
+        <div class="d-flex justify-content-center">
+            <p class="text-center h5"><a href="{% url 'index' %}" class="text-decoration-none">Ir a comprar🤩 </a></p>
+            <p class="text-center h5"><a href="{% url 'Orders:orders_list' %}" class="text-decoration-none">| Ver mis compras</a></p>
+        </div>
     </div>
 {% endblock content %}

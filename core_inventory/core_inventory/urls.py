@@ -12,8 +12,10 @@ urlpatterns = [
     path('carrito/', include('MyApps.Carts.urls')),
     path('pedidos/', include('MyApps.Orders.urls')),
     path('product_detail/', include('MyApps.Products.urls')),
+    path('pagos/', include('MyApps.BillingProfiles.urls')),
+    path('codigos/', include('MyApps.PromoCodes.urls')),
     path('login', views.login_view, name='login'), # Login
-    path('logout', views.logout_view, name='logout'), # Register
+    path('logout', views.logout_view, name='logout'),
     path('register', views.register, name='register'),
     path('contacto', views.contact, name='contact'),
     path('direcciones/', include('MyApps.ShippingAddresses.urls')),

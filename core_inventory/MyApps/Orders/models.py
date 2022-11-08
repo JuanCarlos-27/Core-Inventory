@@ -3,9 +3,10 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.contrib.auth import get_user_model
 from MyApps.Carts.models import Cart
+from MyApps.PromoCodes.models import PromoCode
 from MyApps.ShippingAddresses.models import ShippingAddress
 from . common import OrderStatus, choices
-
+from django.utils.html import format_html
 User = get_user_model()
 
 class Order(models.Model):
@@ -19,15 +20,24 @@ class Order(models.Model):
     total = models.PositiveIntegerField(default=0, verbose_name="Total pago")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Dirección de envio")
+    promo_code = models.OneToOneField(PromoCode, null=True, blank=True, on_delete=models.CASCADE)
     accepted = models.BooleanField(default=False, verbose_name="Tomar orden")
-    # employeed_in_charge = models.ManyToManyField(User)
+
     def __str__(self):
         return self.order_id
     
     class Meta:
         verbose_name = "Pedidos"
         verbose_name_plural = "pedidos"
+    
+    def apply_promo_code(self, promo_code):
+        if self.promo_code is None:
+            self.promo_code = promo_code
+            self.save()
+            self.update_total()
+            promo_code.use()
         
+   
     def get_or_set_shipping_address(self):
         if self.shipping_address:
             return self.shipping_address
@@ -49,13 +59,23 @@ class Order(models.Model):
     def complete(self):
         self.status = OrderStatus.COMPLETED
         self.save()
+        
+    def cancelled(self):
+        self.status = OrderStatus.CANCELED
+        self.save()
     
     def update_total(self):
         self.total = self.get_total()
         self.save()
     
+    def get_discount(self):
+        if self.promo_code:
+            return self.promo_code.discount
+        
+        return 0
+    
     def get_total(self):
-        return self.cart.total + self.shipping_total
+        return self.cart.total + self.shipping_total - self.get_discount()
     
 def set_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
