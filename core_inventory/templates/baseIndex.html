@@ -75,7 +75,7 @@
           <img src="{% static 'img/person-circle.svg' %}"  width="32" height="32" >
         </a>
         <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="{% url 'Users:user_info' %}">Perfil</a></li>
           <li><a class="dropdown-item" href="{% url 'address:shipping_addresses' %}">Direcciones</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>

@@ -21,5 +21,6 @@ class ProductAdmin(ImportExportModelAdmin):
     list_editable = ('status',)
     #list_filter = ()
     list_display_links = ("name",)
+    list_per_page = 10 # No of records per page 
 
     

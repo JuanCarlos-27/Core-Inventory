@@ -14,6 +14,7 @@ urlpatterns = [
     path('product_detail/', include('MyApps.Products.urls')),
     path('pagos/', include('MyApps.BillingProfiles.urls')),
     path('codigos/', include('MyApps.PromoCodes.urls')),
+    path('perfil/', include('MyApps.Users.urls')),
     path('login', views.login_view, name='login'), # Login
     path('logout', views.logout_view, name='logout'),
     path('register', views.register, name='register'),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='Password/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_done', auth_views.PasswordResetDoneView.as_view(template_name="Password/password_reset_done.html"), name='password_reset_done'),
     path('password_reset_complete', auth_views.PasswordResetCompleteView.as_view(template_name="Password/password_reset_complete.html"), name='password_reset_complete'),
+    path('change-password/', auth_views.PasswordChangeView.as_view(template_name="Password/change_password.html")),
 
 ]
 if settings.DEBUG:

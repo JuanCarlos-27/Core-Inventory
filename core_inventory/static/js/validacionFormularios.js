@@ -18,7 +18,7 @@ const campos = {
 	apellido: false,
 	documento:false,
 	telefono: false,
-	direccion: false,
+	// direccion: false,
 	correo: false,
 	password: false
 }

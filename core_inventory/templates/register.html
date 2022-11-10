@@ -40,7 +40,7 @@
                     </div>
                     <p class="formulario__input-error">Debe utilizar solamente números. Mínimo 7 y máximo 10 </p>
                 </div>
-
+{% comment %} 
                 <div class="col-md-6 form-group formulario__grupo" id="grupo__direccion">
                     <label for="direccion" class="formulario__label">Dirección<span class="asterisco">*</span></label>
                     <div class="formulario__grupo-input">
@@ -48,8 +48,8 @@
                         <i class="formulario__validacion-estado fas fa-times-circle"></i>
                     </div>
                     <p class="formulario__input-error">La dirección debe tener máximo 40 caracteres.</p>
-                </div>
-                <div class="col-md-6 form-group formulario__grupo" id="grupo__correo">
+                </div> {% endcomment %}
+                <div class="col-md-12 form-group formulario__grupo" id="grupo__correo">
                     <label for="correo" class="formulario__label">Correo Electrónico<span class="asterisco">*</span></label>
                     <div class="formulario__grupo-input">
                         <input type="mailT" name="correo" id="correo" class="form-control validacion-correcta formulario__input"  placeholder="ej: juang20133@gmail.com" required/>

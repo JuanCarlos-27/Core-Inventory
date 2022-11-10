@@ -1,0 +1,35 @@
+{% extends 'baseIndex.html' %}
+
+{% block content %}
+<div class="container p-3 bg-white d-flex justify-content-center">
+    <div class="text-center shadow p-4 border">
+        <img src="https://cdn-icons-png.flaticon.com/512/4646/4646084.png" alt="user-image" width="200px" height="200px"/>
+        <h3 class="first_name">{{request.user.first_name}}<a href="#" id="editName">🖊️</a></h3>
+        <form class="form_name d-none" method="POST" action="{% url 'Users:change' %}">
+            {% csrf_token %}
+            <input type="text" name="new_name" class="form-control text-center formulario__input" value="{{request.user.first_name}}" required/>
+            <button type="submit">🖊️</button>
+        </form>
+        
+        
+        <hr>
+        <h6><span class="fw-bold">Identificación:</span> {{request.user.dni}}</h6>     
+        <h6><span class="fw-bold">Correo electrónico:</span> {{request.user.email}}</h6>
+        <h6><span class="fw-bold">Registrado el:</span> {{request.user.date_joined.date}}</h6>
+  
+    </div>
+</div>
+{% endblock  %}
+
+{% block js %}
+    <script>
+        const inputName = document.querySelector(".first_name")
+        const formName = document.querySelector(".form_name")
+        const btnEditName = document.getElementById("editName")
+        btnEditName.addEventListener('click',()=>{
+            inputName.classList.add("d-none");
+            formName.classList.remove("d-none")
+        })
+
+    </script>
+{% endblock js %}

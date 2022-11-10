@@ -55,7 +55,6 @@ def register(request):
                                             first_name=name,
                                             last_name=last_name,
                                             phone_number=telefono,
-                                            address = direccion,
                                             dni = dni)
         except Exception as e:
             messages.error(request, "Ya estas registrado")
@@ -72,6 +71,7 @@ def register(request):
                                      valid_from=valid_from,
                                      valid_to=valid_to,
                                      discount=1000)
+            #Se 
             messages.success(request, "¡Te has registrado correctamente!")
             
             

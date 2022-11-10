@@ -99,6 +99,11 @@ JAZZMIN_SETTINGS = {
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fa fa-chevron-right",
+    
+    "topmenu_links": [
+        # external url that opens in a new window (Permissions can be added)
+        {"name": "Ir al catálogo", "url": "index", "permissions": ["auth.view_user"], "new_window": True},
+    ],
 }
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": False,
@@ -132,6 +137,8 @@ JAZZMIN_UI_TWEAKS = {
     },
     "actions_sticky_top": False
 }
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -191,10 +198,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'jcromero909@misena.edu.co'
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-# EMAIL_HOST_USER = 'noemply.inventory@gmail.com'
-# EMAIL_HOST_PASSWORD = 'zkjlowexvoqybzyb'
+# EMAIL_HOST_USER = 'jcromero909@misena.edu.co'
+# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = 'noemply.inventory@gmail.com'
+EMAIL_HOST_PASSWORD = 'zkjlowexvoqybzyb'
 EMAIL_USE_TLS = True
 
 STRIPE_PUBLIC_KEY = 'pk_test_51M1Fq2BQSHmCnrdvv3HwVGsD7cN3GUIgOCVR8fJAVTOIDQ152dOefmyefjIPSpaD8A75B61hG8HyWjLBhxA4bNGG00PieTdNrc'
