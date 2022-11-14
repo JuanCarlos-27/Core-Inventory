@@ -18,10 +18,12 @@ class User(AbstractUser):
     @property
     def description(self):
         return 'Descripción para el usuario {}'.format(self.username)
-    
     @property
     def billing_profiles(self):
         return self.billingprofile_set.all().order_by('-default')
+    @property
+    def billing_profile(self):
+        return self.billingprofile_set.filter(default=True).first()    
     
     def has_shipping_address(self):
         return self.shippingAddress is not None

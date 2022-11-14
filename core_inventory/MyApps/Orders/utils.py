@@ -9,13 +9,13 @@ def get_or_created_order(cart, request):
     if order:
         request.session['order_id'] = order.order_id
         
-    return order
+    return order    
 
 def breadcrumb(products=True, address=False, payment=False,confirmation=False):
     return [
         {'title':'Productos', 'collapsed': products, 'progress':0, 'url': reverse('Orders:order')},
         {'title':'Dirección', 'collapsed': address,'progress':38,'url': reverse('Orders:address')},
-        {'title':'Pago', 'collapsed': payment,'progress':68, 'url': reverse('Orders:order')},
+        {'title':'Pago', 'collapsed': payment,'progress':68, 'url': reverse('Orders:payment')},
         {'title':'Confirmación','collapsed': confirmation,'progress':100,'url': reverse('Orders:order')}
     ]
     

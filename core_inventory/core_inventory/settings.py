@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#mq)mpnw7-k=vppoc=&u*%tz)((#^*nn4_4!bxk#1gerjou9pl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'Users.User'
 
@@ -138,7 +138,7 @@ JAZZMIN_UI_TWEAKS = {
     "actions_sticky_top": False
 }
 
-
+LOGOUT_REDIRECT_URL = 'login'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 

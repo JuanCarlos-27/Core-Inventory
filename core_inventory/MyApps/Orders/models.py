@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from MyApps.Carts.models import Cart
 from MyApps.PromoCodes.models import PromoCode
 from MyApps.ShippingAddresses.models import ShippingAddress
+from MyApps.BillingProfiles.models import BillingProfile
 from . common import OrderStatus, choices
 from django.utils.html import format_html
 User = get_user_model()
@@ -21,8 +22,9 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
     shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Dirección de envio")
     promo_code = models.OneToOneField(PromoCode, null=True, blank=True, on_delete=models.CASCADE)
+    billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True,on_delete=models.CASCADE)
     accepted = models.BooleanField(default=False, verbose_name="Tomar orden")
-
+    
     def __str__(self):
         return self.order_id
     
@@ -37,7 +39,20 @@ class Order(models.Model):
             self.update_total()
             promo_code.use()
         
-   
+    def get_or_set_billing_profile(self):
+        if self.billing_profile:
+            return self.billing_profile 
+        billing_profile = self.user.billing_profile
+        
+        if billing_profile:
+            self.update_billing_profile(billing_profile)
+
+        return billing_profile    
+    
+    def update_billing_profile(self, billing_profile):
+        self.billing_profile = billing_profile
+        self.save()
+        
     def get_or_set_shipping_address(self):
         if self.shipping_address:
             return self.shipping_address

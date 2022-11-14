@@ -1,4 +1,5 @@
 import threading
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from MyApps.Carts.utils import create_cart, destroy_cart
 from MyApps.Products.models import Product
@@ -11,6 +12,38 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic.list import ListView
 from django.db.models.query import EmptyQuerySet
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
+
+@login_required(login_url='login')
+def orderPdf(request, info):
+    order = Order.objects.filter(order_id = info).first()
+    template = get_template("ReportesPDF/orderPdf.html")
+    
+    if request.user.id != order.user.id:
+        messages.error(request, "¡Estas tratando de ingresar a urls no permitidas, por seguridad hemos registrado tus datos y tu dirección IP!")
+        return redirect('index')
+    
+    context = {
+        "products": order.cart.products.all(),
+        "order": order,
+    }
+    html = template.render(context)
+    response = HttpResponse(content_type="application/pdf")
+    response['Content-Disposition'] = 'attachment; filename="orden.pdf"'
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+
+    
+    return response
+
+
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -81,7 +114,7 @@ def select_address(request):
 
 @login_required(login_url='login')
 def check_address(request, pk):
-    cart = get_or_create_cart(request)
+    cart = create_cart(request)
     order = get_or_created_order(cart, request)
     
     shipping_address = get_object_or_404(ShippingAddress, pk=pk)
@@ -108,7 +141,7 @@ def confirm(request):
         'cart':cart,
         'order':order,
         'shipping_address': shipping_address,
-        'breadcrumb':breadcrumb(address=True, confirmation=True),
+        'breadcrumb':breadcrumb(address=True, confirmation=True, payment=True),
     })
     
 
@@ -161,3 +194,17 @@ def complete(request):
 @login_required(login_url='login')
 def success(request):
     return render(request, 'Pedidos/success_order.html')
+
+@login_required(login_url='login')
+def payment(request):
+    cart = create_cart(request)
+    order = get_or_created_order(cart, request)
+    
+    billing_profile = order.get_or_set_billing_profile()
+    return render(request, 'Pedidos/payment.html',{
+        "cart": cart,
+        "order":order,
+        "billing_profile":billing_profile,
+        "breadcrumb": breadcrumb(address=True,payment=True)
+    })
+    

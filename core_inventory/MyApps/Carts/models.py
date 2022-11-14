@@ -56,19 +56,26 @@ class CartProductsManager(models.Manager):
         if not created:
             quantity = object.quantity + quantity
         
+        total = quantity * product.price
         object.update_quantity(quantity)
+        object.set_total(total)
         return object
 
 class CartProducts(models.Model):
     cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity = models.IntegerField(default = 1)
+    total = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     
     objects = CartProductsManager()
     
     def update_quantity(self, quantity =1):
         self.quantity = quantity
+        self.save()
+        
+    def set_total(self, total=0):
+        self.total = total
         self.save()
 
 def set_cart_id(sender, instance, *args, **kwargs):

@@ -32,8 +32,11 @@
                             <h6 class="fw-bold">Enviado a:</h6>
                             <p class="">{{order.shipping_address}}</p>
                         </div>
-                        <div class="col-6 ">
-                            <h1 class="text-center">✅</h1>
+                        <div class="col-6">
+                            <h1 class="text-center">
+                                ✅
+                                <a href="{% url 'Orders:generatePDF' order.order_id %}"><img src="https://icons.veryicon.com/png/o/file-type/file-type-1/pdf-icon.png" alt="pdf" width="40px" height="40px" class="img-responsive mb-2"/></a>
+                            </h1>
                         </div>
                     </div>
                 </div>

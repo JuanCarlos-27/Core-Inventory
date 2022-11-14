@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name="admin"),
     path('', views.ProductListView.as_view(), name='index'), # Ruta raiz
     path('main/', include('MyApps.Products.urls')),
     path('carrito/', include('MyApps.Carts.urls')),
@@ -24,8 +24,12 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='Password/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_done', auth_views.PasswordResetDoneView.as_view(template_name="Password/password_reset_done.html"), name='password_reset_done'),
     path('password_reset_complete', auth_views.PasswordResetCompleteView.as_view(template_name="Password/password_reset_complete.html"), name='password_reset_complete'),
-    path('change-password/', auth_views.PasswordChangeView.as_view(template_name="Password/change_password.html")),
+    path('change-password/', auth_views.PasswordChangeView.as_view(template_name="Password/change_password.html"), name="change_password"),
+    path('change-success/', auth_views.PasswordChangeDoneView.as_view(template_name="Password/password_change_done.html"), name="password_change_done"),
 
 ]
+# 404 redirect
+handler404 = views.error_404_view
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

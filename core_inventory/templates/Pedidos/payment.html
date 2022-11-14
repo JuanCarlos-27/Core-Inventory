@@ -1,0 +1,32 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Pago{% endblock%}
+{% block content %}
+<div class="container bg-white rounded-3 d-flex justify-content-around align-content-start flex-wrap">  
+    <div class="steps col-xl-10 col-sm-12 mb-3">
+        {% include 'Pedidos/stepByStep.html' %}
+    </div>
+    
+    <div class="col-xl-8 col-sm-12 pb-5">
+        {% if billing_profile %}
+        <div class="h3 text-center">Método de pago</div>
+            <div class="card mt-2 border-dark">
+                <div class="card-body">
+                    <div class="card-title">{{billing_profile.brand}}</div>
+                    <div class="card-subtitle">****{{billing_profile.last4}}</div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            <div class="col-12 text-center">
+                <h4 class="opacity-75">No tienes tarjetas de pago registradas.</h4>
+                {% url 'Orders:payment' as next_url %}
+                <a href="{% url 'billing:create' %}?next={{next_url}}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
+            </div>
+        {% endif %}
+        <div class="col-xl-12 col-sm-12 d-flex justify-content-center p-3">
+            <a href="{% url 'Orders:confirm' %}" class="btn btn-success ">Continuar</a>
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

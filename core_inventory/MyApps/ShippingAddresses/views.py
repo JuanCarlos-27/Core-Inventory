@@ -10,23 +10,34 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse_lazy
 
-class ShippingAddressListView(LoginRequiredMixin,ListView):
-    login_url = 'login'  
-    model = ShippingAddress
-    template_name = "Direcciones/shipping_addresses.html"
+# class ShippingAddressListView(LoginRequiredMixin,ListView):
+#     login_url = 'login'  
+#     model = ShippingAddress
+#     template_name = "Direcciones/shipping_addresses.html"
 
-    def get_queryset(self):
-        return ShippingAddress.objects.filter(user=self.request.user).order_by('-default')
+#     def get_queryset(self):
+#         return ShippingAddress.objects.filter(user=self.request.user).order_by('-default')
     
-    def notification(self):
-        cart = create_cart(self.request)
-        return cart
+#     def notification(self):
+#         cart = create_cart(self.request)
+#         return cart
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cart'] = self.notification()
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['cart'] = self.notification()
+#         return context
 
+@login_required(login_url='login')
+def shipping_address(request):
+    cart = create_cart(request)
+    shipping_addresses =  ShippingAddress.objects.filter(user=request.user).order_by('-default')
+
+
+    return render(request, "Direcciones/shipping_addresses.html",{
+        "cart":cart,
+        "object_list":shipping_addresses
+    })
+    
 @login_required(login_url='login')
 def create(request):
     if request.method == 'POST':
@@ -39,6 +50,7 @@ def create(request):
         shippingAddress_count = ShippingAddress.objects.filter(user=user).count()
         shippingAddress_default = ShippingAddress.objects.filter(user=user).exists()
 
+        
         if shippingAddress_count < 6:
             if shippingAddress_default:
                 shippingAddress = ShippingAddress.objects.create(user=user,address=address, neighborhood=neighborhood, zone=zone,reference=reference)

@@ -1,6 +1,11 @@
 {% extends 'baseIndex.html' %}
 {% block title %} Dirección{% endblock%}
 {% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+{% endblock css %}
+
 {% block content %}
 <div class="container bg-white rounded-3 p-3">
     <h1 class="text-center rounded-3 mb-3">Mis direcciones 🏠</h1>
@@ -57,7 +62,6 @@
 </div>
 <script>
     const openModal = (url)=>{
-        console.log(url)
         $("#editAddress").load(url, function(){
             $(this).modal("show");
         });

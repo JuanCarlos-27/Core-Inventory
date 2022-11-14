@@ -30,8 +30,13 @@ def create(request):
           
     billing_profiles=request.user.billing_profiles
     
+    
+    if request.GET.get('next'):
+        if request.GET['next'] == reverse('Orders:payment'):
+            return HttpResponseRedirect(request.GET['next'])
+        
     return render(request, 'Pagos/create.html',{
         "cart":cart,
         "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
-        "billing":billing_profiles
+        "billing_profile":billing_profiles
     })

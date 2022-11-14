@@ -6,7 +6,7 @@
     <div class="steps col-xl-10 col-sm-12 mb-3">
         {% include 'Pedidos/stepByStep.html' %}
     </div>
-    <div class="col-xl-10 col-sm-12 p-3">
+    <div class="col-xl-11 col-sm-12 p-3">
         
         <div class="card border-dark shadow">
             <div class="card-header h4" style="background-color: #F37828;">
@@ -28,16 +28,24 @@
                     </div>
                     <div class="col-xl-4  border-end">
                         <h6 class="fw-bold">Método de pago</h6>
+                        {% if order.billing_profile %}
                         <div class="card-text">
-                            Tarjeta con número *****2234
+                            Tarjeta con número *****{{order.billing_profile.last4}}
                         </div>
+                        {% else %}
+                        <div class="card-text">
+                            Tarjeta con número *****1234
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="col-xl-4">
                         <h6 class="fw-bold">Código de descuento</h6>
-                        <form id="promoCodeForm" action="{% url 'promo_code:validate' %}">
+                        <form class="d-flex" id="promoCodeForm" action="{% url 'promo_code:validate' %}">
                             <input type="text" id="code" name="code" value="{{order.promo_code.code}}" class="formulario__input" placeholder="Ej: AAD576" {% if order.promo_code %}readonly disabled{% endif %}>
+                            <button type="submit" class="btn btn-success rounded-circle">
+                                <img src="{% static 'img/search.svg' %}" alt="search_bar_logo">
+                            </button>
                         </form>
-                        
                         <div class="fw-bold fst-italic text-success" id="promoCodeSuccess">
                             {% if order.promo_code %}
                                 ¡Código aplicado!

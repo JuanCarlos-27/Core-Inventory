@@ -14,5 +14,6 @@ urlpatterns = [
     path("mensaje_exito", views.success, name="success"),
     path("mis_pedidos", views.OrderListView.as_view(), name="orders_list"),
     path("mis_pedidos/cancelados", views.orders_cancelled, name="orders_cancelled"),
-
+    path("pago", views.payment, name="payment"),
+    path('generatePDF/<info>', views.orderPdf, name='generatePDF'),
 ]

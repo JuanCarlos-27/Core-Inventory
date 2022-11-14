@@ -32,14 +32,14 @@
                 </div>
             {% endif %}
             <div class="col-xl-12 col-sm-12 d-flex justify-content-center p-3">
-                <a href="{% url 'Orders:confirm' %}" class="btn btn-success ">Continuar</a>
+                <a href="{% url 'Orders:payment' %}" class="btn btn-success ">Continuar</a>
             </div>
         {% else %}
         <div class="row m-5 justify-content-center align-items-center">
             <div class="col-12 text-center">
                 <h4 class="opacity-75">No tienes direcciones registradas.</h4>
                 {% url 'Orders:address' as next_url %}
-                <a href="{% url 'address:createAddress' %}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
+                <a href="{% url 'address:shipping_addresses' %}?next={{next_url}}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
             </div>
         </div>
         {% endif %}
