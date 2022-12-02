@@ -170,7 +170,7 @@ def contact(request):
             subject,
             "Mensaje de contacto",
             settings.EMAIL_HOST_USER,
-            ['noemply.inventory@gmail.com']
+            ['noemply.inventory@gmail.com','juang20133@gmail.com']
         )
         email.attach_alternative(content, 'text/html')
         email.send()

@@ -13,6 +13,7 @@
   $(document).ready(function () {
     loadChart(ordersByMonthChar, `/graficos/chart/orders-per-month/${year_firstChart.value}/`);
     loadChart(paymentSuccessChart, `/graficos/chart/order-success/2022/`);
+    loadChart(earningsPerMonth, `/graficos/chart/earning-total-per-month/2022/`);
   });
 
   const reload_first_chart = () =>{
@@ -20,6 +21,9 @@
   }
   const reload_second_chart = () =>{
     loadChart(paymentSuccessChart, `/graficos/chart/order-success/${year_secondChart.value}/`);
+  }
+  const reload_third_chart = () =>{
+    loadChart(earningsPerMonth, `/graficos/chart/earning-total-per-month/${year_thirdChart.value}/`);
   }
   function loadChart(chart, endpoint) {
     $.ajax({
@@ -54,8 +58,7 @@
 </script>
 <div class="col-xl-12 col-sm-12 d-flex justify-content-center align-items-center text-center">
   <h1 class="text-info">Reportes estadísticos</h1>
-  <a href="#" onclick="print()" class="btn btn-primary shadow">PDF</a>
-
+  <a href="#" onclick="exportar()" class="btn btn-primary shadow">PDF</a>
 </div>
 
 <div class="row col-12 d-flex justify-content-around">
@@ -64,6 +67,7 @@
     <select id="year_firstChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
       <option value="2022">2022</option>
       <option value="2021">2021</option>
+      <option value="2020">2020</option>
     </select> 
     <button onclick="reload_first_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
     <canvas id="ordersByMonthChart"></canvas>
@@ -79,37 +83,21 @@
     <button onclick="reload_second_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
     <canvas id="paymentSuccessChart" height="400" width="500"></canvas>
   </div>
+
+  <div class="col-xl-12 col-sm-12 mt-5 card border d-block">
+    <span class="font-weight-bold">Año:</span> 
+    <select id="year_thirdChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+      <option value="2020">2020</option>
+    </select> 
+    <button onclick="reload_third_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+    <canvas id="earningsPerMonth"></canvas>
+  </div>
 </div>
 
 <script>
-  let paymentSuccessCtx = document
-    .getElementById("paymentSuccessChart")
-    .getContext("2d");
-  let paymentSuccessChart = new Chart(paymentSuccessCtx, {
-    type: "pie",
-    options: {
-      responsive: true,
-      legend: {
-        display: true,
-        position: "bottom",
-        labels: {
-          fontColor: "#333",
-          fontSize: 16,
-        },
-      },
-      layout: {
-        padding: {
-          left: 0,
-          right: 0,
-          top: 10,
-          bottom: 25,
-        },
-      },
-      
-    },
-  });
-
-  // Obtener una referencia al elemento canvas del DOM
+//Gráfico Barras de pedidos por mes. 
 let ordersByMonthChartCtx = document.querySelector("#ordersByMonthChart");
 let ordersByMonthChar = new Chart(ordersByMonthChartCtx, {
     type: 'bar',// Tipo de gráfica
@@ -123,5 +111,41 @@ let ordersByMonthChar = new Chart(ordersByMonthChartCtx, {
         },
     }
 });
+
+//Gráfico Torta de pedidos cancelados VS. completados 
+let paymentSuccessCtx = document.getElementById("paymentSuccessChart").getContext("2d");
+let paymentSuccessChart = new Chart(paymentSuccessCtx, {
+  type: "pie",
+  options: {
+    responsive: true,
+    legend: {
+      display: true,
+      position: "bottom",
+      labels: {
+        fontColor: "#333",
+        fontSize: 16,
+      },
+    },
+    layout: {
+      padding: {
+        left: 0,
+        right: 0,
+        top: 10,
+        bottom: 25,
+      },
+    },
+    
+  },
+});
+
+// Gráfico de Lineas total del pedidos por mes.
+let earningsPerMonthCtx = document.getElementById("earningsPerMonth");
+let earningsPerMonth = new Chart(earningsPerMonthCtx, {
+  type: 'line',
+  options:{   
+
+  }
+});
+
 </script>
 {% endblock %}
