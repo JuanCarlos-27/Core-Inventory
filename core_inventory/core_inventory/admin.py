@@ -1,0 +1,37 @@
+from django.contrib import admin
+from django.contrib.admin.views.decorators import staff_member_required
+from django.shortcuts import render
+from django.urls import path
+
+
+@staff_member_required
+def admin_statistics_view(request):
+    return render(request, 'admin/charts.html', {
+        'title': 'Graficos'
+    })
+
+class CustomAdminSite(admin.AdminSite):
+    def get_app_list(self, request):
+        app_list = super().get_app_list(request)
+        app_list += [
+            {
+                'name': 'Reportes',
+                'app_label': 'Gráficos',
+                'models': [
+                    {
+                        'name': 'Gráficos',
+                        'object_name': 'Gráficos',
+                        'admin_url': '/admin/statistics/',
+                        'view_only': True,
+                    }
+                ],
+            },
+        ]
+        return app_list
+
+    def get_urls(self):
+        urls = super().get_urls()
+        url_patterns = [
+            path("statistics/", admin_statistics_view), 
+        ]
+        return url_patterns + urls

@@ -20,6 +20,7 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('contacto', views.contact, name='contact'),
     path('direcciones/', include('MyApps.ShippingAddresses.urls')),
+    path('graficos/', include('MyApps.Charts.urls')),
     path('password_reset', auth_views.PasswordResetView.as_view(template_name="Password/forgot_password.html"), name="password_reset"),
     path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='Password/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password_reset_done', auth_views.PasswordResetDoneView.as_view(template_name="Password/password_reset_done.html"), name='password_reset_done'),

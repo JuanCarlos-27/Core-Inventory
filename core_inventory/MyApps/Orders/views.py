@@ -12,7 +12,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic.list import ListView
 from django.db.models.query import EmptyQuerySet
-
 from django.conf import settings
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -39,8 +38,6 @@ def orderPdf(request, info):
         html, dest=response)
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
-
-    
     return response
 
 

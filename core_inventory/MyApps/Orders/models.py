@@ -85,13 +85,13 @@ class Order(models.Model):
     
     def get_discount(self):
         if self.promo_code:
-            return self.promo_code.discount
-        
+            return self.promo_code.discount       
         return 0
     
     def get_total(self):
         return self.cart.total + self.shipping_total - self.get_discount()
-    
+
+        
 def set_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
         instance.order_id = str(uuid.uuid4())[:5]

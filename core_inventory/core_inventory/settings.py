@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#mq)mpnw7-k=vppoc=&u*%tz)((#^*nn4_4!bxk#1gerjou9pl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -34,7 +34,8 @@ AUTH_USER_MODEL = 'Users.User'
 
 INSTALLED_APPS = [
     'jazzmin',
-    'django.contrib.admin',
+    # 'django.contrib.admin',
+    'core_inventory.apps.CustomAdminConfig',
     'django.contrib.humanize',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'MyApps.Providers',
     'MyApps.PromoCodes',
     'MyApps.BillingProfiles',
+    'MyApps.Charts'
     
 ]
 
