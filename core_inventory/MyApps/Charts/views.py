@@ -39,7 +39,7 @@ def orders_per_month_chart(request,year):
         data.append(order.filter(created_at__month = month_number).count())
         
     return JsonResponse({
-        'title': f'Pedidos por mes',
+        'title': f'Pedidos por mes en el año {year}',
         'data': {
             'labels': months,
             'datasets': [{

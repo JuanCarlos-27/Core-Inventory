@@ -19,8 +19,8 @@
         {% else %}
             <div class="col-12 text-center">
                 <h4 class="opacity-75">No tienes tarjetas de pago registradas.</h4>
-                {% url 'Orders:payment' as next_url %}
-                <a href="{% url 'billing:create' %}?next={{next_url}}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
+
+                <a href="{% url 'billing:create' %}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>
             </div>
         {% endif %}
         <div class="col-xl-12 col-sm-12 d-flex justify-content-center p-3">

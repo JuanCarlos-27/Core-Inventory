@@ -88,7 +88,16 @@ def update_totals(sender, instance, action, *args, **kwargs):
 
 def post_save_update_totals(sender, instance, *args, **kwargs):
     instance.cart.update_totals()
+    
+def change_product_status(sender, instance,*args, **kwargs):
+    if instance.stock == 0:
+        instance.status = 1
+        print("Ok")
+    else:
+        instance.status = 0
 
 pre_save.connect(set_cart_id, sender=Cart)
+pre_save.connect(change_product_status, sender=Product)
+
 post_save.connect(post_save_update_totals, sender = CartProducts)
 m2m_changed.connect(update_totals, sender = Cart.products.through)

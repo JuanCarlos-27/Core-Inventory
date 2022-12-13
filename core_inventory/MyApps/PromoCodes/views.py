@@ -34,6 +34,6 @@ def send_promo_code(request):
     thread = threading.Thread(target=Mail.send_promo_code, args=(promo_code,request.user))
     thread.start()
     promo_code.send_to_user()
-    messages.success(request, "Código enviado!")
+    messages.success(request, "¡Código enviado!")
 
     return redirect('index')

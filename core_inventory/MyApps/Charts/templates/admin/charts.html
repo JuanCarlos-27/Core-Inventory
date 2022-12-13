@@ -1,19 +1,13 @@
 {% extends "admin/base_site.html" %} {% block content %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.min.js"
-  crossorigin="anonymous"
-></script>
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css"
-/>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-v4-grid-only@1.0.0/dist/bootstrap-grid.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
 <script>
   $(document).ready(function () {
     loadChart(ordersByMonthChar, `/graficos/chart/orders-per-month/${year_firstChart.value}/`);
-    loadChart(paymentSuccessChart, `/graficos/chart/order-success/2022/`);
-    loadChart(earningsPerMonth, `/graficos/chart/earning-total-per-month/2022/`);
+    loadChart(paymentSuccessChart, `/graficos/chart/order-success/${year_secondChart.value}/`);
+    loadChart(earningsPerMonth, `/graficos/chart/earning-total-per-month/${year_thirdChart.value}/`);  
   });
 
   const reload_first_chart = () =>{
@@ -55,43 +49,63 @@
         console.log("Failed to fetch chart data from " + endpoint + "!"),
     });
   }
+
 </script>
 <div class="col-xl-12 col-sm-12 d-flex justify-content-center align-items-center text-center">
   <h1 class="text-info">Reportes estadísticos</h1>
-  <a href="#" onclick="exportar()" class="btn btn-primary shadow">PDF</a>
 </div>
-
-<div class="row col-12 d-flex justify-content-around">
-  <div class="col-xl-12 col-sm-12 mt-5 card border d-block">
-    <span class="font-weight-bold">Año:</span> 
-    <select id="year_firstChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
-    </select> 
-    <button onclick="reload_first_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+<div class="row col-12 d-flex justify-content-around" id="main-section">
+  <div class="col-xl-12 col-sm-12 mt-5 card border">
+    <div class="d-flex flex-wrap justify-content-between">
+      <section class="seccion1">
+        <span class="font-weight-bold">Año:</span> 
+        <select id="year_firstChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
+          <option value="2022">2022</option>
+          <option value="2021">2021</option>
+          <option value="2020">2020</option>
+        </select> 
+        <button onclick="reload_first_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+      </section> 
+      <section class="seccion2">
+        <button id="downloadFirstChart" class="btn btn-primary shadow ">PDF</button>
+      </section> 
+    </div>
     <canvas id="ordersByMonthChart"></canvas>
   </div>
 
-  <div class="col-xl-5 mt-5 card border d-block">
-    <span class="font-weight-bold">Año:</span> 
-    <select id="year_secondChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
-    </select> 
-    <button onclick="reload_second_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+  <div class="col-xl-5 mt-5 card border">
+    <div class="d-flex flex-wrap justify-content-between">
+        <section class="seccion1">
+          <span class="font-weight-bold">Año:</span> 
+          <select id="year_secondChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+          </select> 
+          <button onclick="reload_second_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+        </section>
+        <section class="seccion2">
+          <button id="downloadSecondChart" class="btn btn-primary shadow ">PDF</button>
+        </section> 
+    </div>
     <canvas id="paymentSuccessChart" height="400" width="500"></canvas>
   </div>
 
-  <div class="col-xl-12 col-sm-12 mt-5 card border d-block">
-    <span class="font-weight-bold">Año:</span> 
-    <select id="year_thirdChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
-    </select> 
-    <button onclick="reload_third_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+  <div class="col-xl-12 col-sm-12 mt-5 card border">
+    <div class="d-flex flex-wrap justify-content-between">
+        <section class="seccion1">
+          <span class="font-weight-bold">Año:</span> 
+          <select id="year_thirdChart" class="mt-2" style="border-radius:20%; border: 4px solid #eaeaea; outline:none">
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+          </select> 
+          <button onclick="reload_third_chart()" style="border-radius:20%; border: 2px solid #eaeaea; outline:none">Ir</button> 
+        </section>
+        <section class="seccion2">
+          <button id="downloadThirdChart" class="btn btn-primary shadow ">PDF</button>
+        </section>
+    </div>
     <canvas id="earningsPerMonth"></canvas>
   </div>
 </div>
@@ -147,5 +161,33 @@ let earningsPerMonth = new Chart(earningsPerMonthCtx, {
   }
 });
 
+let firstChart = document.getElementById("ordersByMonthChart"); 
+let secondChart = document.getElementById("paymentSuccessChart"); 
+let thirdChart = document.getElementById("earningsPerMonth"); 
+
+document.addEventListener("click", e =>{
+    if(e.target.id === 'downloadFirstChart'){
+      downloadChartsToPDF(firstChart)
+    }
+    if(e.target.id === 'downloadSecondChart'){
+      downloadChartsToPDF(secondChart)
+    }
+    if(e.target.id === 'downloadThirdChart'){
+      downloadChartsToPDF(thirdChart)
+    }
+})
+
+const downloadChartsToPDF = (chart)=>{
+    let d = new Date();
+    let n = d.toISOString();
+    let imgData = chart.toDataURL("image/png", 1.0);
+    let pdf = new jsPDF({
+      orientation: "l",
+      unit: "mm",
+      format: [270,150]
+    });
+    pdf.addImage(imgData, "JPEG", 5, 5);
+    pdf.save(n+"-graf01.pdf");
+}
 </script>
 {% endblock %}

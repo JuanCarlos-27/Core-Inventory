@@ -11,7 +11,7 @@ urlpatterns = [
     path('main/', include('MyApps.Products.urls')),
     path('carrito/', include('MyApps.Carts.urls')),
     path('pedidos/', include('MyApps.Orders.urls')),
-    path('product_detail/', include('MyApps.Products.urls')),
+    path('productos/', include('MyApps.Products.urls')),
     path('pagos/', include('MyApps.BillingProfiles.urls')),
     path('codigos/', include('MyApps.PromoCodes.urls')),
     path('perfil/', include('MyApps.Users.urls')),

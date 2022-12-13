@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <div class="col-xl-4 col-sm-12">
-                    <h6 class="fw-bold">Total + envio</h6>
+                    <h6 class="fw-bold">Total + envio {% if order.promo_code_id != null %} + descuento {% endif %}</h6>
                     {% load humanize %}
                     <p class="">${{order.total|intcomma}}</p> 
                 </div>

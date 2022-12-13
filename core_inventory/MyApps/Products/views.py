@@ -39,7 +39,7 @@ def editarProducto(request):
     producto.price = precioP
     producto.image_product = imagenP
     producto.save()
-    return redirect('/')
+    return redirect('/productos/productos')
 
 def eliminarProducto(request, id):
     producto = Product.objects.get(id_product = id)

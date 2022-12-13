@@ -2,6 +2,7 @@
 {% block css %}
     <script src="https://kit.fontawesome.com/9c6f82517c.js" crossorigin="anonymous"></script> 
 {% endblock css %}
+{% block title %} Busqueda{% endblock title %}
 
 {% block content %}
     <div class="container">
@@ -43,7 +44,7 @@
                 <div class="product-info smart-form">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-6"> 
-                    {% if p.status != 0%}
+                    {% if p.status == 1 and p.stock == 0  %}
                         <a href="" class="text-white btn disabled" style="background-color:#F37828;">Ver detalle</a>
                     {% else %}
                         <a href="{% url 'product_detail' p.slug %}" class="text-white shadow fw-bold btn" style="background-color:#F37828;">Ver detalle</a>

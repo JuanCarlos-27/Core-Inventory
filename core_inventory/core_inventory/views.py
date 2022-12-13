@@ -27,7 +27,7 @@ def send_success_registration(emailUser, name, clave):
     content = template.render(context)
     
     email = EmailMultiAlternatives(
-        'Correo de confirmación',
+        '🤩Correo de confirmación🤩',
         'Tu registro ha sido exitoso',
         settings.EMAIL_HOST_USER,
         [emailUser]
@@ -60,10 +60,15 @@ def register(request):
             messages.error(request, "Ya estas registrado")
             
         if user:
-            thread = threading.Thread(target=send_success_registration, args=(
-                email, name, password
-            ))
-            thread.start() 
+            try:
+                thread = threading.Thread(target=send_success_registration, args=(
+                    email, name, password
+                ))
+                thread.start() 
+                messages.success(request, "¡Te has registrado correctamente!")
+            except Exception as e:
+                messages.error(request, "¡Ocurrio un error inesperado, vuelve a intentarlo nuevamente!")
+                
             #Se crea un código de promoción para el usuario que se registra
             valid_from = user.date_joined
             valid_to = valid_from + timedelta(days=14)     
@@ -71,10 +76,6 @@ def register(request):
                                      valid_from=valid_from,
                                      valid_to=valid_to,
                                      discount=1000)
-            #Se 
-            messages.success(request, "¡Te has registrado correctamente!")
-            
-            
             return redirect("login")
         
     return render(request, 'register.html', {"cart":cart})
@@ -140,7 +141,6 @@ class ProductListView(ListView):
             promo_code = PromoCode.objects.has_promo_code(self.request.user)
             return promo_code
 
-    
     template_name='index.html'
     queryset = Product.objects.all()
     paginate_by = 8
