@@ -23,7 +23,7 @@ def orderPdf(request, info):
     order = Order.objects.filter(order_id = info).first()
     template = get_template("ReportesPDF/orderPdf.html")
     
-    if request.user.id != order.user.id:
+    if request.user.id != order.user.id and not request.user.is_staff:
         messages.error(request, "¡Estas tratando de ingresar a urls no permitidas, por seguridad hemos registrado tus datos y tu dirección IP!")
         return redirect('index')
     

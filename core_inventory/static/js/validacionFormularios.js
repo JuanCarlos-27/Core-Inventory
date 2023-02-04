@@ -9,8 +9,6 @@ const expresiones = {
 	direccion: /\w{3,40}/,
 	correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
 	password: /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,12}$/ // 6 a 12 digitos.
-
-
 }
 
 const campos = {

@@ -37,4 +37,6 @@ class BillingProfile(models.Model):
     class Meta:
         verbose_name = "Método de pago"
         verbose_name_plural = "Métodos de pago"
+        db_table="billing_profiles"
+
      

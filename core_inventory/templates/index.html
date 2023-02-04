@@ -43,14 +43,6 @@
 {% endfor %}
 {% endif %}
 <main role="main">
-{% comment %} <div>
-  
-  <p class="position-absolute ms-5 promo_code d-flex flex-wrap">
-    <img src="https://images.emojiterra.com/google/noto-emoji/v2.034/512px/1f381.png" alt="{{p.name}}" width="70px" height="70px" class="img-responsive"/>
-    <span class="w-100 text-start fw-bold">Bienvenida</span>
-  </p>
-  {% endif %}
-</div> {% endcomment %}
   <div class="container d-flex flex-wrap justify-content-center">
     {% if not user.is_authenticated  %}
       {% include 'carousel.html' %}

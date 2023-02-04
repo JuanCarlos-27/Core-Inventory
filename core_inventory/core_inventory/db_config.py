@@ -13,11 +13,14 @@ SQLITE = {
 MYSQL = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'proyecto_core_inventory_py',
+        'NAME': 'core_inventory_project',
         'USER': 'root',
         'PASSWORD': '12345678',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'TRADITIONAL',
+        },
     }
 }
 

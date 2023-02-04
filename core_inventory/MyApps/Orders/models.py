@@ -31,6 +31,8 @@ class Order(models.Model):
     class Meta:
         verbose_name = "Pedidos"
         verbose_name_plural = "pedidos"
+        db_table="orders"
+
     
     def apply_promo_code(self, promo_code):
         if self.promo_code is None:

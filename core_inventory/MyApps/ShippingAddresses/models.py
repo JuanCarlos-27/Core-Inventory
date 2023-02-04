@@ -16,6 +16,8 @@ class ShippingAddress(models.Model):
     class Meta:
         verbose_name = "Dirección"
         verbose_name_plural = "Direcciones"
+        db_table="shipping_addresses"
+
     
     def has_orders(self):
         return self.order_set.count() >= 1

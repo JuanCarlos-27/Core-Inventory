@@ -12,6 +12,11 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
+    class Meta:
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"
+        db_table = "users"
+        
     @property
     def shippingAddress(self):
         return self.shippingaddress_set.filter(default=True).first()

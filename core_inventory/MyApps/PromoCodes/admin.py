@@ -5,3 +5,6 @@ from .models import PromoCode
 @admin.register(PromoCode)
 class PromoCodeAdmin(admin.ModelAdmin):
     exclude = ['code']
+    list_display = ('code','user','used','send')
+
+    

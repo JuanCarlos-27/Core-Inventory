@@ -10,6 +10,7 @@ class OrderAdmin(admin.ModelAdmin):
     
     def pdf(self,queryset):
         if queryset.status == 'OrderStatus.COMPLETED':
+            print(queryset)
             return format_html('<a href="/pedidos/generatePDF/{}">📂<a/>', queryset)
 
     def Estado(self, obj):

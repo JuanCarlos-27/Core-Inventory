@@ -13,4 +13,4 @@ class Supplier(models.Model):
     class Meta:
         verbose_name = "Proveedor"
         verbose_name_plural = "Proveedores"
-        db_table = "proveedor"
+        db_table = "provider"

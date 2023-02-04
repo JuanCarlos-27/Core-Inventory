@@ -24,6 +24,8 @@ class Cart(models.Model):
     class Meta:
         verbose_name = "Carrito"
         verbose_name_plural = "Carritos"
+        db_table="carts"
+
         
     def update_totals(self):
         self.update_subtotal()

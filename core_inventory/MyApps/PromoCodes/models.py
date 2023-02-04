@@ -35,6 +35,7 @@ class PromoCode(models.Model):
     class Meta:
         verbose_name = "Código de promoción"
         verbose_name_plural = "Códigos de promoción"
+        db_table="promo_codes"
         
     def use(self):
         self.used = True

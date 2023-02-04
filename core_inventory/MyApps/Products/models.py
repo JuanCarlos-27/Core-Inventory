@@ -29,7 +29,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Producto"
         verbose_name_plural = "Productos"
-        db_table = "productos"
+        db_table = "products"
         
 def set_slug(sender, instance, *args, **kwargs):
     if instance.name and not instance.slug:
