@@ -20,17 +20,18 @@ class PromoCodeManager(models.Manager):
 class PromoCode(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete = models.CASCADE, verbose_name="Cliente")
     code = models.CharField(max_length=50, unique=True, verbose_name="Código")
-    discount = models.PositiveIntegerField(default=0, verbose_name="Descuento")
+    discount = models.IntegerField(default=0, verbose_name="Descuento")
     valid_from = models.DateTimeField(verbose_name="Válido desde")
     valid_to = models.DateTimeField(verbose_name="Válido hasta")
     used = models.BooleanField(default=False, verbose_name="¿Ya fue usado?")
     send = models.BooleanField(default=False, verbose_name="¿Ya fue enviado?")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Generado el")
     
-    objects = PromoCodeManager()
     
     def __str__(self):
         return self.code
+    
+    objects = PromoCodeManager()
     
     class Meta:
         verbose_name = "Código de promoción"
