@@ -18,7 +18,7 @@ class ProductAdmin(ImportExportModelAdmin):
     list_display = ('id_product','name','descripction','price','show_image','stock','status')
     ordering = ("id_product",)
     search_fields = ('name', 'id_product')
-    list_editable = ('status',)
+    # list_editable = ('status',)
     #list_filter = ()
     list_display_links = ("name",)
     list_per_page = 10 # No. of records per page 

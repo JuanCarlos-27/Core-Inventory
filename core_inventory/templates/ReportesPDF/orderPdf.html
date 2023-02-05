@@ -158,6 +158,17 @@
         <div><span>DIRECCIÓN: {{order.shipping_address}}</span></div>
         <div><span>EMAIL: <a href="mailto:{{order.user.email}}">{{order.user.email}}</a></span></div>
         <div><span>FECHA DE ENVIO:  {{order.created_at.date}}</span></div>
+        <div><span>ESTADO: 
+          {% if order.status == "OrderStatus.COMPLETED" %}
+            Completado
+          {% elif order.status == "OrderStatus.CANCELED" %}
+            Cancelado por usuario {{order.cancelled_by}}
+          {% elif order.status == "OrderStatus.CREATED" %}
+            A espera de confirmación
+          {% endif %}
+        </span></div>
+
+
       </div>
     </header>
     <hr>

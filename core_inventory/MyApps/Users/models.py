@@ -36,6 +36,9 @@ class User(AbstractUser):
     def orders_completed(self):
         return self.order_set.filter(status=OrderStatus.COMPLETED).order_by('-id')
     
+    def orders_unconfirmed(self):
+        return self.order_set.filter(status=OrderStatus.CREATED).order_by('-id')
+    
     def orders_cancelled(self):
         return self.order_set.filter(status=OrderStatus.CANCELED).order_by('-id')
     

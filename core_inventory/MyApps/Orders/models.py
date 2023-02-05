@@ -23,7 +23,7 @@ class Order(models.Model):
     shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Dirección de envio")
     promo_code = models.OneToOneField(PromoCode, null=True, blank=True, on_delete=models.CASCADE)
     billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True,on_delete=models.CASCADE)
-    accepted = models.BooleanField(default=False, verbose_name="Tomar orden")
+    cancelled_by = models.IntegerField(default=0, verbose_name="Tomar orden")
     
     def __str__(self):
         return self.order_id
@@ -69,8 +69,13 @@ class Order(models.Model):
         self.shipping_address = shipping_address
         self.save()
     
-    def cancel(self):
+    def created(self):
+        self.status = OrderStatus.CREATED
+        self.save()
+        
+    def cancel(self, user):
         self.status = OrderStatus.CANCELED
+        self.cancelled_by = user.dni 
         self.save()
         
     def complete(self):

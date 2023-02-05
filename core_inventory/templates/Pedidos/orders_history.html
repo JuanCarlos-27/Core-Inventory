@@ -2,82 +2,85 @@
 {% block title %} Mis pedidos{% endblock%}
 {% load static %}
 {% block content %}
-{% if object_list.exists or orders_cancelled.exists %}
-<div class="container p-4 bg-white rounded-3">  
-    <h1 class="text-center mb-4">Mis pedidos📦</h1>
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{% url 'Orders:orders_list' %}" class="btn btn-success fw-bold mx-1">Realizados</a>
-        <a href="{% url 'Orders:orders_cancelled' %}" class="btn btn-danger fw-bold mx-1">Cancelados</a>
-        <a href="" class="btn btn-warning fw-bold mx-1">Por confirmar</a>
-    </div>
+{% if object_list.exists or orders_cancelled.exists or orders_unconfirmed.exists %}
+    <div class="container p-4 bg-white rounded-3">  
+        <h1 class="text-center mb-4">Mis pedidos📦</h1>
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'Orders:orders_list' %}" class="btn btn-success fw-bold mx-1">Realizados</a>
+            <a href="{% url 'Orders:orders_cancelled' %}" class="btn btn-danger fw-bold mx-1">Cancelados</a>
+            <a href="{% url 'Orders:orders_unconfirmed' %}" class="btn btn-warning fw-bold mx-1">Por confirmar</a>
+        </div>
 
-    {% for order in object_list %}
-    <div class="card mb-3 border-dark">
-        <div class="card-header border-bottom">
-            <div class="row">
-                <div class="col-xl-4 col-sm-12">
-                    <h6 class="fw-bold">Pedido Realizado</h6>
-                    <a data-bs-toggle="collapse" {% if object_list.count > 1 %} href="#aa{{order.order_id}}" {% else %} href="#unique" {% endif %} role="button" aria-expanded="false" aria-controls="collapseExample">
-                        {{order.created_at}}
-                    </a>
-                </div>
-                <div class="col-xl-4 col-sm-12">
-                    <h6 class="fw-bold">Total + envio {% if order.promo_code_id != null %} + descuento {% endif %}</h6>
-                    {% load humanize %}
-                    <p class="">${{order.total|intcomma}}</p> 
-                </div>
-                <div class="col-xl-4 col-sm-12">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-6">
-                            <h6 class="fw-bold">Enviado a:</h6>
-                            <p class="">{{order.shipping_address}}</p>
+        {% for order in object_list %}
+            <div class="card mb-3 border-dark">
+                <div class="card-header border-bottom">
+                    <div class="row">
+                        <div class="col-xl-4 col-sm-12">
+                            <h6 class="fw-bold">Pedido Realizado</h6>
+                            <a data-bs-toggle="collapse" {% if object_list.count > 1 %} href="#aa{{order.order_id}}" {% else %} href="#unique" {% endif %} role="button" aria-expanded="false" aria-controls="collapseExample">
+                                {{order.created_at}}
+                            </a>
                         </div>
-                        <div class="col-6">
-                            <h1 class="text-center">
-                                ✅
-                                <a href="{% url 'Orders:generatePDF' order.order_id %}"><img src="https://icons.veryicon.com/png/o/file-type/file-type-1/pdf-icon.png" alt="pdf" width="40px" height="40px" class="img-responsive mb-2"/></a>
-                            </h1>
+                        <div class="col-xl-4 col-sm-12">
+                            <h6 class="fw-bold">Total + envio {% if order.promo_code_id != null %} + descuento {% endif %}</h6>
+                            {% load humanize %}
+                            <p class="">${{order.total|intcomma}}</p> 
                         </div>
+                        <div class="col-xl-4 col-sm-12">
+                            <div class="row d-flex align-items-center">
+                                <div class="col-6">
+                                    <h6 class="fw-bold">Enviado a:</h6>
+                                    <p class="">{{order.shipping_address}}</p>
+                                </div>
+                                <div class="col-6">
+                                    <h1 class="text-center">
+                                        ✅
+                                        <a href="{% url 'Orders:generatePDF' order.order_id %}"><img src="https://icons.veryicon.com/png/o/file-type/file-type-1/pdf-icon.png" alt="pdf" width="40px" height="40px" class="img-responsive mb-2"/></a>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" {% if object_list.count > 1 %} id="aa{{order.order_id}}" {% else %} id="unique" {% endif %}>
+                    <div class="card-body">
+                        {% for cp in order.cart.products_related  %}
+                        {% with product=cp.product%}
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-12">
+                                {% if product.image_product.url %}
+                                    <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
+                                {% endif %}
+                            </div>
+                            <div class="col-xl-4 col-sm-12">
+                                <h6 class="">{{product.name}}</h6>
+                                {% load humanize %}
+                                <p class="text-danger">${{product.price|intcomma}}</p> 
+                            </div>
+                            <div class="col-xl-4 col-sm-12">
+                                <h6>Cantidad</h6>
+                                <h6 class="">{{cp.quantity}}</h6>
+                            </div>
+                        </div>
+                        {% endwith %}
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="collapse" {% if object_list.count > 1 %} id="aa{{order.order_id}}" {% else %} id="unique" {% endif %}>
-            <div class="card-body">
-                {% for cp in order.cart.products_related  %}
-                {% with product=cp.product%}
-                <div class="row">
-                    <div class="col-xl-4 col-sm-12">
-                        {% if product.image_product.url %}
-                            <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
-                        {% endif %}
-                    </div>
-                    <div class="col-xl-4 col-sm-12">
-                        <h6 class="">{{product.name}}</h6>
-                        {% load humanize %}
-                        <p class="text-danger">${{product.price|intcomma}}</p> 
-                    </div>
-                    <div class="col-xl-4 col-sm-12">
-                        <h6 class="">Cantidad</h6>
-                        <h6 class="">{{cp.quantity}}</h6>
-                    </div>
-                </div>
-                {% endwith %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
 
-    {% block cancelados %}{% endblock %}
-</div>
+        {% block cancelados %}{% endblock %}
+
+        {% block unconfirmed %}{% endblock %}
+
+    </div>
 {% else %}
     <div class="container p-4 bg-white rounded-3">
         <h1 class="text-center rounded-3 mb-3">Mis pedidos📦</h1>
         <div class="d-flex justify-content-end mb-3">
             <a href="{% url 'Orders:orders_list' %}" class="btn btn-success fw-bold mx-1">Realizados</a>
             <a href="{% url 'Orders:orders_cancelled' %}" class="btn btn-danger fw-bold mx-1">Cancelados</a>
-            <a href="" class="btn btn-warning fw-bold mx-1">Por confirmar</a>
+            <a href="{% url 'Orders:orders_unconfirmed' %}" class="btn btn-warning fw-bold mx-1">Por confirmar</a>
         </div>
         <div class="row h-75 justify-content-center align-items-center">
             <div class="col-sm-12 text-center">

@@ -1,0 +1,60 @@
+{% extends 'Pedidos/orders_history.html' %}
+{% block title %} Pedidos en proceso{% endblock%}
+{% load static %}
+
+{% block unconfirmed %}
+{% for order in orders_unconfirmed %}
+    <div class="card mb-3 border-dark">
+        <div class="card-header border-bottom">
+            <div class="row">
+                <div class="col-xl-4 col-sm-12">
+                    <h6 class="fw-bold">Pedido en espera</h6>
+                    <a data-bs-toggle="collapse" {% if orders_unconfirmed.count > 1 %} href="#aa{{order.order_id}}" {% else %} href="#unique" {% endif %} role="button" aria-expanded="false" aria-controls="collapseExample">
+                        {{order.created_at}}
+                    </a>
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <h6 class="fw-bold">Total</h6>
+                    {% load humanize %}
+                    <p>${{order.total|intcomma}}</p> 
+                </div>
+                <div class="col-xl-4 col-sm-12">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-6">
+                            <h6 class="fw-bold">Enviado a:</h6>
+                            <p class="">No enviado</p>
+                        </div>
+                        <div class="col-6 ">
+                            <a href="{% url 'Orders:cancel_order_created' order.order_id %}" class="btn btn-outline-danger fw-bold m-0 p-2">Cancelar pedido</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" {% if orders_unconfirmed.count > 1 %} id="aa{{order.order_id}}" {% else %} id="unique" {% endif %}>
+            <div class="card-body">
+                {% for cp in order.cart.products_related  %}
+                {% with product=cp.product%}
+                <div class="row">
+                    <div class="col-xl-4 col-sm-12">
+                        {% if product.image_product.url %}
+                            <img src={{product.image_product.url}} alt="{{product.name}}" width="60px" height="60px" class="img-responsive"/>   
+                        {% endif %}
+                    </div>
+                    <div class="col-xl-4 col-sm-12">
+                        <h6 class="">{{product.name}}</h6>
+                        {% load humanize %}
+                        <p class="text-danger">${{product.price|intcomma}}</p> 
+                    </div>
+                    <div class="col-xl-4 col-sm-12">
+                        <h6 class="">Cantidad</h6>
+                        <h6 class="">{{cp.quantity}}</h6>
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock unconfirmed %}

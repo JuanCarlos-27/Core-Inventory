@@ -3,12 +3,13 @@
 {% load static %}
 {% block content %}
     <div class="container w-50 reset-password">
-        <h3 class="col-sm-12 text-center py-3">¡Tu pedido se ha completado con éxito ✅!</h3>
-        <p class="text-center">En instantes te llegará a tu correo electrónico la confirmación y los detalles del mismo.</p>
+        <h3 class="col-sm-12 text-center py-3">Nuestros trabajadores están validando tu orden 🔎</h3>
+        <p class="text-center">Recuerda revisar tu correo electrónico una vez tu pedido haya sido confirmado. ✅</p>
+        <p class="text-center">Para ver el estado de tus pedidos haz clic en <a href="{% url 'Orders:orders_list' %}" class="text-decoration">Mis pedidos</a></p>            
+
         <p class="text-center">Te invitamos a seguir explorando nuestros productos de la más alta calidad en el mercado.</p>
         <div class="d-flex justify-content-center">
             <p class="text-center h5"><a href="{% url 'index' %}" class="text-decoration-none">Ir a comprar🤩 </a></p>
-            <p class="text-center h5"><a href="{% url 'Orders:orders_list' %}" class="text-decoration-none">| Ver mis compras</a></p>
         </div>
     </div>
 {% endblock content %}

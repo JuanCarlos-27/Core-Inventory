@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from . utils.charts import months, colorPrimary, colorSuccess, colorDanger, generate_color_palette, get_year_dict
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
+from django.db.models import Func, F
 
 @login_required(login_url='login')
 def statistics_view(request):
@@ -31,13 +32,15 @@ def orders_success_vs_cancelled_char(request, year):
 
 @login_required(login_url='login')
 def orders_per_month_chart(request,year):
-    order = Order.objects.filter(created_at__year = year)
+    order = Order.objects.filter(created_at__month=Func(F('created_at'), function='MONTH'))
+    print(order)
+    
     data = []
     months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 
     for month_number in range(1,13):
         data.append(order.filter(created_at__month = month_number).count())
-        
+    
     return JsonResponse({
         'title': f'Pedidos por mes en el año {year}',
         'data': {

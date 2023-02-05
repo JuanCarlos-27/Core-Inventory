@@ -12,8 +12,8 @@ def validate(request):
     cart = create_cart(request)
     order = get_or_created_order(cart, request)
     
-    code=request.GET.get('code')
-    promo_code=PromoCode.objects.get_valid(code)
+    code = request.GET.get('code')
+    promo_code = PromoCode.objects.get_valid(code)
     
     if promo_code is None:
         return JsonResponse({
