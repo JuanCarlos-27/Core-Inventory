@@ -4,25 +4,20 @@
     font-size: 16px;
 }
 
-.reset-password{
-	background: #fff;
-    border-radius: 10px;
-    box-shadow: -5px 9px 18px 0px #3a3a3a;
+.reset-password, .contact-form, .login-form, .register-form {
+	background-color: #fff;
+	border-radius: 10px;
+	box-shadow: -5px 9px 18px 0px #3a3a3a;
 	padding-bottom:25px;
 }
+.reset-password{
+	max-width: 600px;
+}
 .contact-form{
-    background: #fff;
-    border-radius: 10px 10px 10px 20%;
-    box-shadow: -5px 9px 18px 0px #3a3a3a;
-	padding-bottom:10px;
+	max-width: 500px;
 }
 .login-form{
-    background: #fff;
-    margin: 30px auto;
-    border-radius: 10px 10px 10px 20% ;
-    box-shadow: -5px 9px 18px 0px #3a3a3a;
-	padding-bottom:10px;
-	width: 340px;
+	max-width: 340px;
 }
 .forgotPassword{
 	text-align: center;
@@ -37,24 +32,9 @@
 /*ESTILOS FORMULARIO DE REGISTRO */
 
 .register-form{
-    background: #fff;
-    margin: 30px auto;
-    width: 70%;
-    border-radius: 10px 10px 10px 20% ;
-    box-shadow: -5px 9px 18px 0px #3a3a3a;
+	max-width: 900px;
 }
-.register-form form{
-    padding: 90px;
-}
-.register-form form .row{
-    margin-bottom: -7%;
-}
-.register-form h3{
-    margin-bottom: 30px;
-    margin-top: -10%;
-    text-align: center;
-    color: #000;
-}
+
 .btnRegister, .btnAccess {
     width: 50%;
     border: none;
@@ -70,7 +50,6 @@
 .asterisco{
     color: #f00;
     font-size: 20px;
-
 }
 
 .formulario__label {
@@ -131,62 +110,6 @@
 }
 
 
-.formulario__grupo-terminos, 
-.formulario__mensaje,
-.formulario__grupo-btn-enviar {
-	grid-column: span 2;
-}
-
-.formulario__mensaje {
-	height: 45px;
-	line-height: 45px;
-	background: #F66060;
-	padding: 0 15px;
-	border-radius: 3px;
-	display: none;
-}
-
-.formulario__mensaje-activo {
-	display: block;
-}
-
-.formulario__mensaje p {
-	margin: 0;
-}
-
-.formulario__grupo-btn-enviar {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.formulario__btn {
-	height: 45px;
-	line-height: 45px;
-	width: 30%;
-	background: #000;
-	color: #fff;
-	font-weight: bold;
-	border: none;
-	border-radius: 3px;
-	cursor: pointer;
-	transition: .1s ease all;
-}
-
-.formulario__btn:hover {
-	box-shadow: 3px 0px 30px rgba(163,163,163, 1);
-}
-
-.formulario__mensaje-exito {
-	font-size: 14px;
-	color: #119200;
-	display: none;
-}
-
-.formulario__mensaje-exito-activo {
-	display: block;
-}
-
 /* ----- -----  Estilos para Validacion ----- ----- */
 .formulario__grupo-correcto .formulario__validacion-estado {
 	color: #28a745;
@@ -216,26 +139,4 @@
 
 .formulario_select_validacion:valid{
 	border: 3px solid #28a745;
-}
-
-@media screen and (max-width: 800px) {
-	.formulario {
-		grid-template-columns: 1fr;
-	}
-	.register-form form{
-		padding: 30px;
-	}
-	.login-form{
-		width: 100%;
-	}
-
-	.formulario__grupo-terminos, 
-	.formulario__mensaje,
-	.formulario__grupo-btn-enviar {
-		grid-column: 1;
-	}
-
-	.formulario__btn {
-		width: 100%;
-	}
 }
