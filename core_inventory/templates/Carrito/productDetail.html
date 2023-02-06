@@ -1,25 +1,38 @@
 {% extends '../baseIndex.html' %}
 {% block title %} Detalle{% endblock title %}
 {% block content %}
-<div class="container d-flex justify-content-center">
-    <div class="card border-dark rounded" style="width: 18rem;">
-        {% if product.image_product %}
-            <img src={{product.image_product.url}} alt="{{p.name}}" width="200px" height="200px" class="card-img-top border-bottom"/>  
-        {% endif %}
-        <div class="card-body text-center">
-            <h5 class="card-title">{{product.name}}</h5>
-            <div class="fw-bold">
-                {% load humanize %}
-                Precio:<span class="text-danger"> ${{ product.price|intcomma}}</span>
-            </div>
-            <p class="card-text">{{ product.descripction }}</p>
-            {% if product.status == 0 %}
-                <span class="badge rounded-pill text-bg-success">Disponible ({{product.stock}} unidades)</span>
-            {% else %}
-                <span class="badge rounded-pill text-bg-danger">Agotado</span>
-            {% endif %}
-            {% include 'Carrito/add.html' %}
-        </div>
+<div class="container d-flex justify-content-center pb-3">
+  <div class="card-product text-center">
+    <div class="card-head">
+      <img
+        src="{{product.image_product.url}}"
+        alt="{{product.name}} imagen"
+        width="200px"
+        height="200px"
+        class="img-responsive"
+      />
     </div>
+    <div class="card-body">
+      <div class="product-desc">
+        <span class="product-title d-flex justify-content-center flex-wrap">
+          <strong>{{product.name}}</strong>
+          {% if product.status == 0 and product.stock != 0 %}
+          <span>({{product.stock}} unidades disponibles)</span>
+          {% else %}
+          <span class="badge-status bg-danger">Agotado</span>
+          {% endif %}
+        </span>
+        <span class="product-caption"> {{product.descripction}} </span>
+      </div>
+      <div class="product-properties">
+        {% load humanize %}
+        <span class="product-price">$ {{product.price|intcomma }} COP</span>
+      </div>
+      {% include 'Carrito/add.html' %}
+    </div>
+    <footer>
+    </footer>
+
+  </div>
 </div>
 {% endblock content %}

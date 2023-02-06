@@ -2,11 +2,10 @@
 {% block title %} Registrar{% endblock title %}
 
 {% block content %}
-<div class="container register-form">
+<div class="container register-form py-4 px-5">
     <form method="post" class="formulario" id="formulario">
         {% csrf_token %}
-        <h3>Registrar Usuario</h3>
-        <hr>
+        <h3 class="text-center p-0 m-0">Registrar Usuario</h3>
         <div class="row">
             <div class="col-md-6 form-group formulario__grupo" id="grupo__nombre">
                 <label for="nombre" class="formulario__label">Nombre<span class="asterisco">*</span></label>
@@ -71,5 +70,4 @@
         </div>
     </form>
 </div>
-
 {% endblock content  %}

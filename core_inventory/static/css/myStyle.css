@@ -73,15 +73,14 @@ body{
 
 .pagination-outer{ text-align: center; }
 .pagination{
-    font-family: 'Ubuntu', sans-serif !important; 
-    display: inline-flex !important;
-    position: relative !important;
-    border: 2px solid #333 !important;
+    display: inline-flex;
+    position: relative;
+    border: 2px solid #333;
 }
 .pagination li a.page-link{
-    color: #333 !important;
-    background-color: #fff !important;
-    font-size: 20px !important;
+    color: #333 ;
+    background-color: #fff;
+    font-size: 20px ;
     font-weight: 500;
     line-height: 37px;
     height: 38px;
@@ -158,7 +157,6 @@ body{
         transform: translatex(7px);
     }
 } */
-
 
 @media only screen and (max-width: 480px){
     .pagination{

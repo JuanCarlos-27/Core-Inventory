@@ -37,7 +37,6 @@ AUTH_USER_MODEL = 'Users.User'
 INSTALLED_APPS = [
     'jazzmin',
     # 'django.contrib.admin',
-    'dbmanager',
     'core_inventory.apps.CustomAdminConfig',
     'django.contrib.humanize',
     'django.contrib.auth',

@@ -104,7 +104,6 @@ def address(request):
     shipping_address = order.get_or_set_shipping_address()
     can_choose_address = request.user.shippingaddress_set.count() > 1
     
-    print(can_choose_address)
     return render(request, 'Pedidos/address.html',{
         "cart":cart,
         "order": order,

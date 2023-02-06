@@ -94,7 +94,6 @@ def post_save_update_totals(sender, instance, *args, **kwargs):
 def change_product_status(sender, instance,*args, **kwargs):
     if instance.stock == 0:
         instance.status = 1
-        print("Ok")
     else:
         instance.status = 0
 

@@ -50,6 +50,7 @@ def send_promo_code(modeladmin, request, queryset):
                 promoCode, queryset[index].email, user
             ))
             thread.start()
+            promoCode.send_to_user()
         messages.success(request, "¡Codigos enviados correctamente!")
     except:
         messages.err(request, "¡Codigos enviados correctamente!")

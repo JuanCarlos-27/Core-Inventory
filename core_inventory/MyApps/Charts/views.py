@@ -33,7 +33,6 @@ def orders_success_vs_cancelled_char(request, year):
 @login_required(login_url='login')
 def orders_per_month_chart(request,year):
     order = Order.objects.filter(created_at__month=Func(F('created_at'), function='MONTH'))
-    print(order)
     
     data = []
     months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
