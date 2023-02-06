@@ -51,7 +51,7 @@ pre_save.connect(set_total, sender=PurchaseDetail)
 
 def set_total_purchase(sender, instance, *args, **kwargs):
     obj = instance.purchase
-    obj.total = instance.total
+    obj.total += instance.total
     obj.save()
         
 post_save.connect(set_total_purchase,sender=PurchaseDetail)

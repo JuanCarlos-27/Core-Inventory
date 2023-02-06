@@ -14,7 +14,7 @@ class ProductResources(resources.ModelResource):
 @admin.register(Product)
 class ProductAdmin(ImportExportModelAdmin):
     resource_class = ProductResources
-    fields = ('name','descripction','price','image_product','stock','status')
+    fields = ('name','descripction','price','image_product','status')
     list_display = ('id_product','name','descripction','price','show_image','stock','status')
     ordering = ("id_product",)
     search_fields = ('name', 'id_product')
