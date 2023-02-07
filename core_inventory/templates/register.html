@@ -1,5 +1,6 @@
 {% extends 'baseIndex.html' %}
 {% block title %} Registrar{% endblock title %}
+{% load static %}
 
 {% block content %}
 <div class="container register-form py-4 px-5">
@@ -71,3 +72,7 @@
     </form>
 </div>
 {% endblock content  %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'js/validacionFormularios.js' %}"></script>
+{% endblock js %}

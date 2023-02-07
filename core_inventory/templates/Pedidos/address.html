@@ -16,9 +16,9 @@
                         <img src="{% static 'img/tachuela.svg' %}" alt="tachuela" width="32" height="32">
                         <h5 class="card-title">{{shipping_address.address}}</h5>
                         <hr>
-                        <p class=""><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
-                        <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
-                        <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
+                        <p><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
+                        <p><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
+                        <p><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
                         <div class="card-footer">
                             <p class="text-muted">Dirección principal</p>
                         </div>
@@ -31,8 +31,8 @@
                     <a href="{% url 'Orders:select_address' %}" class="h4 text-decoration-none opacity-75 text-primary">Elige otra dirección</a>
                 </div>
             {% endif %}
-            <div class="col-xl-12 col-sm-12 d-flex justify-content-center p-3">
-                <a href="{% url 'Orders:payment' %}" class="btn btn-success ">Continuar</a>
+            <div class="d-flex justify-content-center p-3">
+                <a href="{% url 'Orders:payment' %}" class="button-detail">Continuar</a>
             </div>
         {% else %}
         <div class="row m-5 justify-content-center align-items-center">

@@ -101,6 +101,7 @@ def address(request):
     cart = create_cart(request)
     order = get_or_created_order(cart, request)
     
+    print(order)
     shipping_address = order.get_or_set_shipping_address()
     can_choose_address = request.user.shippingaddress_set.count() > 1
     
@@ -142,6 +143,7 @@ def confirm(request):
     
     shipping_address = order.shipping_address
     
+    print(shipping_address)
     if shipping_address is None:
         return redirect('Orders:address')
     
