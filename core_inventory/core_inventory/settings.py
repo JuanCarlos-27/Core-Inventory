@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'MyApps.Orders',
     'MyApps.Products',
     'MyApps.Purchases',
+    'MyApps.Sales',
     'MyApps.Carts',
     'MyApps.ShippingAddresses',
     'MyApps.Providers',
