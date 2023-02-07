@@ -2,9 +2,6 @@
 {% block title %} Dirección{% endblock%}
 {% load static %}
 
-{% block css %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-{% endblock css %}
 
 {% block content %}
 <div class="container bg-white rounded-3 p-3">
@@ -17,14 +14,16 @@
                 <div class="col-sm-4 mb-4">
                     <div class="card text-center shadow" style="border-color: #F37828;">
                     <div class="card-body">
-                        <img src="{% static 'img/tachuela.svg' %}" alt="" width="32" height="32">
+                        <img src="{% static 'img/tachuela.svg' %}" alt="tachuela" width="32" height="32">
                         <h5 class="card-title">{{shipping_address.address}}</h5>
                         <hr>
-                        <p class=""><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
-                        <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
-                        <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
+                        <p><span class="fw-bold">Barrio:</span> {{shipping_address.neighborhood}}</p>
+                        <p><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
+                        <p><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
                         <div class="card-footer text-right">
-                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold"><i class="bi bi-pencil-square"></i></a>
+                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold px-4 py-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-edit" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"/><path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3M16 5l3 3"/></svg>
+                            </a>
                         </div>
                     </div>
                     </div>
@@ -39,8 +38,12 @@
                         <p class=""><span class="fw-bold">Localidad:</span> {{shipping_address.zone}}</p>
                         <p class=""><span class="fw-bold">Datos de referencia:</span> {{shipping_address.reference}}</p>
                         <div class="card-footer text-right">
-                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold"><i class="bi bi-pencil-square"></i></a>
-                            <a onclick="modalDelete('eliminar/{{shipping_address.pk}}')" class="btn btn-danger fw-bold"><i class="bi bi-trash"></i></a>
+                            <a onclick="openModal('editarDireccion/{{shipping_address.pk}}')" class="btn btn-primary fw-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-edit" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="M9 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-3"/><path d="M9 15h3l8.5-8.5a1.5 1.5 0 0 0-3-3L9 12v3M16 5l3 3"/></svg>
+                            </a>
+                            <a onclick="modalDelete('eliminar/{{shipping_address.pk}}')" class="btn btn-danger fw-bold">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" class="icon icon-tabler icon-tabler-trash" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>
+                            </a>
                             <a href="{% url 'address:default' shipping_address.pk %}" class="btn btn-warning fw-bold">Principal</a>
                         </div>
                     </div>
@@ -82,6 +85,9 @@
           })
     }
 </script>
-
 {% include 'Direcciones/create.html' %}
 {% endblock content %}
+
+{% block js %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{% endblock js %}

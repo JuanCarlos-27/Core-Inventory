@@ -1,6 +1,55 @@
-body{
-    background: #CFB286 /*BDA174*/;
+body, .search-button {
+    background: #CFB286;
 }
+.search-button{
+    border: none;
+    height: 100%;
+    padding: 0px 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 2px solid #000;
+    transition: .4s background-color;
+}
+.search-button:hover{
+    background-color: #c28c3c;
+}
+.input-search{
+    border: none;
+    outline: none;
+    border: 2px solid #000;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 8px 20px;
+}
+
+.navigation-link {
+    font-weight: 500;
+    color: #000;
+    margin: 10px;
+    text-decoration: none;
+    transition: .4s;
+    position: relative;
+}
+.navigation-link:hover{
+    color: #fff;
+}
+
+.navigation-link::before {
+    content: "";
+    position: absolute;
+    bottom: -0.25em;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #fff;
+    transform: scaleX(0);
+    transition: transform 0.4s ease-in-out;
+}
+.navigation-link:hover::before,
+.navigation-link:target::before {
+  transform: scaleX(1);
+}
+
 .steps {
     display: flex;
     justify-content: space-between;
@@ -42,14 +91,16 @@ body{
     z-index: 10;
     display: flex;
     flex-wrap: wrap;
-    justify-content:center;
+    justify-content: center;
     text-align: center;
 }
+
 .step-title {
     flex-basis: 100%;
 }
+
 #progress {
-    appearance:none;
+    appearance: none;
     position: absolute;
     width: 90%;
     z-index: 5;
@@ -71,16 +122,20 @@ body{
 
 /* paginator styles */
 
-.pagination-outer{ text-align: center; }
-.pagination{
+.pagination-outer {
+    text-align: center;
+}
+
+.pagination {
     display: inline-flex;
     position: relative;
     border: 2px solid #333;
 }
-.pagination li a.page-link{
-    color: #333 ;
+
+.pagination li a.page-link {
+    color: #333;
     background-color: #fff;
-    font-size: 20px ;
+    font-size: 20px;
     font-weight: 500;
     line-height: 37px;
     height: 38px;
@@ -93,21 +148,27 @@ body{
     z-index: 1;
     transition: all 0.3s ease 0s;
 }
-.pagination li:first-child a.page-link{ border-radius: 2px 0 0 2px; }
-.pagination li:last-child a.page-link{
+
+.pagination li:first-child a.page-link {
+    border-radius: 2px 0 0 2px;
+}
+
+.pagination li:last-child a.page-link {
     border: none;
     border-radius: 0 2px 2px 0;
 }
+
 .pagination li a.page-link:hover,
 .pagination li a.page-link:focus,
 .pagination li.active a.page-link:hover,
-.pagination li.active a.page-link{
+.pagination li.active a.page-link {
     color: #fff;
     background: #F37828;
     border-color: #333;
 }
+
 .pagination li a.page-link:before,
-.pagination li a.page-link:after{
+.pagination li a.page-link:after {
     content: '';
     background-color: #fca664;
     height: 100%;
@@ -120,57 +181,52 @@ body{
     z-index: -1;
     transition: all 0.4s ease 0s;
 }
-.pagination li a.page-link:after{
+
+.pagination li a.page-link:after {
     background-color: #fa8231;
     height: 0;
     border: none;
 }
-.pagination li a.page-link:hover:before{
+
+.pagination li a.page-link:hover:before {
     border-radius: 0 0 7px 7px;
     opacity: 1;
     top: -2px;
 }
+
 .pagination li.active a.page-link:before,
-.pagination li a.page-link:focus:before{
+.pagination li a.page-link:focus:before {
     opacity: 0;
 }
+
 .pagination li a.page-link:focus:after,
-.pagination li.active a.page-link:after{
+.pagination li.active a.page-link:after {
     opacity: 1;
     height: 100%;
 }
 
 
-.promo_code:hover{
+.promo_code:hover {
     width: 40px;
     height: 40px;
     cursor: pointer;
 }
-/* @keyframes move{
-	0%{
-        transform: translatex(7px);
-	}
-    50%{
-        transform: translatey(7px);
-    }
-    100%{
-        transform: translatex(7px);
-    }
-} */
 
-@media only screen and (max-width: 480px){
-    .pagination{
+@media only screen and (max-width: 480px) {
+    .pagination {
         font-size: 0;
         border: none;
         display: inline-block;
     }
-    .pagination li{
+
+    .pagination li {
         display: inline-block;
         vertical-align: top;
         margin: 0 5px 10px;
     }
+
     .pagination li a.page-link,
-    .pagination li:last-child a.page-link{
+    .pagination li:last-child a.page-link {
         line-height: 34px;
         border: 2px solid #333;
     }

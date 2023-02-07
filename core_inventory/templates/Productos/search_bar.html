@@ -1,9 +1,9 @@
 {% load static %}
-<form action="{% url 'search' %}" class="input-group w-75 mb-1">
-    <input type="text" name="q" class="form-control" value="{{ query }}" placeholder="Busca tu producto">
-    <div class="input-group-append">
-        <button type="submit" class="btn" style="background-color:#CFB286">
-            <img src="{% static 'img/search.svg' %}" alt="search_bar_logo">
+<form action="{% url 'search' %}" class=" d-flex flex-wrap flex-grow-1 mx-3">
+    <input type="text" name="q" class="input-search flex-grow-1" value="{{ query }}" placeholder="Busca tu producto">
+    <div>
+        <button type="submit" class="search-button" aria-label="Boton de busqueda">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-search" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><path d="m21 21-6-6"/></svg>
         </button>
     </div>
 </form>

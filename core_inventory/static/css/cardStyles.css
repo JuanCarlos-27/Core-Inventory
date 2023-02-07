@@ -1,6 +1,7 @@
 .img-responsive {
     object-fit: contain;
     width: 100%;
+    aspect-ratio: 3/2;
 }
 .card-product {
     max-width: 300px;

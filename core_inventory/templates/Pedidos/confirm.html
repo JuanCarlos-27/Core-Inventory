@@ -41,9 +41,9 @@
                     <div class="col-xl-4">
                         <h6 class="fw-bold">Código de descuento</h6>
                         <form class="d-flex" id="promoCodeForm" action="{% url 'promo_code:validate' %}">
-                            <input type="text" id="code" name="code" value="{{order.promo_code.code}}" class="formulario__input" placeholder="Ej: AAD576" {% if order.promo_code %}readonly disabled{% endif %}>
-                            <button type="submit" class="btn btn-success rounded-circle">
-                                <img src="{% static 'img/search.svg' %}" alt="search_bar_logo">
+                            <input type="text" style="border-radius:20px 0px 0px 20px" id="code" name="code" value="{{order.promo_code.code}}" class="formulario__input" placeholder="Ej: AAD576" {% if order.promo_code %}readonly disabled{% endif %}>
+                            <button type="submit" class="btn btn-success" style="border-radius:0px 20px 20px 0px">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-search" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><path d="m21 21-6-6"/></svg>
                             </button>
                         </form>
                         <div class="fw-bold fst-italic text-success" id="promoCodeSuccess">
