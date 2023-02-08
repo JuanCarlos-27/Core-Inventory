@@ -9,7 +9,7 @@ from xhtml2pdf import pisa
 @login_required(login_url='login')
 def salesPdf(request, info):
     sale = Sale.objects.filter(sale_id = info).first()
-    user = sale.user
+    user = sale.client
     products = sale.saledetail_set.select_related('product')
     
     template = get_template("ReportesPDF/salesPdf.html")
@@ -25,7 +25,7 @@ def salesPdf(request, info):
     }
     html = template.render(context)
     response = HttpResponse(content_type="application/pdf")
-    response['Content-Disposition'] = 'attachment; filename="venta.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="venta ({sale.sale_id}).pdf"'
     pisa_status = pisa.CreatePDF(
         html, dest=response)
     if pisa_status.err:
