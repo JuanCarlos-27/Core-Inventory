@@ -10,7 +10,7 @@ User = get_user_model()
 class Sale(models.Model):
     sale_id = models.CharField(max_length=100, null = False, blank = False, unique=True, verbose_name="Id")
     product = models.ManyToManyField(Product, through="SaleDetail")
-    total = models.PositiveIntegerField(default=0, verbose_name="Total Ingreso")
+    total = models.IntegerField(default=0, verbose_name="Total Ingreso")
     client = models.ForeignKey(User, verbose_name = "Cliente", on_delete = models.CASCADE)
     sale_man = models.IntegerField(default=0, verbose_name="Venta hecha por")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha")
