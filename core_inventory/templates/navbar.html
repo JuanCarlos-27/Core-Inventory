@@ -1,0 +1,118 @@
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+{% endblock css %}
+<div class="container d-flex flex-wrap gap-3 section-navbar-main">
+    {% comment %} <a href="#" class="d-flex align-items-center col-md-1 col-12 justify-content-center text-decoration-none">
+        <img src="static/img/logo1.png" alt="" width="40px" height="40px"> 
+    </a>  {% endcomment %}
+    {% include 'Productos/search_bar.html' %}
+    {% if user.is_authenticated %}
+    <article>
+        <button class="button-menu" aria-label="muestra la barra de navegación">            
+            <span class="mb-1"></span>
+            <span class="mb-1"></span>
+            <span></span>
+        </button>
+        <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle justify-content-center position-relative" id="dropdownUser1" aria-label="Menú desplegable para otras opciones" data-bs-toggle="dropdown" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-user-circle" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.168 18.849A4 4 0 0 1 10 16h4a4 4 0 0 1 3.834 2.855"/></svg>
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="Opciones del menú desplegable">
+            <li><a class="dropdown-item" href="{% url 'Users:user_info' %}">Perfil</a></li>
+            <li><a class="dropdown-item" href="{% url 'address:shipping_addresses' %}">Direcciones</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+        </ul>
+    </article>
+    {% else %}
+    <article>
+        <button class="button-menu" aria-label="muestra la barra de navegación">            
+            <span class="mb-1"></span>
+            <span class="mb-1"></span>
+            <span></span>
+        </button>
+        <a href="{% url 'Carts:cart' %}" class="d-flex justify-content-center align-items-center text-center position-relative"> 
+            <span id="add-product" class="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style="left:75%"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-shopping-cart" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="6" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M17 17H6V3H4"/><path d="m6 5 14 1-1 7H6"/></svg>
+        </a>
+    </article>
+    {% endif %}
+</div>
+<nav class="container navbar" id="nav">
+    {% if user.is_authenticated  %}
+        <ul class="nav d-flex pt-2 col-12 justify-content-center gap-3 align-items-center nav-links">
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-home" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"/></svg>
+                <a href="{% url 'index' %}" class="navigation-link">Inicio</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-mail" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><rect width="18" height="14" x="3" y="5" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                <a href="{% url 'contact' %}" class="navigation-link">Contáctenos</a>
+            </li>
+            {% if user.is_superuser or user.is_staff %}
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-id" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><rect width="18" height="16" x="3" y="4" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M15 8h2M15 12h2M7 16h10"/></svg>           
+                <a href="/admin" target="_blank" class="navigation-link">Panel de administrador</a>
+            </li> 
+            {% endif %}
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-credit-card" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><rect width="18" height="14" x="3" y="5" rx="3"/><path d="M3 10h18M7 15h.01M11 15h2"/></svg>
+                <a href="{% url 'billing:create' %}" class="navigation-link">Métodos de pago</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-package" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3M12 12l8-4.5M12 12v9M12 12 4 7.5M16 5.25l-8 4.5"/></svg>
+                <a href="{% url 'Orders:orders_list' %}" class="navigation-link">Mis Pedidos</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-shopping-cart" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="6" cy="19" r="2"/><circle cx="17" cy="19" r="2"/><path d="M17 17H6V3H4"/><path d="m6 5 14 1-1 7H6"/></svg>
+                <a href="{% url 'Carts:cart' %}" class="navigation-link position-relative">Mi Carrito
+                    <span id="add-product" class="position-absolute top-15 start-100 translate-middle badge  bg-danger"></span>
+                </a>
+            </li>
+            {% if promo_code and not promo_code.send %}
+                <li class="d-flex flex-wrap justify-content-center align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" class="icon-gift swing" viewBox="0 0 1024 1024"><path fill="#9FDBAD" d="M131.255 466.13h766.243v535.732H131.255V466.131Z"/><path fill="#5C2D51" d="M873.446 487.415a2.341 2.341 0 0 1 2.342 2.342v489.33a2.341 2.341 0 0 1-2.342 2.342H154.881a2.341 2.341 0 0 1-2.341-2.341V489.544a2.341 2.341 0 0 1 2.341-2.341h718.565m0-42.57H154.881a44.91 44.91 0 0 0-44.91 44.91v489.545a44.91 44.91 0 0 0 44.91 44.91h718.565a44.91 44.91 0 0 0 45.336-44.91V489.544a44.91 44.91 0 0 0-45.336-44.698z"/><path fill="#FDCA89" d="M64.635 289.895h893.95V478.05H64.634V289.895Z"/><path fill="#5C2D51" d="M937.3 311.18v145.586H85.92V311.18H937.3m5.534-42.57H80.385a37.035 37.035 0 0 0-37.035 37.036v156.44a37.035 37.035 0 0 0 37.035 37.036h862.449a37.035 37.035 0 0 0 37.035-36.822V305.646a37.035 37.035 0 0 0-37.035-37.035z"/><path fill="#F05071" d="M584.19 283.51a166.658 166.658 0 0 1-98.122-25.967c46.826-79.604 162.614-236.258 263.928-236.258a106.423 106.423 0 0 1 75.56 33.63c24.264 23.2 49.167 60.021 31.288 104.719-24.69 61.512-126.217 123.876-272.441 123.876z"/><path fill="#5C2D51" d="M749.996 42.569a86.628 86.628 0 0 1 60.66 27.67c42.57 40.866 30.438 71.303 26.394 81.307-21.285 53.424-117.278 110.466-252.86 110.466a153.249 153.249 0 0 1-68.11-12.557c49.805-77.689 150.055-206.886 233.916-206.886m0-42.569C603.771 0 457.121 264.78 457.121 264.78a201.99 201.99 0 0 0 127.707 40.014c222.21 0 380.993-145.586 255.414-265.205A127.707 127.707 0 0 0 749.996 0z"/><path fill="#5C2D51" d="M490.325 268.61h42.569v754.537h-42.569z"/><path fill="#F05071" d="M511.61 276.699c-249.242-1.916-347.79-82.797-356.09-152.185-5.747-44.484 27.244-84.286 79.39-96.844a175.384 175.384 0 0 1 41.08-5.108c138.136 0 212.845 184.75 235.62 254.137z"/><path fill="#5C2D51" d="M275.777 44.059c109.402 0 176.449 133.88 206.034 211.355C253.854 246.688 182.338 169 176.804 121.96c-4.044-33.416 21.285-63.853 63.854-73.431a154.313 154.313 0 0 1 36.183-4.47m0-42.57a195.818 195.818 0 0 0-47.251 5.535c-157.719 38.1-159.634 290.96 295.216 290.96h16.176S464.358 1.49 275.777 1.49z"/></svg>
+                    <a href="{% url 'promo_code:send_promo_code' %}" class="navigation-link">¡Regalo!</a>
+                </li>
+            {% endif %}
+        </ul>
+    {% else %}
+        <ul class="nav d-flex pt-2 col-12 justify-content-center gap-3 align-items-center nav-links">
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-home" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><path d="M5 12H3l9-9 9 9h-2M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M9 21v-6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v6"/></svg>
+                <a href="{% url 'index' %}" class="navigation-link">Inicio</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-mail" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><rect width="18" height="14" x="3" y="5" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                <a href="{% url 'contact' %}" class="navigation-link">Contáctenos</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-user" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+                <a href="{% url 'login' %}" class="navigation-link">Iniciar Sesión</a>
+            </li>
+            <li class="d-flex flex-wrap align-items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="icon icon-tabler icon-tabler-users" viewBox="0 0 24 24"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85"/></svg>
+                <a href="{% url 'register' %}" class="navigation-link">Crea tu cuenta</a>
+            </li>
+        </ul>
+    {% endif %}
+</nav>
+
+
+
+{% block js %}
+    <script>
+        const toggleButton = document.querySelector('.button-menu')
+        const navWrapper = document.querySelector('.navbar')
+
+        toggleButton.addEventListener('click',() => {
+            toggleButton.classList.toggle('close')
+            navWrapper.classList.toggle('show')
+        })
+        navWrapper.addEventListener('click',e => {
+            if(e.target.id === 'nav'){
+              navWrapper.classList.remove('show')
+              toggleButton.classList.remove('close')
+            }
+        })
+    </script>
+{% endblock js %}

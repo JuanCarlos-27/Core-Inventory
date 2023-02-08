@@ -22,35 +22,6 @@ body, .search-button {
     border-bottom-left-radius: 20px;
     padding: 8px 20px;
 }
-
-.navigation-link {
-    font-weight: 500;
-    color: #000;
-    margin: 10px;
-    text-decoration: none;
-    transition: .4s;
-    position: relative;
-}
-.navigation-link:hover{
-    color: #fff;
-}
-
-.navigation-link::before {
-    content: "";
-    position: absolute;
-    bottom: -0.25em;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #fff;
-    transform: scaleX(0);
-    transition: transform 0.4s ease-in-out;
-}
-.navigation-link:hover::before,
-.navigation-link:target::before {
-  transform: scaleX(1);
-}
-
 .steps {
     display: flex;
     justify-content: space-between;

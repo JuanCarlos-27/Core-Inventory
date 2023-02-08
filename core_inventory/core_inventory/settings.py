@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -153,11 +154,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = '587'
-# EMAIL_HOST_USER = 'jcromero909@misena.edu.co'
-# EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_HOST_USER = 'noemply.inventory@gmail.com'
-EMAIL_HOST_PASSWORD = 'zkjlowexvoqybzyb'
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
-
 STRIPE_PUBLIC_KEY = 'pk_test_51M1Fq2BQSHmCnrdvv3HwVGsD7cN3GUIgOCVR8fJAVTOIDQ152dOefmyefjIPSpaD8A75B61hG8HyWjLBhxA4bNGG00PieTdNrc'
 STRIPE_PRIVATE_KEY = config('STRIPE_PRIVATE_KEY')

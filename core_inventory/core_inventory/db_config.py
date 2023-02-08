@@ -1,4 +1,5 @@
 import os
+from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -12,11 +13,11 @@ SQLITE = {
 MYSQL = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'core_inventory_project',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PSW'),
+        'HOST': config('DATABASE_HOST'),
+        'PORT': config('DATABASE_PORT')
     }
 }
 POSTGRESQL = {

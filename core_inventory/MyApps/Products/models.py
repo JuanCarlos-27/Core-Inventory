@@ -20,9 +20,6 @@ class Product(models.Model):
     status = models.IntegerField(verbose_name="Estado", choices= PRODUCT_STATUS, default="Disponible")
     slug = models.SlugField(null=False, blank=False, unique=True)
 
-    def show_image(self):
-        return format_html('<img src={} width="70" style="border-radius: 10px; border: 2px solid #000; margin:0 10px;"/> ', self.image_product.url)
-
     def __str__(self):
         return self.name
 
