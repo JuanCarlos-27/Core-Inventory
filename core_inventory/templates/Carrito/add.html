@@ -1,10 +1,10 @@
 <form action="{% url 'Carts:add' %}" method="POST">
     {% csrf_token %}
     <input type="hidden" name="product_id" value="{{ product.id_product }}">
-    <div class="d-flex my-3">
-        <button type="button" id="remove" class="shadow fw-bold btn" style="background-color: #F37828;">-</button>
-        <input type="number" id="txtQuantity" value="1" class="text-center form-control border border-dark" name="txtQuantity" readonly>
-        <button type="button" id="add" class="shadow fw-bold btn" style="background-color: #F37828;">+</button>
+    <div class="d-flex gap-2 my-3">
+        <button type="button" id="remove" class="button-detail">-</button>
+        <input type="number" id="txtQuantity" value="1" class="text-center formulario__input p-0" name="txtQuantity" readonly>
+        <button type="button" id="add" class="button-detail">+</button>
     </div>
     <div class="mt-2">
         {% if product.status != 0 or product.stock == 0 %}
@@ -32,5 +32,13 @@
         }
         quantity.value = value
     })
+    {% comment %} quantity.addEventListener("keyup", ()=>{
+        if (quantity.value < {{product.stock}} && Number(quantity.value) > 0) {
+            quantity.value = parseInt(quantity.value)
+            btnAddToCar.removeAttribute("disabled")
+        }else{
+            btnAddToCar.setAttribute("disabled", true)
+        }
+    }) {% endcomment %}
 </script>
 

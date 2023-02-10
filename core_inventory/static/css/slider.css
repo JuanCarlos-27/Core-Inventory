@@ -1,0 +1,106 @@
+.slider {
+    margin: 0 auto;
+    margin-bottom: 20px;
+    max-width: 80%;
+    box-shadow: 0px 5px 6px 0px rgb(0 0 0 / 30%);
+}
+
+.slide_viewer {
+    height: 340px;
+    overflow: hidden;
+    position: relative;
+}
+
+.slide_group {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.slide {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(135deg, #f37828 8%, #c82930 83%);
+}
+
+.slide_buttons {
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+a.slide_btn {
+    color: #0000;
+    font-size: 42px;
+    margin: 0 0.175em;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+.slide_btn.active,
+.slide_btn:hover {
+    color: #428cc6;
+    cursor: pointer;
+}
+
+.directional_nav {
+    margin: 0 auto;
+    max-width: 940px;
+    position: relative;
+    top: -180px;
+}
+
+.previous_btn {
+    bottom: 0;
+    left: 100px;
+    margin: auto;
+    position: absolute;
+    top: 0;
+}
+
+.next_btn {
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    right: 100px;
+    top: 0;
+}
+
+.previous_btn,
+.next_btn {
+    cursor: pointer;
+    height: 65px;
+    -webkit-transition: fill 0.5s ease-in-out;
+    -moz-transition: fill 0.5s ease-in-out;
+    -ms-transition: fill 0.5s ease-in-out;
+    -o-transition: fill 0.5s ease-in-out;
+    transition: fill 0.5s ease-in-out;
+    width: 65px;
+}
+
+.previous_btn:hover,
+.next_btn:hover {
+    fill: #eee;
+}
+
+@media only screen and (max-width: 767px) {
+    .previous_btn {
+        left: 50px;
+    }
+
+    .next_btn {
+        right: 50px;
+    }
+}
+
+img {
+    object-fit: contain;
+    text-align: center;
+}
