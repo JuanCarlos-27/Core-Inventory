@@ -18,7 +18,7 @@ JAZZMIN_SETTINGS = {
         "ShippingAddresses.shippingaddress":"fas fa-map",
         "Users.user":"fas fa-users",
         "Sales.sale":"fas fa-store",
-        "Purchases.purchase":"fas fa-basket-shopping"
+        "Purchases.purchase":"fas fa-plus"
     },
     # Icons that are used when one is not manually specified
 

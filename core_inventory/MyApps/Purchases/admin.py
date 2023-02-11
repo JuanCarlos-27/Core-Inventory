@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Purchase, PurchaseDetail
-import matplotlib.pyplot as plt
 from django.http import FileResponse, HttpResponse
 from import_export import resources
 from import_export.admin import ImportExportModelAdmin

@@ -1,12 +1,11 @@
 from django.shortcuts import render
 from MyApps.Orders.models import Order
 from MyApps.Orders.common import OrderStatus
+from MyApps.Sales.models import Sale
 from django.http import JsonResponse
 from . utils.charts import months, colorPrimary, colorSuccess, colorDanger, generate_color_palette, get_year_dict
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
-from django.db.models import Func, F
-
 
 @login_required(login_url='login')
 def orders_success_vs_cancelled_char(request, year):
@@ -29,14 +28,15 @@ def orders_success_vs_cancelled_char(request, year):
 
 @login_required(login_url='login')
 def orders_per_month_chart(request,year):
-    order = Order.objects.filter(created_at__month=Func(F('created_at'), function='MONTH'))
-    
+    order = Order.objects.filter(created_at__year = year)
     data = []
     months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
 
     for month_number in range(1,13):
-        data.append(order.filter(created_at__month = month_number).count())
+        order_filter=order.extra(where=[f"MONTH(created_at) = {month_number}"]).count()
+        data.append(order_filter)
     
+    print(data)
     return JsonResponse({
         'title': f'Pedidos por mes en el año {year}',
         'data': {
@@ -55,16 +55,22 @@ def orders_per_month_chart(request,year):
 @login_required(login_url='login')
 def earning_total_per_month(request,year):
     order = Order.objects.filter(created_at__year = year)
+    sales = Sale.objects.filter(created_at__year=year)
     months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic']
     data = []
     totales = []
     for month_number in range(1,13):
-        orders_month = order.filter(created_at__month = month_number)
+        orders_month = order.extra(where=[f"MONTH(created_at) = {month_number}"])
+        sales_month = sales.extra(where=[f"MONTH(created_at) = {month_number}"])
+
         for order_total in orders_month:
             totales.append(order_total.total)
+        for sale_total in sales_month:
+            totales.append(sale_total.total)
+            
         data.append(sum(totales))
         totales = []
-        
+    
     return JsonResponse({
         'title': f'Total ingresos por mes en {year}',
         'data': {

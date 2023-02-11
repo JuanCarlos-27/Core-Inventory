@@ -31,7 +31,7 @@ pre_save.connect(set_purchase_id, sender=Purchase)
 
 class PurchaseDetail(models.Model):
     purchase = models.ForeignKey(Purchase, on_delete = models.CASCADE)
-    product = models.ForeignKey(Product, null=True, on_delete = models.CASCADE)
+    product = models.ForeignKey(Product, null=True, on_delete = models.CASCADE, verbose_name="Producto")
     quantity = models.PositiveIntegerField(verbose_name="cantidad")
     unit_price = models.PositiveIntegerField(verbose_name="Precio unitario")
     total = models.IntegerField(default=0)

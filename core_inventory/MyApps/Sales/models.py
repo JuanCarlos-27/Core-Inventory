@@ -22,6 +22,9 @@ class Sale(models.Model):
         verbose_name = "Venta"
         verbose_name_plural = "Ventas"
         db_table = "sales"
+    
+    def get_month(self):
+        return self.created_at.month
         
     def is_empty_relation(self, is_empty):
         return is_empty
@@ -50,7 +53,7 @@ pre_save.connect(set_sale_id, sender=Sale)
 
 class SaleDetail(models.Model):
     sale = models.ForeignKey(Sale, on_delete = models.CASCADE)
-    product = models.ForeignKey(Product, null=False, blank=False, on_delete = models.CASCADE)
+    product = models.ForeignKey(Product, null=False, blank=False, on_delete = models.CASCADE, verbose_name="Producto")
     quantity = models.PositiveIntegerField(verbose_name="cantidad")
     total = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,7 +65,7 @@ class SaleDetail(models.Model):
         verbose_name = "Detalle de venta"
         verbose_name_plural = "Detalle de ventas"
         db_table = "sale_detail"
-        
+    
     def clean(self):
         obj = self.product
         

@@ -24,7 +24,7 @@ class SaleAdmin(ImportExportModelAdmin):
         return False
     
     def pdf(self,queryset):
-        return format_html('<a class="text-decoration-none" href="/ventas/generatePDF/{}"><i class="fas fa-file text-primary"><a/>', queryset)
+        return format_html('<a class="text-decoration-none" href="/ventas/generatePDF/{}"><i class="fas fa-file text-primary"></i></a>', queryset)
     
 
 admin.site.register(Sale, SaleAdmin)

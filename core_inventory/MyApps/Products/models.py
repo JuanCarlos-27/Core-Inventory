@@ -13,7 +13,7 @@ PRODUCT_STATUS = (
 class Product(models.Model):
     id_product = models.AutoField(verbose_name="Código", primary_key=True, help_text = "Ej: 1")
     name = models.CharField(max_length=40, verbose_name= "Nombre" , help_text="Ej: Papaya")
-    descripction = models.TextField(max_length=40, verbose_name="Descripcion",help_text="Ej: Und.x 100g")
+    descripction = models.TextField(max_length=40, verbose_name="Descripción",help_text="Ej: Und.x 100g")
     price = models.PositiveIntegerField(verbose_name="Precio",help_text="Ej: 12500")
     image_product = models.ImageField(upload_to = 'media', verbose_name="Imagen")
     stock = models.IntegerField(default=0,verbose_name="Cantidad", help_text="Ej: 50")

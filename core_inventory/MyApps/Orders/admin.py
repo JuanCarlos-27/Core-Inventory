@@ -15,10 +15,12 @@ class OrderAdmin(ImportExportModelAdmin):
     list_display = ('order_id','user','created_at','total','shipping_address','Estado',"Boton",'pdf')
     exclude = ('status',)
     
+    def has_change_permission(self, request, obj=None):
+        return False
     
     def pdf(self,queryset):
         if queryset.status == 'OrderStatus.COMPLETED':
-            return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}">📂<a/>', queryset)
+            return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}"><i class="fas fa-file text-primary"></i><a/>', queryset)
         
         return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}"><i class="fas fa-file text-primary"></i><a/>', queryset)
 
