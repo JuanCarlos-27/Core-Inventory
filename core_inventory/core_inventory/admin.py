@@ -22,7 +22,7 @@ class CustomAdminSite(admin.AdminSite):
                         'name': 'Gráficos',
                         'object_name': 'Gráficos',
                         'admin_url': '/admin/statistics/',
-                        'view_only': True,
+                        'view_only': False,
                     }
                 ],
             },

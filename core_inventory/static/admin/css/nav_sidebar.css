@@ -38,7 +38,7 @@
     margin-left: -276px;
     border-top: 1px solid transparent;
     border-right: 1px solid var(--hairline-color);
-    background-color: var(--body-bg);
+    background-color: red;
     overflow: auto;
 }
 

@@ -7,9 +7,6 @@ from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
 from django.db.models import Func, F
 
-@login_required(login_url='login')
-def statistics_view(request):
-    return render(request, 'statistics.html', {})
 
 @login_required(login_url='login')
 def orders_success_vs_cancelled_char(request, year):

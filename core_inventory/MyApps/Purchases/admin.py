@@ -1,12 +1,16 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Purchase, PurchaseDetail
+import matplotlib.pyplot as plt
+from django.http import FileResponse, HttpResponse
+
 
 class PurchaseDetailInline(admin.TabularInline):
     model = PurchaseDetail
     extra = 1
     exclude = ['total',]
     
+
 class PurchaseAdmin(admin.ModelAdmin):
     inlines = [PurchaseDetailInline,]
     filter_horizontal = ['product',]

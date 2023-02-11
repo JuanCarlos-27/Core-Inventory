@@ -9,16 +9,26 @@ JAZZMIN_SETTINGS = {
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
-        "auth.Group": "fas fa-users",
+        "auth.group": "fas fa-users",
+        "BillingProfiles.billingprofile":"fas fa-credit-card",
+        "Orders.order":"fas fa-box",
+        "Products.product":"fas fa-lemon",
+        "PromoCodes.promocode":"fas fa-tags",
+        "Providers.supplier":"fas fa-truck",
+        "ShippingAddresses.shippingaddress":"fas fa-map",
+        "Users.user":"fas fa-users",
+        "Sales.sale":"fas fa-store",
+        "Purchases.purchase":"fas fa-basket-shopping"
     },
     # Icons that are used when one is not manually specified
-    "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fa fa-chevron-right",
-    
+
+    "related_modal_active": True,
+
     "topmenu_links": [
         # external url that opens in a new window (Permissions can be added)
         {"name": "Ir al catálogo", "url": "index", "permissions": ["auth.view_user"], "new_window": True},
     ],
+    "custom_css": "css/custom_admin.css"
 }
 
 JAZZMIN_UI_TWEAKS = {
@@ -27,14 +37,14 @@ JAZZMIN_UI_TWEAKS = {
     "body_small_text": False,
     "brand_small_text": False,
     "brand_colour": "navbar-dark",
-    "accent": "accent-danger",
-    "navbar": "navbar-dark",
+    # "accent": "accent-danger",
+    # "navbar": "navbar-dark",
     "no_navbar_border": False,
     "navbar_fixed": False,
     "layout_boxed": False,
     "footer_fixed": False,
-    "sidebar_fixed": False,
-    "sidebar": "sidebar-dark-primary",
+    "sidebar_fixed": True,
+    # "sidebar": "sidebar-dark-primary",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": False,
     "sidebar_nav_child_indent": False,
@@ -51,5 +61,6 @@ JAZZMIN_UI_TWEAKS = {
         "danger": "btn-danger",
         "success": "btn-success"
     },
-    "actions_sticky_top": False
+    "actions_sticky_top": False,
+    "related_modal_active": True,
 }

@@ -14,6 +14,7 @@ class ProductResources(resources.ModelResource):
 
 @admin.register(Product)
 class ProductAdmin(ImportExportModelAdmin):
+    form_template = 'product_form.html'
     resource_class = ProductResources
     fields = ('name','descripction','price','image_product','status')
     list_display = ('id_product','name','descripction','price','Imagen','stock','Estado')

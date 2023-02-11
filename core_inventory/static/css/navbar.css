@@ -3,8 +3,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-
 .navigation-link {
     font-weight: 500;
     color: #000;
@@ -37,11 +35,7 @@
 
 .button-menu {
     display: none;
-}
-
-/* .icon-gift{
-    transform: rotate(-30deg);
-}       */        
+}     
 .swing:hover{
     animation-name: swing;
         -webkit-animation-name: swing;
