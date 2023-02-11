@@ -1,3 +1,5 @@
+
+
 input[type="text"],
 input[type="number"],
 input[type="search"],
@@ -81,9 +83,13 @@ textarea:focus {
     text-decoration: none;
 }
 
+.main-header{
+    border: 2px solid #000000;
+}
+
 .main-header, .brand-link, aside{
     background-color: #F37828 !important;
-    color: #000000 !important
+    color: #000000 !important;
 }
 
 
@@ -92,11 +98,9 @@ aside li, aside p, aside i{
     font-weight: 500;
 }
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active{
-    background-color: #aaaa !important;
+    background-color: #dddddd !important;
     border-radius: 10px;
-
 }
-
 aside .nav-item{
     position: relative;
     font-weight: 500;
@@ -127,37 +131,64 @@ aside .nav-item:hover::before {
     transform: scaleX(1);
 }
 
+/* Datatables header style */
+tbody{
+    text-align: center;
+}
 thead{
     background-color: #F37828 !important;
     text-align: center;
 }
-tbody{
-    text-align: center;
-}
+
 thead a, thead span{
     text-align: center;
     color: #000000 !important;
 }
 
+/* Section that shows core inventory brand on the top */
 .brand-link{
     display: none;
 } 
-
+/* Breadcrumb selectors */
 .breadcrumb{
     background-color: #F37828 !important;
+    border: 2px solid #000000;
     padding: 8px 30px;
     border-radius: 30px;
 }
-
-body > div > div.content-wrapper > div.content.border-bottom.mb-2 > div > div > div > ol > li{
+div.content.border-bottom.mb-2 > div > div > div > ol > li{
     color: #000000 !important;
 }
-
-
-body > div > div.content-wrapper > div.content.border-bottom.mb-2 > div > div > div > ol > li > a{
+div.content.border-bottom.mb-2 > div > div > div > ol > li > a{
+    color: #ffffff !important;
+}
+.breadcrumb-item+.breadcrumb-item::before{
     color: #ffffff !important;
 }
 
-.breadcrumb-item+.breadcrumb-item::before{
-    color: #ffffff !important;
+/* Cards of Control Panel */
+section .col-md-6 .card{
+    border: 2px solid #000000;
+}
+section .col-md-6 .card-header{
+    border-bottom: 2px solid #000000;
+    background-color: #F37828;
+}
+/* Recent activity section */
+#content-related{
+    border: 2px solid #4444;
+    text-align: center;
+}
+
+/* User panel */
+.user-panel{
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 2px dashed #000000 !important;   
+}
+.tab-content fieldset thead th{
+    color: #000000 !important;
+}
+.tab-content fieldset table{
+    color: #000000 !important;
 }
