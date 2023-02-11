@@ -1,9 +1,17 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 from . models import Order
 
+class OrderResources(resources.ModelResource):
+    fields = ('order_id','user','created_at','total','shipping_address','status')
+    class Meta:
+        model = Order
+        # import_id_fields = ('id_product', )
+
 @admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
+class OrderAdmin(ImportExportModelAdmin):
     list_display = ('order_id','user','created_at','total','shipping_address','Estado',"Boton",'pdf')
     exclude = ('status',)
     
@@ -12,7 +20,7 @@ class OrderAdmin(admin.ModelAdmin):
         if queryset.status == 'OrderStatus.COMPLETED':
             return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}">📂<a/>', queryset)
         
-        return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}">📋<a/>', queryset)
+        return format_html('<a class="text-decoration-none" href="/pedidos/generatePDF/{}"><i class="fas fa-file text-primary"></i><a/>', queryset)
 
 
     def Boton(self, queryset):
