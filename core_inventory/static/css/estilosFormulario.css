@@ -35,15 +35,29 @@
 }
 
 .btnRegister, .btnAccess {
-    width: 50%;
     border: none;
     border-radius: 1rem;
-    padding: 1.5%;
-    margin-top: 20px;
-    background: #F37828;
+    text-decoration: none;
+    text-align: center;
     font-weight: 600;
+    margin: auto;
+    margin-top: 20px;
+    padding: 10px;
+    width: 50%;
+    background-image: linear-gradient(to right, #F37828 0%, #F37828  51%, #c82930  100%);
+    background-size: 200% auto;
     color: #fff;
     cursor: pointer;
+    transition: 0.5s;
+}
+.btnRegister:hover, .btnAccess:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+.button-btnRegister:disabled, .btnAccess:disabled {
+    background-image: none;
+    background-color: #f3792867;
 }
 
 .asterisco{

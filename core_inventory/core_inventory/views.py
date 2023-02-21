@@ -57,6 +57,7 @@ def register(request):
                                             phone_number=telefono,
                                             dni = dni)
         except Exception as e:
+            print(e)
             messages.error(request, "Ya estas registrado")
             
         if user:

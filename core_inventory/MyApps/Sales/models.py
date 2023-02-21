@@ -22,9 +22,6 @@ class Sale(models.Model):
         verbose_name = "Venta"
         verbose_name_plural = "Ventas"
         db_table = "sales"
-    
-    def get_month(self):
-        return self.created_at.month
         
     def is_empty_relation(self, is_empty):
         return is_empty
