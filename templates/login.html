@@ -1,0 +1,73 @@
+{% extends 'baseIndex.html' %}
+{% block title %} Login{% endblock title %}
+
+{% block content %}
+<form method="POST">
+  {% csrf_token %}
+  {% if messages %}
+    {% for m in messages %}
+        {% if m.tags == 'success' %}
+            <script type="text/javascript">
+                const mensajeExito = ()=>{
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
+                    
+                    Toast.fire({
+                        icon: 'success',
+                        title: "{{ m }}"
+                    })
+                }
+                mensajeExito();
+            </script>
+        {% else %}
+        <script type="text/javascript">
+            const mensajeError = ()=>{
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '{{ m }}'
+                })
+            }
+            mensajeError();
+        </script>
+        {% endif %}
+    {% endfor %}
+  {% endif %}
+  <div class="container login-form">
+      <h3 class="col-sm-12 text-center py-3">Iniciar Sesión</h3>
+      <div class="col-sm-12 form-group formulario__grupo" id="grupo__correo">
+          <label for="correo" class="formulario__label">Correo Electrónico<span class="asterisco">*</span></label>
+          <div class="formulario__grupo-input">
+              <input type="text" name="email" id="correo" class="form-control validacion-correcta formulario__input"  placeholder="ej: coreInventory@gmail.com" required/>
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+          </div>
+          <p class="formulario__input-error">El correo solo puede contener letras, números, puntos, guiones y guion bajo.</p>
+      </div>
+      <div class="col-sm-12 form-group formulario__grupo" id="grupo__password">
+          <label for="password" class="formulario__label">Contraseña<span class="asterisco">*</span></label>
+          <div class="formulario__grupo-input">
+              <input type="password" name="password" id="password" class="form-control validacion-correcta formulario__input"  placeholder="Ingresar Contraseña" required/>
+              <i class="formulario__validacion-estado fas fa-times-circle"></i>
+          </div>
+          <p class="formulario__input-error">La contraseña debe tener entre 8 y 16 caracteres, al menos un número, al menos una minúscula y al menos una mayúscula.
+          Puede tener otros símbolos.</p>
+      </div>
+      <div class="col-sm-12 form-group text-center">
+        <input type="submit" name="btnxSubmit" class="btnAccess" value="Ingresar"/>
+      </div>
+      <div class="col-sm-12 form-group text-center pt-2">
+        <a href="{% url  'password_reset' %}" class="forgotPassword">¿Has olvidado tu contraseña?</a>
+    </div>
+  </div>
+</form>
+
+{% endblock content  %}
