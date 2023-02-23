@@ -17,7 +17,7 @@ MYSQL = {
         'USER': config('AZURE_MYSQL_USER'),
         'PASSWORD': config('AZURE_MYSQL_PASSWORD'),
         'HOST': config('AZURE_MYSQL_HOST'),
-        'PORT': config('DATABASE_PORT')
+        'PORT': 3306
     }
 }
 POSTGRESQL = {
