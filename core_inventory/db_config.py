@@ -13,10 +13,10 @@ SQLITE = {
 MYSQL = {
     'default':{
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DATABASE_NAME'),
-        'USER': config('DATABASE_USER'),
-        'PASSWORD': config('DATABASE_PSW'),
-        'HOST': config('DATABASE_HOST'),
+        'NAME': config('AZURE_MYSQL_NAME'),
+        'USER': config('AZURE_MYSQL_USER'),
+        'PASSWORD': config('AZURE_MYSQL_PASSWORD'),
+        'HOST': config('AZURE_MYSQL_HOST'),
         'PORT': config('DATABASE_PORT')
     }
 }
