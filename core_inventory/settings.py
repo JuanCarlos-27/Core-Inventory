@@ -17,8 +17,8 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*','core-inventory.azurewebsites.net', 'coreinventory.software']
-CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net']
+ALLOWED_HOSTS = ['core-inventory.azurewebsites.net', 'coreinventory.software']
+CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net','https://*.coreinventory.software']
 
 AUTH_USER_MODEL = 'Users.User'
 
