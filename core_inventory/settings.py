@@ -18,7 +18,7 @@ SECRET_KEY = "django-insecure-#mq)mpnw7-k=vppoc=&u*%tz)((#^*nn4_4!bxk#1gerjou9pl
 DEBUG = True
 
 ALLOWED_HOSTS = ['core-inventory.azurewebsites.net', 'coreinventory.software']
-CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net']
+CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net','https://*.coreinventory.software']
 
 AUTH_USER_MODEL = 'Users.User'
 
