@@ -35,6 +35,24 @@ def send_success_registration(emailUser, name, clave):
     email.attach_alternative(content, 'text/html')
     email.send()
 
+def send_contact_email(name, email, message, subject):
+    context = {
+        'name': name,
+        'email': email,
+        'message': message,
+        'subject':subject
+    }
+    template = get_template("contact_email.html")
+    content = template.render(context)
+    email = EmailMultiAlternatives(
+        subject,
+        "Mensaje de contacto",
+        settings.EMAIL_HOST_USER,
+        ['noemply.inventory@gmail.com','juang20133@gmail.com']
+    )
+    email.attach_alternative(content, 'text/html')
+    email.send()
+
 def register(request):
     cart = create_cart(request)
     if request.method == 'POST':
@@ -121,14 +139,7 @@ def logout_view(request):
     messages.success(request, "¡Sesión cerrada correctamente!")
     return redirect("login")
 
-# def productosCatalogo(request):
-#     cart = create_cart(request)
-#     # print(cart.products.count())
-#     listaProductos = Product.objects.all()
-#     return render(request, "index.html", {
-#         "productos":listaProductos,
-#         "cart": cart
-#         })
+
 
 class ProductListView(ListView):
     def cart(self):
@@ -154,25 +165,16 @@ def contact(request):
     if request.method == 'POST':
         name = request.POST['nameContact']
         email = request.POST['emailContact']
-        subject = request.POST['subject']
         message = request.POST['messageContact']
-        context = {
-            'name': name,
-            'email': email,
-            'message': message,
-            'subject':subject
-        }
-        template = get_template("contact_email.html")
-        content = template.render(context)
-        email = EmailMultiAlternatives(
-            subject,
-            "Mensaje de contacto",
-            settings.EMAIL_HOST_USER,
-            ['noemply.inventory@gmail.com','juang20133@gmail.com']
-        )
-        email.attach_alternative(content, 'text/html')
-        email.send()
-        messages.success(request, "¡Tu mensaje ha sido enviado correctamente!")
+        subject = request.POST['subject']
+        try:
+            thread = threading.Thread(target=send_contact_email, args=(
+                name, email, message, subject
+            ))
+            thread.start() 
+            messages.success(request, "¡Tu mensaje ha sido enviado correctamente!")
+        except Exception as e:
+            messages.error(request, "¡Ocurrio un error inesperado, vuelve a intentarlo nuevamente!")
 
     return render(request, "contact.html",{"cart":cart})
 

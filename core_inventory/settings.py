@@ -17,8 +17,9 @@ SECRET_KEY = "django-insecure-#mq)mpnw7-k=vppoc=&u*%tz)((#^*nn4_4!bxk#1gerjou9pl
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['core-inventory.azurewebsites.net', 'coreinventory.software']
-CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net','https://*.coreinventory.software']
+ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS = ['core-inventory.azurewebsites.net', 'coreinventory.software']
+# CSRF_TRUSTED_ORIGINS = ['https://*.core-inventory.azurewebsites.net','https://*.coreinventory.software']
 
 AUTH_USER_MODEL = 'Users.User'
 
@@ -118,13 +119,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATIC_ROOT = BASE_DIR / 'static'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Development
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR,'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
