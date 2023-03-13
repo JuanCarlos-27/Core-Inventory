@@ -48,6 +48,9 @@ class PurchaseDetail(models.Model):
     def clean(self):
         obj = self.product
         
+        if self.unit_price == 0:
+            raise ValidationError("El precio unitario no puede ser 0")
+        
         if not self.quantity:
             raise ValidationError("Debe ingresar un valor valido")
 
