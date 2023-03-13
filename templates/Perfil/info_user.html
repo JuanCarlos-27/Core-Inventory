@@ -1,10 +1,25 @@
 {% extends 'baseIndex.html' %}
 {% block title %} Perfil{% endblock%}
 
+{% block css %}
+<style>
+    .user-card-color{
+        background: #F37828;
+        background: linear-gradient(135deg, #F37828 8%, #c82930 83%);
+        border-radius: 25px;
+        color: #fff;
+        transition: box-shadow .2s, transform
+    }
+    .user-card-color:hover{
+        box-shadow: 0px 0px 20px rgba(0,0,0,1)
+    }
+</style>
+{% endblock css %}
+
 {% block content %}
-<div class="container p-3 d-flex bg-white justify-content-center">
-    <div class="text-center shadow rounded p-4 border">
-        <img src="https://cdn-icons-png.flaticon.com/512/4646/4646084.png" alt="user-image" width="200px" height="200px"/>   
+<div class="container p-3 d-flex justify-content-center">
+    <div class="text-center p-4 user-card-color" id="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4646/4646084.png" alt="user image" width="200px" height="200px"/>   
         <h3 class="first_name">{{request.user.first_name}}<a href="#" id="editName">🖊️</a></h3>
         <form class="form_name d-none pt-2" method="POST" action="{% url 'Users:update_personal_information' %}">
             {% csrf_token %}
@@ -18,11 +33,11 @@
             <button type="submit" id="btnSaveLastName" style="border:none; outline:none">🖊️</button>
         </form>
         <hr>
-            <h6><span class="fw-bold">Identificación:</span> {{request.user.dni}}</h6>     
-            <h6><span class="fw-bold">Correo electrónico:</span> {{request.user.email}}</h6>
-            <h6><span class="fw-bold">Registrado el:</span> {{request.user.date_joined.date}}</h6>
+            <p><span class="fw-bold">Identificación:</span> {{request.user.dni}}</p>     
+            <p><span class="fw-bold">Correo electrónico:</span> {{request.user.email}}</p>
+            <p><span class="fw-bold">Registrado el:</span> {{request.user.date_joined.date}}</p>
         <hr>
-        <a href="{% url 'change_password' %}" class="text-muted">Cambiar contraseña</a>
+        <a href="{% url 'change_password' %}" class="text-white">Cambiar contraseña</a>
     </div>
 </div>
 {% endblock  %}
@@ -62,6 +77,28 @@
                 e.preventDefault();
                 formLastName.innerHTML+='<p class="fw-bold text-danger">No puedes usar números*</p>'
             }
+        })
+
+        const el = document.getElementById("card");
+        const { clientWidth, clientHeight } = el;
+        el.addEventListener("mouseover", (event) => {
+            const { layerX, layerY } = event
+            const yRotation = ((layerX - clientWidth / 2) / clientWidth ) * 5
+            const xRotation = ((layerY - clientHeight / 2) / clientHeight ) * 5
+            const string = `
+                perspective(500px)
+                scale(1.1)
+                rotateX(${xRotation}deg)
+                rotateY(${yRotation}deg)`
+            el.style.transform = string
+        })
+
+        el.addEventListener("mouseout", ()=>{
+            el.style.transform = `
+            perspective(500px)
+            scale(1)
+            rotateX(0deg)
+            rotateY(0deg)`
         })
     </script>
 {% endblock js %}

@@ -33,7 +33,7 @@ def orderPdf(request, info):
     }
     html = template.render(context)
     response = HttpResponse(content_type="application/pdf")
-    response['Content-Disposition'] = 'attachment; filename="orden.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="pedido ({order.order_id}).pdf"'
     pisa_status = pisa.CreatePDF(
         html, dest=response)
     if pisa_status.err:

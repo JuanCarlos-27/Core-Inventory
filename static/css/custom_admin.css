@@ -197,3 +197,19 @@ section .col-md-6 .card-header{
     flex: 0 0 100%;
     max-width: 100%;
 }
+
+/* Para seleccionar los grupos */
+.select2-container--default .select2-selection--multiple 
+.select2-selection__choice{
+    color: #000000 !important;
+    font-weight: 600;
+}
+
+
+/* .nav-header{
+    display: none;
+}
+
+.nav-item{
+    margin-top: 1rem;
+} */

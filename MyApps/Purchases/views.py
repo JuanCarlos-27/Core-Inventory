@@ -11,10 +11,6 @@ def purchasePdf(request, info):
     purchase = Purchase.objects.filter(purchase_id = info).first()
     provider = purchase.provider
     products = purchase.purchasedetail_set.select_related('product')
-    
-    # for p in products:
-    #     print(p.product.name)
-    # return redirect("/admin/Purchases/purchase/")
     template = get_template("ReportesPDF/purchasePdf.html")
     
     if not request.user.is_staff:
@@ -28,7 +24,7 @@ def purchasePdf(request, info):
     }
     html = template.render(context)
     response = HttpResponse(content_type="application/pdf")
-    response['Content-Disposition'] = 'attachment; filename="compra.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="compra ({purchase.purchase_id}).pdf"'
     pisa_status = pisa.CreatePDF(
         html, dest=response)
     if pisa_status.err:

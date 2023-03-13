@@ -1,8 +1,8 @@
-body, .search-button {
+body,
+.search-button {
     background-color: #c69a57;
-    
 }
-.search-button{
+.search-button {
     border: none;
     height: 100%;
     padding: 0px 15px;
@@ -11,10 +11,12 @@ body, .search-button {
     border: 2px solid #000;
     transition: .4s background-color;
 }
-.search-button:hover{
+
+.search-button:hover {
     background-color: #c28c3c;
 }
-.input-search{
+
+.input-search {
     border: none;
     outline: none;
     border: 2px solid #000;
@@ -22,6 +24,7 @@ body, .search-button {
     border-bottom-left-radius: 20px;
     padding: 8px 20px;
 }
+
 .steps {
     display: flex;
     justify-content: space-between;
@@ -182,6 +185,11 @@ body, .search-button {
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+
+.address-image{
+    width: 170px;
+    height: 170px;
 }
 
 @media only screen and (max-width: 480px) {

@@ -35,8 +35,9 @@
                 <a href="{% url 'Orders:payment' %}" class="button-detail">Continuar</a>
             </div>
         {% else %}
-        <div class="row m-5 justify-content-center align-items-center">
-            <div class="col-12 text-center">
+        <div class="row mb-5 mt-1 justify-content-center align-items-center">
+            <div class="d-flex flex-wrap flex-column justify-content-center align-items-center text-center">
+                <img src="../static/img/address.png" class="address-image" alt="address image">
                 <h4 class="opacity-75">No tienes direcciones registradas.</h4>
                 {% url 'Orders:address' as next_url %}
                 <a href="{% url 'address:shipping_addresses' %}?next={{next_url}}" class="h5 text-decoration-none opacity-75 text-primary">Agregar una nueva ➕</a>

@@ -92,12 +92,13 @@
 	transition: .3s ease all;
 }
 
-.formulario__input_textarea:focus {
+.formulario__input:focus {
 	border: 3px solid #F37828;
 	outline: none;
 	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
 }
-.formulario__input:focus {
+
+.formulario__input_textarea:focus {
 	border: 3px solid #F37828;
 	outline: none;
 	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);

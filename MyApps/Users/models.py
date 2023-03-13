@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from MyApps.Orders.common import OrderStatus
 
 class User(AbstractUser):
-    customer_id = models.CharField(max_length=100, blank=True, null=False)
+    # customer_id = models.CharField(max_length=100, blank=True, null=False)
     email = models.EmailField(('Correo electrónico'), unique=True)
     phone_number = models.CharField(max_length=10, unique=True, verbose_name="Teléfono")
     dni = models.CharField(max_length=14, unique=True, verbose_name="Cédula")

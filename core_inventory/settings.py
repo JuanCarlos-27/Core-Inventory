@@ -59,6 +59,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 ROOT_URLCONF = 'core_inventory.urls'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 TEMPLATES = [
     {
@@ -108,6 +109,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # Internationalization
 LANGUAGE_CODE = 'es-co'
 TIME_ZONE = 'America/Bogota'
@@ -118,14 +121,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Development
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR,'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR,'static'),
+)
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

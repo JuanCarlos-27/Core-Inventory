@@ -158,6 +158,13 @@
         <div><span>DIRECCIÓN: {{order.shipping_address}}</span></div>
         <div><span>EMAIL: <a href="mailto:{{order.user.email}}">{{order.user.email}}</a></span></div>
         <div><span>FECHA DE ENVIO:  {{order.created_at.date}}</span></div>
+        <div><span>MÉTODO DE PAGO: 
+          {% if order.billing_profile %}
+            Tarjeta No. {{ order.billing_profile }}
+          {% else  %}
+            En efectivo
+          {% endif %}
+        </span></div>
         <div><span>ESTADO: 
           {% if order.status == "OrderStatus.COMPLETED" %}
             Completado

@@ -51,7 +51,7 @@ def create(request):
         shippingAddress_default = ShippingAddress.objects.filter(user=user).exists()
 
         
-        if shippingAddress_count < 6:
+        if shippingAddress_count < 3:
             if shippingAddress_default:
                 shippingAddress = ShippingAddress.objects.create(user=user,address=address, neighborhood=neighborhood, zone=zone,reference=reference)
             else:
