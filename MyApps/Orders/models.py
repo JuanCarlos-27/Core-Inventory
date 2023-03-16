@@ -20,7 +20,7 @@ class Order(models.Model):
     shipping_total = models.PositiveIntegerField(default=2000, verbose_name="Envio")
     total = models.PositiveIntegerField(default=0, verbose_name="Total pago")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Creado el")
-    shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Dirección de envio")
+    shipping_address = models.ForeignKey(ShippingAddress, null=True, blank=True, on_delete=models.SET_NULL, verbose_name="Dirección de envio")
     promo_code = models.OneToOneField(PromoCode, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Código de promoción")
     billing_profile = models.ForeignKey(BillingProfile, null=True, blank=True,on_delete=models.CASCADE, verbose_name="Info de pago")
     cancelled_by = models.IntegerField(default=0, verbose_name="Cancelado por")

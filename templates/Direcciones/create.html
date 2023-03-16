@@ -10,7 +10,7 @@
                 <div class="col-md-12">
                     <label for="address" class="formulario__label">Dirección<span class="asterisco">*</span></label>
                     <input type="text" name="address" id="address" class="form-control validacion-correcta formulario__input"  placeholder="Ej: Calle 32 sur # 14 bis este" required/>
-                </div>
+                  </div>
                 <div class="col-md-12">
                     <label for="neighborhood" class="formulario__label">Barrio<span class="asterisco">*</span></label>
                     <input type="text" name="neighborhood" id="neighborhood" class="form-control validacion-correcta formulario__input"  placeholder="Ej: Los jardines" required/>
@@ -23,13 +23,38 @@
                     <label for="reference" class="formulario__label">Referencia<span class="asterisco">*</span></label>
                     <textarea class="form-control formulario__input_textarea" name="reference" id="reference" rows="2" placeholder="Ej: Puerta amarilla; frente al parque"></textarea>
                 </div>
-
+                <span id="msj-validation" class="fw-bold text-danger text-center d-none">*Todos los campos son obligatorios</span>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardarAddress">Guardar</button>
                   </div>
               </form>
+
         </div> 
       </div>
     </div>
 </div>
+
+{% block js %}
+  <script type="text/javascript">
+    const address = document.getElementById("address");
+    const neighborhood = document.getElementById("neighborhood");
+    const zone = document.getElementById("zone");
+    const reference = document.getElementById("reference");
+    const save = document.getElementById("btnGuardarAddress");
+    const validation = document.getElementById("msj-validation");
+
+    save.addEventListener("click", (e)=>{
+      if(!address.value.trim() ||
+         !neighborhood.value.trim() ||
+         !zone.value.trim() ||
+         !reference.value.trim()
+      ){
+        validation.classList.remove("d-none")
+        validation.classList.add("d-block")
+        e.preventDefault()
+      }
+    })
+
+  </script>
+{% endblock js %}

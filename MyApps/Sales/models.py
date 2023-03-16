@@ -26,14 +26,12 @@ class Sale(models.Model):
     def is_empty_relation(self, is_empty):
         return is_empty
     
-    def clean(self):
-        
+    def clean(self):  
         if self.sale_man == 0:
             print("No ha establecido el sale_man")
         
     def save(self, *args, **kwargs):
-        # if not self.product.exists():
-        #     raise ValidationError("El campo producto no puede estar vacío")
+
         super().save(*args, **kwargs)
     
 def set_sale_id(sender, instance, *args, **kwargs):
@@ -69,7 +67,7 @@ class SaleDetail(models.Model):
         if not obj:
             raise ValidationError("nouu")
         
-        if not self.quantity:
+        if not self.quantity or self.quantity == 0:
             raise ValidationError("Debe ingresar un valor valido")
 
         if self.quantity > obj.stock:

@@ -60,6 +60,6 @@ send_promo_code.short_description = 'Enviar código de descuento'
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('dni','first_name','last_name','email','phone_number','date_joined','is_staff')
-    exclude = ('customer_id',)
+    exclude = ('customer_id','password')
 
     actions = [send_promo_code]
