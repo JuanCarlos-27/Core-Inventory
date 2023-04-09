@@ -18,7 +18,7 @@ django-import-export==3.0.1
 django-jazzmin==2.6.0
 et-xmlfile==1.1.0
 fonttools==4.38.0
-future==0.18.2
+future==0.18.3
 html5lib==1.1
 idna==3.4
 kiwisolver==1.4.4
