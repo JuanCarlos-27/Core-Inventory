@@ -8,6 +8,8 @@
 </div>
 
 ## Características destacadas ✅
+![image](https://github.com/JuanCarlos-27/Core-Inventory/assets/110681873/13687e53-98f1-4afc-b62d-17db612383a1)
+![image](https://github.com/JuanCarlos-27/Core-Inventory/assets/110681873/992bc45e-46cd-4e9c-85c1-13a1d0211330)
 
 - Realiza pedidos en línea de forma rápida y sencilla 🛒
 - Registra tus ventas y lleva un control de tus ingresos 📈
